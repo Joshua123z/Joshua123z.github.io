@@ -3,16 +3,16 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
 import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
 
-// Firebase config
+// Firebase config (your provided config)
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  databaseURL: "YOUR_DATABASE_URL",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID",
-  measurementId: "YOUR_MEASUREMENT_ID"
+  apiKey: "AIzaSyD3ZvLmJXK0jsSXTYjqLTPlu9dHG3a3bjs",
+  authDomain: "bonk-bros-chat.firebaseapp.com",
+  databaseURL: "https://bonk-bros-chat-default-rtdb.firebaseio.com",
+  projectId: "bonk-bros-chat",
+  storageBucket: "bonk-bros-chat.firebasestorage.app",
+  messagingSenderId: "286528808357",
+  appId: "1:286528808357:web:4cc24a23774b377915744c",
+  measurementId: "G-703FQN4WS4"
 };
 
 // Initialize Firebase
@@ -39,6 +39,7 @@ function signInWithGoogle() {
         });
       }
       loadMessages(); // Load messages after sign-in
+      toggleAuthUI();
     })
     .catch((error) => {
       console.error('Error during sign-in:', error.message);
@@ -50,8 +51,22 @@ function signOut() {
   signOut(auth).then(() => {
     currentUser = null;
     console.log("User signed out");
-    loadMessages(); // Refresh messages after sign out
+    loadMessages(); // Refresh messages after sign-out
+    toggleAuthUI();
   });
+}
+
+// Toggle UI visibility based on authentication state
+function toggleAuthUI() {
+  const signInBtn = document.getElementById('signInBtn');
+  const signOutBtn = document.getElementById('signOutBtn');
+  if (currentUser) {
+    signInBtn.style.display = 'none';
+    signOutBtn.style.display = 'inline-block';
+  } else {
+    signInBtn.style.display = 'inline-block';
+    signOutBtn.style.display = 'none';
+  }
 }
 
 // Load messages from Firebase Realtime Database
@@ -65,6 +80,22 @@ function loadMessages() {
   });
 }
 
+// Send a message to Firebase
+function sendMessage() {
+  const messageInput = document.getElementById('messageInput');
+  const messageText = messageInput.value;
+  if (messageText && currentUser) {
+    const messagesRef = ref(database, 'messages');
+    push(messagesRef, {
+      message: messageText,
+      timestamp: Date.now(),
+      uid: currentUser.uid,
+      displayName: currentUser.displayName
+    });
+    messageInput.value = ''; // Clear input field
+  }
+}
+
 // Listen to authentication state changes
 onAuthStateChanged(auth, (user) => {
   if (user) {
@@ -72,5 +103,7 @@ onAuthStateChanged(auth, (user) => {
     console.log('Authenticated user:', currentUser.displayName);
   } else {
     console.log('No user signed in');
+    currentUser = null;
   }
+  toggleAuthUI();
 });
