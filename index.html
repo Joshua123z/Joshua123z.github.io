@@ -3,115 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Firebase Chat App</title>
-  <!-- Firebase SDKs -->
+  <title>Firebase Chat</title>
+</head>
+<body>
+
+  <!-- Sign-In / Sign-Out Buttons -->
+  <button id="signInBtn" onclick="signInWithGoogle()">Sign in with Google</button>
+  <button id="signOutBtn" onclick="signOut()" style="display:none;">Sign Out</button>
+
+  <!-- Message input field -->
+  <input type="text" id="messageInput" placeholder="Type a message" />
+  <button onclick="sendMessage()">Send</button>
+
+  <!-- Display messages here -->
+  <div id="messages"></div>
+
+  <!-- Link to Firebase SDKs (v9+) -->
   <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
-</head>
-<body>
-  <h1>Bonk bros chat by Josh</h1>
-  
-  <!-- Sign-In / Sign-Out Buttons -->
-  <button onclick="signInWithGoogle()">Sign in with Google</button>
-  <button onclick="signOut()">Sign Out</button>
 
-  <!-- Messages Section -->
-  <div id="messages"></div>
+  <!-- Link to app.js (your custom script) -->
+  <script src="app.js"></script>
 
-  <!-- Input for new messages -->
-  <textarea id="messageInput" placeholder="Type a message..."></textarea>
-  <button onclick="sendMessage()">Send Message</button>
-
-  <script>
-    // Firebase config
-    const firebaseConfig = {
-      apiKey: "AIzaSyD3ZvLmJXK0jsSXTYjqLTPlu9dHG3a3bjs",
-      authDomain: "bonk-bros-chat.firebaseapp.com",
-      databaseURL: "https://bonk-bros-chat-default-rtdb.firebaseio.com",
-      projectId: "bonk-bros-chat",
-      storageBucket: "bonk-bros-chat.firebasestorage.app",
-      messagingSenderId: "286528808357",
-      appId: "1:286528808357:web:4cc24a23774b377915744c",
-      measurementId: "G-703FQN4WS4"
-    };
-
-    // Initialize Firebase
-    const app = firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const database = firebase.database();
-
-    let currentUser = null;
-
-    // Google Sign-In
-    function signInWithGoogle() {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      auth.signInWithPopup(provider)
-        .then((result) => {
-          currentUser = result.user;
-          console.log('User signed in:', currentUser);
-
-          // Prompt user for display name if not already set
-          if (!currentUser.displayName) {
-            let name = prompt("Choose a display name:");
-            currentUser.updateProfile({
-              displayName: name
-            }).then(() => {
-              console.log("Name set:", currentUser.displayName);
-            });
-          }
-          loadMessages();
-        })
-        .catch((error) => {
-          console.error('Error during sign-in:', error.message);
-        });
-    }
-
-    // Sign Out
-    function signOut() {
-      auth.signOut().then(() => {
-        currentUser = null;
-        console.log("User signed out");
-        document.getElementById('messages').innerHTML = '';
-      });
-    }
-
-    // Send message to Firebase Realtime Database
-    function sendMessage() {
-      const messageInput = document.getElementById('messageInput');
-      const messageText = messageInput.value;
-      if (messageText && currentUser) {
-        const messagesRef = database.ref('messages');
-        messagesRef.push().set({
-          message: messageText,
-          timestamp: Date.now(),
-          uid: currentUser.uid,
-          displayName: currentUser.displayName
-        });
-        messageInput.value = ''; // Clear input
-      }
-    }
-
-    // Load messages from Firebase Realtime Database
-    function loadMessages() {
-      const messagesRef = database.ref('messages');
-      messagesRef.on('child_added', (snapshot) => {
-        const message = snapshot.val();
-        const messageElement = document.createElement('div');
-        messageElement.textContent = `${message.displayName}: ${message.message}`;
-        document.getElementById('messages').appendChild(messageElement);
-      });
-    }
-
-    // Listen to auth state changes
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        currentUser = user;
-        console.log('Authenticated user:', currentUser.displayName);
-      } else {
-        console.log('No user signed in');
-      }
-    });
-  </script>
 </body>
 </html>
