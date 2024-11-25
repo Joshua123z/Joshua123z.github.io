@@ -107,3 +107,4 @@ onAuthStateChanged(auth, (user) => {
   }
   toggleAuthUI();
 });
+
