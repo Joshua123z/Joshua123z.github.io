@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Viewer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px 0;
+    }
+    iframe {
+      width: 100%;
+      height: 500px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <h1>Website Viewer</h1>
+  <input type="text" id="urlInput" placeholder="Enter website URL" />
+  <button id="fetchButton">Fetch Website</button>
+
+  <h2>Preview</h2>
+  <iframe id="websiteFrame"></iframe>
+
+  <script>
+    document.getElementById('fetchButton').addEventListener('click', function () {
+      const url = document.getElementById('urlInput').value;
+
+      if (url) {
+        const iframe = document.getElementById('websiteFrame');
+        iframe.src = 'about:blank'; // Clear previous content
+
+        // Call a backend API to fetch the HTML of the website
+        fetch(`/fetch-site?url=${encodeURIComponent(url)}`)
+          .then(response => response.text())
+          .then(htmlContent => {
+            iframe.contentWindow.document.open();
+            iframe.contentWindow.document.write(htmlContent);
+            iframe.contentWindow.document.close();
+          })
+          .catch(err => {
+            alert('Error fetching website: ' + err.message);
+          });
+      }
+    });
+  </script>
+</body>
+</html>
