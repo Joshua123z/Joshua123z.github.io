@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Website Viewer</title>
+  <title>Webpage Viewer</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -13,41 +13,52 @@
       padding: 10px;
       margin: 10px 0;
     }
-    iframe {
-      width: 100%;
-      height: 500px;
+    #content {
       border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 20px;
+      max-height: 600px;
+      overflow: auto;
+      background-color: #f9f9f9;
     }
   </style>
 </head>
 <body>
-  <h1>Website Viewer</h1>
-  <input type="text" id="urlInput" placeholder="Enter website URL" />
-  <button id="fetchButton">Fetch Website</button>
-
-  <h2>Preview</h2>
-  <iframe id="websiteFrame"></iframe>
+  <h1>Enter URL to Fetch and Display Webpage</h1>
+  <input type="text" id="urlInput" placeholder="Enter website URL (e.g., https://example.com)" />
+  <button id="fetchButton">Fetch Webpage</button>
+  
+  <h2>Webpage Content</h2>
+  <div id="content"></div>
 
   <script>
-    document.getElementById('fetchButton').addEventListener('click', function () {
+    // Listen for the button click to fetch the webpage
+    document.getElementById('fetchButton').addEventListener('click', function() {
       const url = document.getElementById('urlInput').value;
-
-      if (url) {
-        const iframe = document.getElementById('websiteFrame');
-        iframe.src = 'about:blank'; // Clear previous content
-
-        // Call a backend API to fetch the HTML of the website
-        fetch(`/fetch-site?url=${encodeURIComponent(url)}`)
-          .then(response => response.text())
-          .then(htmlContent => {
-            iframe.contentWindow.document.open();
-            iframe.contentWindow.document.write(htmlContent);
-            iframe.contentWindow.document.close();
-          })
-          .catch(err => {
-            alert('Error fetching website: ' + err.message);
-          });
+      const proxyUrl = 'https://api.allorigins.win/raw?url='; // CORS proxy to bypass restrictions
+      
+      // Check if the URL starts with http:// or https://
+      if (!url.startsWith('http://') && !url.startsWith('https://')) {
+        alert('Please enter a valid URL starting with http:// or https://');
+        return;
       }
+
+      // Use the CORS proxy to fetch the content from the URL
+      fetch(proxyUrl + encodeURIComponent(url))
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to fetch the page');
+          }
+          return response.text();
+        })
+        .then(htmlContent => {
+          // Display the HTML content inside the <div id="content"> container
+          document.getElementById('content').innerHTML = htmlContent;
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('There was an error fetching the webpage: ' + error.message);
+        });
     });
   </script>
 </body>
