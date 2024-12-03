@@ -57,7 +57,7 @@
           contentDiv.innerHTML = htmlContent;
 
           // Now fetch and inject CSS and JS into the current page
-          injectStylesAndScripts(htmlContent);
+          injectStylesAndScripts(htmlContent, url);
         })
         .catch(error => {
           console.error('Error:', error);
@@ -66,7 +66,7 @@
     });
 
     // Function to inject CSS and JavaScript from the fetched HTML into the current page
-    function injectStylesAndScripts(htmlContent) {
+    function injectStylesAndScripts(htmlContent, url) {
       const contentDiv = document.getElementById('content');
       
       // Create a temporary DOM element to parse the HTML
@@ -81,6 +81,8 @@
           const link = document.createElement('link');
           link.rel = 'stylesheet';
           link.href = style.href;
+          // Fix relative URLs for assets like images
+          link.href = resolveUrl(style.href, url);
           document.head.appendChild(link); // Inject into <head>
         } else if (style.tagName === 'STYLE') {
           // If it's a <style> tag (inline CSS)
@@ -97,6 +99,8 @@
           // If it's an external script, load it
           const externalScript = document.createElement('script');
           externalScript.src = script.src;
+          // Fix relative URLs for external scripts
+          externalScript.src = resolveUrl(script.src, url);
           externalScript.onload = function () {
             console.log(`External script loaded: ${script.src}`);
           };
@@ -108,6 +112,19 @@
           document.body.appendChild(inlineScript); // Inject into <body>
         }
       });
+
+      // Handle images and assets by adjusting relative URLs
+      const images = tempElement.querySelectorAll('img');
+      images.forEach(img => {
+        img.src = resolveUrl(img.src, url); // Resolve relative image URLs
+      });
+    }
+
+    // Helper function to resolve relative URLs to absolute URLs
+    function resolveUrl(relativeUrl, baseUrl) {
+      const link = document.createElement('a');
+      link.href = baseUrl; // Set the base URL
+      return new URL(relativeUrl, link.href).href; // Resolve and return the absolute URL
     }
   </script>
 
