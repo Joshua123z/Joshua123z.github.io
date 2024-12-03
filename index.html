@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpage Fetcher and Viewer</title>
+  <title>Webpage Viewer</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -13,46 +13,100 @@
       padding: 10px;
       margin: 10px 0;
     }
-    iframe {
-      width: 100%;
-      height: 80vh;
+    #content {
       border: 1px solid #ccc;
+      padding: 10px;
       margin-top: 20px;
+      max-height: 600px;
+      overflow: auto;
+      background-color: #f9f9f9;
     }
   </style>
 </head>
 <body>
 
-  <h1>Enter a URL to Display the Webpage</h1>
-
+  <h1>Enter URL to Fetch and Display Webpage</h1>
   <input type="text" id="urlInput" placeholder="Enter website URL (e.g., https://example.com)" />
-  <button id="fetchButton">Fetch and Display Webpage</button>
-
-  <h2>Webpage Display</h2>
+  <button id="fetchButton">Fetch Webpage</button>
   
-  <!-- Placeholder for the iframe -->
-  <iframe id="webpageIframe" src="" style="display:none;"></iframe>
+  <h2>Webpage Content</h2>
+  <div id="content"></div>
 
   <script>
-    // Event listener for the button click
-    document.getElementById('fetchButton').addEventListener('click', function () {
+    // Event listener for the button click to fetch and display the webpage
+    document.getElementById('fetchButton').addEventListener('click', function() {
       const url = document.getElementById('urlInput').value;
-      
-      // Validate the URL
+      const proxyUrl = 'https://api.allorigins.win/raw?url='; // CORS proxy URL to fetch external HTML
+
+      // Ensure that the URL starts with "http://" or "https://"
       if (!url.startsWith('http://') && !url.startsWith('https://')) {
         alert('Please enter a valid URL starting with http:// or https://');
         return;
       }
 
-      // Find the iframe element
-      const iframe = document.getElementById('webpageIframe');
+      // Fetch the HTML content of the URL
+      fetch(proxyUrl + encodeURIComponent(url))
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to fetch the page');
+          }
+          return response.text();
+        })
+        .then(htmlContent => {
+          // Inject the HTML content into the page
+          const contentDiv = document.getElementById('content');
+          contentDiv.innerHTML = htmlContent;
 
-      // Set the iframe's src to the entered URL
-      iframe.src = url;
-
-      // Display the iframe
-      iframe.style.display = 'block';
+          // Now fetch and inject CSS and JS into the current page
+          injectStylesAndScripts(htmlContent);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('There was an error fetching the webpage: ' + error.message);
+        });
     });
+
+    // Function to inject CSS and JavaScript from the fetched HTML into the current page
+    function injectStylesAndScripts(htmlContent) {
+      const contentDiv = document.getElementById('content');
+      
+      // Create a temporary DOM element to parse the HTML
+      const tempElement = document.createElement('div');
+      tempElement.innerHTML = htmlContent;
+
+      // Extract CSS (links and inline styles)
+      const styles = tempElement.querySelectorAll('link[rel="stylesheet"], style');
+      styles.forEach(style => {
+        if (style.tagName === 'LINK') {
+          // If it's a <link> tag (external CSS)
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = style.href;
+          document.head.appendChild(link);
+        } else if (style.tagName === 'STYLE') {
+          // If it's a <style> tag (inline CSS)
+          const inlineStyle = document.createElement('style');
+          inlineStyle.innerHTML = style.innerHTML;
+          document.head.appendChild(inlineStyle);
+        }
+      });
+
+      // Extract JS (external scripts and inline scripts)
+      const scripts = tempElement.querySelectorAll('script');
+      scripts.forEach(script => {
+        if (script.src) {
+          // If it's an external script, load it
+          const externalScript = document.createElement('script');
+          externalScript.src = script.src;
+          document.body.appendChild(externalScript);
+        } else if (script.innerHTML) {
+          // If it's inline JS, inject it
+          const inlineScript = document.createElement('script');
+          inlineScript.innerHTML = script.innerHTML;
+          document.body.appendChild(inlineScript);
+        }
+      });
+    }
   </script>
 
 </body>
