@@ -17,9 +17,9 @@
       border: 1px solid #ccc;
       padding: 10px;
       margin-top: 20px;
+      background-color: #f9f9f9;
       max-height: 600px;
       overflow: auto;
-      background-color: #f9f9f9;
     }
   </style>
 </head>
@@ -80,9 +80,7 @@
           // If it's a <link> tag (external CSS)
           const link = document.createElement('link');
           link.rel = 'stylesheet';
-          link.href = style.href;
-          // Fix relative URLs for assets like images
-          link.href = resolveUrl(style.href, url);
+          link.href = resolveUrl(style.href, url);  // Fix the URL
           document.head.appendChild(link); // Inject into <head>
         } else if (style.tagName === 'STYLE') {
           // If it's a <style> tag (inline CSS)
@@ -98,12 +96,7 @@
         if (script.src) {
           // If it's an external script, load it
           const externalScript = document.createElement('script');
-          externalScript.src = script.src;
-          // Fix relative URLs for external scripts
-          externalScript.src = resolveUrl(script.src, url);
-          externalScript.onload = function () {
-            console.log(`External script loaded: ${script.src}`);
-          };
+          externalScript.src = resolveUrl(script.src, url); // Fix the URL
           document.body.appendChild(externalScript); // Inject into <body>
         } else if (script.innerHTML) {
           // If it's inline JS, inject it
@@ -113,7 +106,7 @@
         }
       });
 
-      // Handle images and assets by adjusting relative URLs
+      // Handle images and other resources by adjusting relative URLs
       const images = tempElement.querySelectorAll('img');
       images.forEach(img => {
         img.src = resolveUrl(img.src, url); // Resolve relative image URLs
