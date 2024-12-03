@@ -33,8 +33,7 @@
   <div id="content"></div>
 
   <script>
-    // Event listener for the button click to fetch and display the webpage
-    document.getElementById('fetchButton').addEventListener('click', function() {
+    document.getElementById('fetchButton').addEventListener('click', function () {
       const url = document.getElementById('urlInput').value;
       const proxyUrl = 'https://api.allorigins.win/raw?url='; // CORS proxy URL to fetch external HTML
 
@@ -74,7 +73,7 @@
       const tempElement = document.createElement('div');
       tempElement.innerHTML = htmlContent;
 
-      // Extract CSS (links and inline styles)
+      // Extract and inject CSS (both external and inline)
       const styles = tempElement.querySelectorAll('link[rel="stylesheet"], style');
       styles.forEach(style => {
         if (style.tagName === 'LINK') {
@@ -82,28 +81,31 @@
           const link = document.createElement('link');
           link.rel = 'stylesheet';
           link.href = style.href;
-          document.head.appendChild(link);
+          document.head.appendChild(link); // Inject into <head>
         } else if (style.tagName === 'STYLE') {
           // If it's a <style> tag (inline CSS)
           const inlineStyle = document.createElement('style');
           inlineStyle.innerHTML = style.innerHTML;
-          document.head.appendChild(inlineStyle);
+          document.head.appendChild(inlineStyle); // Inject into <head>
         }
       });
 
-      // Extract JS (external scripts and inline scripts)
+      // Extract and inject JS (both external and inline)
       const scripts = tempElement.querySelectorAll('script');
       scripts.forEach(script => {
         if (script.src) {
           // If it's an external script, load it
           const externalScript = document.createElement('script');
           externalScript.src = script.src;
-          document.body.appendChild(externalScript);
+          externalScript.onload = function () {
+            console.log(`External script loaded: ${script.src}`);
+          };
+          document.body.appendChild(externalScript); // Inject into <body>
         } else if (script.innerHTML) {
           // If it's inline JS, inject it
           const inlineScript = document.createElement('script');
           inlineScript.innerHTML = script.innerHTML;
-          document.body.appendChild(inlineScript);
+          document.body.appendChild(inlineScript); // Inject into <body>
         }
       });
     }
