@@ -1,125 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpage Viewer</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    input, button {
-      padding: 10px;
-      margin: 10px 0;
-    }
-    #content {
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin-top: 20px;
-      background-color: #f9f9f9;
-      max-height: 600px;
-      overflow: auto;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ms. Millette's Band</title>
 </head>
-<body>
+<body style="text-align: center; font-family: Arial, sans-serif; margin: 20px; background-color: #f7f7f7; color: #333;">
 
-  <h1>Enter URL to Fetch and Display Webpage</h1>
-  <input type="text" id="urlInput" placeholder="Enter website URL (e.g., https://example.com)" />
-  <button id="fetchButton">Fetch Webpage</button>
-  
-  <h2>Webpage Content</h2>
-  <div id="content"></div>
+    <h1 style="color: #2c3e50; margin-bottom: 10px;">Welcome to Ms. Millette's Band Website!</h1>
+    <p style="color: #7f8c8d; font-size: 18px; margin-bottom: 30px;">Explore your band journey below!</p>
 
-  <script>
-    document.getElementById('fetchButton').addEventListener('click', function () {
-      const url = document.getElementById('urlInput').value;
-      const proxyUrl = 'https://api.allorigins.win/raw?url='; // CORS proxy URL to fetch external HTML
+    <!-- Big Buttons -->
+    <a href="beginningband.html" style="
+        display: inline-block;
+        text-decoration: none;
+        background-color: #ff5733;
+        color: white;
+        padding: 20px 60px;
+        border-radius: 30px;
+        font-size: 28px;
+        font-weight: bold;
+        margin: 20px;
+        box-shadow: 0 6px #c13b20;
+        transition: transform 0.2s;
+    " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">Beginning Band</a>
 
-      // Ensure that the URL starts with "http://" or "https://"
-      if (!url.startsWith('http://') && !url.startsWith('https://')) {
-        alert('Please enter a valid URL starting with http:// or https://');
-        return;
-      }
+    <a href="advancedband.html" style="
+        display: inline-block;
+        text-decoration: none;
+        background-color: #27ae60;
+        color: white;
+        padding: 20px 60px;
+        border-radius: 30px;
+        font-size: 28px;
+        font-weight: bold;
+        margin: 20px;
+        box-shadow: 0 6px #1e8449;
+        transition: transform 0.2s;
+    " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">Advanced Band</a>
 
-      // Fetch the HTML content of the URL
-      fetch(proxyUrl + encodeURIComponent(url))
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Failed to fetch the page');
-          }
-          return response.text();
-        })
-        .then(htmlContent => {
-          // Inject the HTML content into the page
-          const contentDiv = document.getElementById('content');
-          contentDiv.innerHTML = htmlContent;
-
-          // Now fetch and inject CSS and JS into the current page
-          injectStylesAndScripts(htmlContent, url);
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          alert('There was an error fetching the webpage: ' + error.message);
-        });
-    });
-
-    // Function to inject CSS and JavaScript from the fetched HTML into the current page
-    function injectStylesAndScripts(htmlContent, url) {
-      const contentDiv = document.getElementById('content');
-      
-      // Create a temporary DOM element to parse the HTML
-      const tempElement = document.createElement('div');
-      tempElement.innerHTML = htmlContent;
-
-      // Extract and inject CSS (both external and inline)
-      const styles = tempElement.querySelectorAll('link[rel="stylesheet"], style');
-      styles.forEach(style => {
-        if (style.tagName === 'LINK') {
-          // If it's a <link> tag (external CSS)
-          const link = document.createElement('link');
-          link.rel = 'stylesheet';
-          link.href = resolveUrl(style.href, url);  // Fix the URL
-          document.head.appendChild(link); // Inject into <head>
-        } else if (style.tagName === 'STYLE') {
-          // If it's a <style> tag (inline CSS)
-          const inlineStyle = document.createElement('style');
-          inlineStyle.innerHTML = style.innerHTML;
-          document.head.appendChild(inlineStyle); // Inject into <head>
-        }
-      });
-
-      // Extract and inject JS (both external and inline)
-      const scripts = tempElement.querySelectorAll('script');
-      scripts.forEach(script => {
-        if (script.src) {
-          // If it's an external script, load it
-          const externalScript = document.createElement('script');
-          externalScript.src = resolveUrl(script.src, url); // Fix the URL
-          document.body.appendChild(externalScript); // Inject into <body>
-        } else if (script.innerHTML) {
-          // If it's inline JS, inject it
-          const inlineScript = document.createElement('script');
-          inlineScript.innerHTML = script.innerHTML;
-          document.body.appendChild(inlineScript); // Inject into <body>
-        }
-      });
-
-      // Handle images and other resources by adjusting relative URLs
-      const images = tempElement.querySelectorAll('img');
-      images.forEach(img => {
-        img.src = resolveUrl(img.src, url); // Resolve relative image URLs
-      });
-    }
-
-    // Helper function to resolve relative URLs to absolute URLs
-    function resolveUrl(relativeUrl, baseUrl) {
-      const link = document.createElement('a');
-      link.href = baseUrl; // Set the base URL
-      return new URL(relativeUrl, link.href).href; // Resolve and return the absolute URL
-    }
-  </script>
+    <!-- Small Gray Text -->
+    <p style="color: #7f8c8d; font-size: 14px; margin-top: 40px;">#BringBackIntermediateBand</p>
 
 </body>
 </html>
