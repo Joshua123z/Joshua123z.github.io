@@ -71,11 +71,43 @@
             box-shadow: 0 6px #1e8449;
         }
 
-        /* Small gray text */
-        .small-text {
-            color: #7f8c8d;
-            font-size: 14px;
+        /* Fun Stuff Below the Buttons */
+        .fun-stuff {
             margin-top: 40px;
+            padding: 20px;
+        }
+
+        /* Animated Text */
+        .animated-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff5733;
+            animation: fadeInOut 4s infinite;
+        }
+
+        /* Fun Fact */
+        .fun-fact {
+            font-size: 18px;
+            color: #27ae60;
+            margin-top: 30px;
+            font-style: italic;
+        }
+
+        /* Icon styling */
+        .icon-container {
+            margin-top: 20px;
+        }
+
+        .icon {
+            font-size: 36px;
+            color: #2c3e50;
+            margin: 0 15px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .icon:hover {
+            color: #ff5733; /* Change color on hover */
+            transform: scale(1.2); /* Enlarge on hover */
         }
 
         /* Footer styling */
@@ -85,6 +117,22 @@
             text-align: center;
             padding: 10px 0;
             width: 100%;
+        }
+
+        /* Animation Keyframes for Fade-In and Fade-Out */
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
         }
     </style>
 </head>
@@ -97,15 +145,31 @@
         <a href="beginningband.html" class="beginning-band">Beginning Band</a>
         <a href="advancedband.html" class="advanced-band">Advanced Band</a>
 
+        <!-- Fun Stuff Below -->
+        <div class="fun-stuff">
+            <!-- Animated Text -->
+            <div class="animated-text">🎶 Let’s make some music! 🎶</div>
+
+            <!-- Fun Fact -->
+            <div class="fun-fact">Did you know? The shortest musical composition ever is just two notes!</div>
+
+            <!-- Icon Section -->
+            <div class="icon-container">
+                <i class="icon">&#127926;</i> <!-- Musical Note Icon -->
+                <i class="icon">&#127927;</i> <!-- Trumpet Icon -->
+                <i class="icon">&#127928;</i> <!-- Guitar Icon -->
+            </div>
+        </div>
+
         <!-- Small Gray Text -->
-        <p class="small-text">hello! I'm josh</p>
+        <p class="small-text">hello! I'm Josh</p>
 
         <!-- Hidden iframe for audio (if needed) -->
         <iframe src="audio.html" style="display:none;"></iframe>
     </div>
 
     <footer>
-        <p> #BringBackIntermediateBand!! Ms. Millette's Band Website. No rights reserved.</p>
+        <p>#BringBackIntermediateBand!! Ms. Millette's Band Website. No rights reserved.</p>
     </footer>
 </body>
 </html>
