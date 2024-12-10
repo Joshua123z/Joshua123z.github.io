@@ -4,47 +4,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ms. Millette's Band</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body and main content */
+        body {
+            font-family: 'Courier New', monospace; /* Typewriter font */
+            margin: 0;
+            background-color: #f7f7f7;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Full height of the viewport */
+        }
+
+        /* Main content styling */
+        .content {
+            flex: 1; /* Ensures content section takes up all available space */
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Title styling */
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        /* Description text styling */
+        p {
+            color: #7f8c8d;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        /* Button styling */
+        a {
+            display: inline-block;
+            text-decoration: none;
+            padding: 20px 60px;
+            border-radius: 30px;
+            font-size: 28px;
+            font-weight: bold;
+            margin: 20px;
+            transition: transform 0.2s;
+        }
+
+        a:hover {
+            transform: scale(1.1);
+        }
+
+        .beginning-band {
+            background-color: #ff5733;
+            color: white;
+            box-shadow: 0 6px #c13b20;
+        }
+
+        .advanced-band {
+            background-color: #27ae60;
+            color: white;
+            box-shadow: 0 6px #1e8449;
+        }
+
+        /* Small gray text */
+        .small-text {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-top: 40px;
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            width: 100%;
+        }
+    </style>
 </head>
-<body style="text-align: center; font-family: Arial, sans-serif; margin: 20px; background-color: #f7f7f7; color: #333;">
+<body>
+    <div class="content">
+        <h1>Welcome to Ms. Millette's Band Website!</h1>
+        <p>Get info and stuff just press the button and I will get your info! jk lmao!</p>
 
-    <h1 style="color: #2c3e50; margin-bottom: 10px;">Welcome to Ms. Millette's Band Website!</h1>
-    <p style="color: #7f8c8d; font-size: 18px; margin-bottom: 30px;">Get info and stuff just press the button and I will get your info!jk lmao!</p>
+        <!-- Big Buttons -->
+        <a href="beginningband.html" class="beginning-band">Beginning Band</a>
+        <a href="advancedband.html" class="advanced-band">Advanced Band</a>
 
-    <!-- Big Buttons -->
-    <a href="beginningband.html" style="
-        display: inline-block;
-        text-decoration: none;
-        background-color: #ff5733;
-        color: white;
-        padding: 20px 60px;
-        border-radius: 30px;
-        font-size: 28px;
-        font-weight: bold;
-        margin: 20px;
-        box-shadow: 0 6px #c13b20;
-        transition: transform 0.2s;
-    " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">Beginning Band</a>
+        <!-- Small Gray Text -->
+        <p class="small-text">#BringBackIntermediateBand</p>
 
-    <a href="advancedband.html" style="
-        display: inline-block;
-        text-decoration: none;
-        background-color: #27ae60;
-        color: white;
-        padding: 20px 60px;
-        border-radius: 30px;
-        font-size: 28px;
-        font-weight: bold;
-        margin: 20px;
-        box-shadow: 0 6px #1e8449;
-        transition: transform 0.2s;
-    " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">Advanced Band</a>
-
-    <!-- Small Gray Text -->
-    <p style="color: #7f8c8d; font-size: 14px; margin-top: 40px;">#BringBackIntermediateBand</p>
+        <!-- Hidden iframe for audio (if needed) -->
         <iframe src="audio.html" style="display:none;"></iframe>
-    <footer>
-        <p>.</p>
-    </footer>
+    </div>
 
+    <footer>
+        <p>&copy; 2024 Ms. Millette's Band. All rights reserved.</p>
+    </footer>
 </body>
 </html>
