@@ -3,41 +3,215 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>advanced Band</title>
+    <title>Ms. Millette's Band</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body and main content */
+        body {
+            font-family: 'Courier New', monospace; /* Typewriter font */
+            margin: 0;
+            background-color: #f7f7f7;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Full height of the viewport */
+        }
+
+        /* Main content styling */
+        .content {
+            flex: 1; /* Ensures content section takes up all available space */
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Title styling */
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        /* Description text styling */
+        p {
+            color: #7f8c8d;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        /* Button styling */
+        a {
+            display: inline-block;
+            text-decoration: none;
+            padding: 20px 60px;
+            border-radius: 30px;
+            font-size: 28px;
+            font-weight: bold;
+            margin: 20px;
+            transition: transform 0.2s;
+        }
+
+        a:hover {
+            transform: scale(1.1);
+        }
+
+        .beginning-band {
+            background-color: #ff5733;
+            color: white;
+            box-shadow: 0 6px #c13b20;
+        }
+
+        .advanced-band {
+            background-color: #27ae60;
+            color: white;
+            box-shadow: 0 6px #1e8449;
+        }
+
+        /* Fun Stuff Below the Buttons */
+        .fun-stuff {
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        /* Animated Text */
+        .animated-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff5733;
+            animation: fadeInOut 4s infinite;
+        }
+
+        /* Fun Facts flashing animation */
+        .fun-facts {
+            font-size: 18px;
+            color: #27ae60;
+            margin-top: 30px;
+            font-style: italic;
+            animation: flashFacts 50s steps(10) infinite; /* Adjust the time for flashing */
+            white-space: nowrap;
+        }
+
+        /* Icon styling */
+        .icon-container {
+            margin-top: 20px;
+        }
+
+        .icon {
+            font-size: 36px;
+            color: #2c3e50;
+            margin: 0 15px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .icon:hover {
+            color: #ff5733; /* Change color on hover */
+            transform: scale(1.2); /* Enlarge on hover */
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            width: 100%;
+        }
+
+        /* Animation Keyframes for Fade-In and Fade-Out */
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+        }
+
+        /* Animation for Flashing Fun Facts */
+        @keyframes flashFacts {
+            0% {
+                content: "Did you know? The shortest musical composition ever is just two notes!";
+            }
+            10% {
+                content: "Musical notes can represent frequencies, which are vibrations!";
+            }
+            20% {
+                content: "The longest symphony ever lasted 639 years!";
+            }
+            30% {
+                content: "A single note can have different durations depending on time signature!";
+            }
+            40% {
+                content: "Musical instruments existed even in ancient Egypt!";
+            }
+            50% {
+                content: "There are over 1,000 different types of musical scales!";
+            }
+            60% {
+                content: "The cello is considered one of the most expressive instruments!";
+            }
+            70% {
+                content: "The largest piano in the world weighs over a ton!";
+            }
+            80% {
+                content: "In ancient Greece, music was considered a mathematical science!";
+            }
+            90% {
+                content: "Music has the power to alter your mood almost instantly!";
+            }
+            100% {
+                content: "Beethoven composed some of his greatest works after going deaf!";
+            }
+        }
+    </style>
 </head>
-<body style="text-align: center; font-family: Arial, sans-serif; margin: 20px; background-color: #f0f8ff; color: #333;">
+<body>
+    <div class="content">
+        <h1>Welcome to Ms. Millette's Band Website!</h1>
+        <p>Get info and stuff just press the button and I will get your info! jk lmao!</p>
 
-    <h1 style="color: #2c3e50; margin-bottom: 10px;">advanced Band</h1>
-    <p style="color: #7f8c8d; font-size: 18px; margin-bottom: 30px;">Welcome to the advanced Band page!</p>
+        <!-- Big Buttons -->
+        <a href="beginningband.html" class="beginning-band">Beginning Band</a>
+        <a href="advancedband.html" class="advanced-band">Advanced Band</a>
 
-    <!-- Big Buttons -->
-    <a href="begmeter.html" style="
-        display: inline-block;
-        text-decoration: none;
-        background-color: #3498db;
-        color: white;
-        padding: 20px 60px;
-        border-radius: 30px;
-        font-size: 28px;
-        font-weight: bold;
-        margin: 20px;
-        box-shadow: 0 6px #21618c;
-        transition: transform 0.2s;
-    " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">Millette-O-Meter</a>
+        <!-- Fun Stuff Below -->
+        <div class="fun-stuff">
+            <!-- Animated Text -->
+            <div class="animated-text">🎶 Let’s make some music! 🎶</div>
 
-    <a href="beginfo.html" style="
-        display: inline-block;
-        text-decoration: none;
-        background-color: #e74c3c;
-        color: white;
-        padding: 20px 60px;
-        border-radius: 30px;
-        font-size: 28px;
-        font-weight: bold;
-        margin: 20px;
-        box-shadow: 0 6px #c0392b;
-        transition: transform 0.2s;
-    " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">Concert Info</a>
-  
+            <!-- Fun Facts flashing -->
+            <div class="fun-facts">
+                <!-- Fun facts will be animated and change every few seconds -->
+            </div>
+
+            <!-- Icon Section -->
+            <div class="icon-container">
+                <i class="icon">&#127926;</i> <!-- Musical Note Icon -->
+                <i class="icon">&#127927;</i> <!-- Trumpet Icon -->
+                <i class="icon">&#127928;</i> <!-- Guitar Icon -->
+            </div>
+        </div>
+
+        <!-- Small Gray Text -->
+        <p class="small-text">hello! I'm Josh</p>
+        <p class="small-text">Hi, I'm CC :)</p> <!-- New text added for CC -->
+
+        <!-- Hidden iframe for audio (if needed) -->
+        <iframe src="audio.html" style="display:none;"></iframe>
+    </div>
+
+    <footer>
+        <p>#BringBackIntermediateBand!! Ms. Millette's Band Website. No rights reserved.</p>
+    </footer>
 </body>
 </html>
