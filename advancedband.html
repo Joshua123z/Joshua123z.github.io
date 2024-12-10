@@ -3,27 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recreated Chart</title>
+    <title>Aligned Chart</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: monospace;
             background-color: #ffffff;
             color: #000;
             padding: 20px;
         }
-        .chart-container {
-            display: grid;
-            grid-template-columns: 150px 400px;
-            gap: 10px;
-            align-items: center;
+        table {
+            border-collapse: collapse;
+            width: 100%;
         }
-        .row {
-            display: contents;
+        td {
+            vertical-align: middle;
+            padding: 5px;
         }
         .bar {
             display: inline-block;
-            background-color: black;
             height: 20px;
+            background-color: black;
         }
         .bar-1 { width: 300px; }
         .bar-2 { width: 300px; }
@@ -36,20 +35,20 @@
 </head>
 <body>
     <h1>Music Practice Chart</h1>
-    <div class="chart-container">
-        <div class="row">
-            <div>Nutcracker</div>
-            <div class="bar bar-1"></div>
-        </div>
-        <div class="row">
-            <div>Greensleeves</div>
-            <div class="bar bar-2"></div>
-        </div>
-        <div class="row">
-            <div>All I Want for X-Mas</div>
-            <div class="bar bar-3"></div>
-        </div>
-    </div>
+    <table>
+        <tr>
+            <td>Nutcracker</td>
+            <td><div class="bar bar-1"></div></td>
+        </tr>
+        <tr>
+            <td>Greensleeves</td>
+            <td><div class="bar bar-2"></div></td>
+        </tr>
+        <tr>
+            <td>All I Want for X-Mas</td>
+            <td><div class="bar bar-3"></div></td>
+        </tr>
+    </table>
     <div class="footer">
         Green reeds | All I Want for Christmas is right notes | Not slackers | Happy Ms. Milette 😊
     </div>
