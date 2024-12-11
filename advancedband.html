@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ms. Millette's Beginning Band</title>
+    <title>Ms. Millette's Advanced Band</title>
     <style>
         /* Resetting default styles */
         * {
@@ -17,7 +17,7 @@
             font-family: 'Arial', sans-serif;
             background-color: #f3f4f7;
             color: #333;
-            cursor: url('CC.png'), auto; /* Custom Cursor (ensure CC.png is in the same directory or adjust path accordingly) */
+            cursor: url('CC.png'), auto; /* Custom Cursor */
         }
 
         h1, h2, h3, p {
@@ -26,7 +26,7 @@
 
         /* Header Section */
         header {
-            background: #0099CC; /* Lighter blue for Beginning Band */
+            background: #ff6600; /* Advanced Band color */
             color: white;
             text-align: center;
             padding: 40px 0;
@@ -42,9 +42,9 @@
             font-weight: 300;
         }
 
-        /* Millette-O-Meter Section for Beginning Band */
+        /* Millette-O-Meter Section for Advanced Band */
         #millette-o-meter {
-            background: linear-gradient(135deg, #b3e0ff, #66ccff); /* Lighter colors for Beginning Band */
+            background: linear-gradient(135deg, #ffcc99, #ff6600); /* Advanced Band colors */
             color: white;
             text-align: center;
             padding: 40px 0;
@@ -66,7 +66,7 @@
             height: 50px;
             margin: 30px auto;
             border-radius: 25px;
-            border: 2px solid #66ccff;
+            border: 2px solid #ff6600;
             position: relative;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
@@ -93,7 +93,7 @@
 
         /* Button Style */
         button {
-            background-color: #66ccff;
+            background-color: #ff6600;
             color: white;
             font-size: 1.2em;
             padding: 10px 30px;
@@ -105,7 +105,7 @@
         }
 
         button:hover {
-            background-color: #33b5cc;
+            background-color: #ff4500;
         }
 
         /* Energy Level Feedback Section */
@@ -118,20 +118,20 @@
 
         /* Stylish Pop-Up */
         .popup {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 100; /* Sit on top */
+            display: none;
+            position: fixed;
+            z-index: 100;
             left: 0;
             top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
             justify-content: center;
             align-items: center;
         }
 
         .popup-content {
-            background: #4CAF50;
+            background: #ff6600;
             color: white;
             padding: 30px;
             border-radius: 15px;
@@ -167,7 +167,7 @@
 
         /* Concert Info Section */
         #concert-info {
-            background: #4CAF50;
+            background: #ff6600;
             color: white;
             padding: 40px 0;
             border-radius: 10px;
@@ -176,7 +176,7 @@
         }
 
         .concert {
-            background-color: #388e3c;
+            background-color: #ff4500;
             margin: 15px 0;
             padding: 20px;
             border-radius: 10px;
@@ -210,14 +210,13 @@
 <body>
 
     <header>
-        <h1>Ms. Millette's PJMS Beginning Band</h1>
-        <h2>Starting the Journey of Music!</h2>
+        <h1>Ms. Millette's PJMS Advanced Band</h1>
+        <h2>Experience the Power of Music!</h2>
     </header>
 
-    <!-- Millette-O-Meter for Beginning Band -->
     <section id="millette-o-meter">
-        <h3>Beginning Band POWER</h3>
-        <p>Click below to increase the energy of the Beginning Band!</p>
+        <h3>Advanced Band POWER</h3>
+        <p>Click below to increase the energy of the Advanced Band!</p>
         <div id="meter">
             <div id="level" class="level low"></div>
         </div>
@@ -225,7 +224,6 @@
         <div id="energy-feedback">Energy Level: 0%</div>
     </section>
 
-    <!-- Concert Info Section -->
     <section id="concert-info">
         <h3>Upcoming Concert</h3>
         <div class="concert">
@@ -235,5 +233,58 @@
             <p><strong>Important:</strong> Be at school by 6:30 PM or earlier ⚠️</p>
             <p><strong>Location:</strong> PJMS Cafeteria</p>
         </div>
+        <button onclick="showPopup()">View Band Info</button>
+    </section>
 
-        <!-- Button to Trigger Pop-Up
+    <div id="powerPopup" class="popup">
+        <div class="popup-content">
+            <h2>🎉 Advanced Band is FULL OF POWER! 🎉</h2>
+            <p>The Advanced Band has reached 100% energy!</p>
+            <button onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 PJMS Band. All rights reserved.</p>
+    </footer>
+
+    <script>
+        var popup = document.getElementById("powerPopup");
+        var advancedEnergyLevel = 0;
+
+        function increaseEnergy() {
+            if (advancedEnergyLevel < 100) {
+                advancedEnergyLevel += 10;
+                document.getElementById('level').style.width = advancedEnergyLevel + '%';
+                document.getElementById('energy-feedback').innerText = `Energy Level: ${advancedEnergyLevel}%`;
+                updateLevelClass(advancedEnergyLevel);
+            } else {
+                document.getElementById('energy-feedback').innerText = "The Advanced Band is FULL OF POWER!";
+                showPopup();
+            }
+        }
+
+        function updateLevelClass(energyLevel) {
+            const levelElement = document.getElementById('level');
+
+            if (energyLevel <= 30) {
+                levelElement.className = 'level low';
+            } else if (energyLevel <= 70) {
+                levelElement.className = 'level medium';
+            } else {
+                levelElement.className = 'level high';
+            }
+        }
+
+        function showPopup() {
+            if (advancedEnergyLevel >= 100) {
+                popup.style.display = "flex";
+            }
+        }
+
+        function closePopup() {
+            popup.style.display = "none";
+        }
+    </script>
+</body>
+</html>
