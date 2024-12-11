@@ -63,7 +63,7 @@
         #millette-o-meter h3 {
             font-size: 2.5em;
             margin-bottom: 20px;
-            color: #66ccff;
+            color: black; /* Changed the color to black */
         }
 
         /* Band Power Meter */
@@ -113,6 +113,14 @@
 
         button:hover {
             background-color: #33b5cc;
+        }
+
+        /* Energy Level Feedback Section */
+        #energy-feedback {
+            font-size: 1.5em;
+            margin-top: 20px;
+            font-weight: bold;
+            color: black;
         }
 
         /* Concert Info Section */
@@ -176,6 +184,8 @@
                 <div id="level" class="level low"></div>
             </div>
             <button onclick="increaseEnergy()">Increase Energy!</button>
+            <!-- Feedback for energy level -->
+            <div id="energy-feedback">Energy Level: 0%</div>
         </div>
     </section>
 
@@ -186,7 +196,7 @@
             <div class="concert">
                 <h4>🎄 Christmas Concert 🎄</h4>
                 <p><strong>Date:</strong> Wednesday, December 12th</p>
-                <p><strong>Time:</strong> Starts at 7:00 PM </p>
+                <p><strong>Time:</strong> Starts at 7:00 PM ⚠️</p>
                 <p><strong>Important:</strong> Be at school by 6:30 PM or earlier ⚠️</p>
                 <p><strong>Location:</strong> PJMS Cafeteria</p>
             </div>
@@ -206,6 +216,9 @@
                 energyLevel += 10;
                 document.getElementById('level').style.width = energyLevel + '%';
 
+                // Update the feedback text
+                document.getElementById('energy-feedback').innerText = `Energy Level: ${energyLevel}%`;
+
                 // Add a class for dynamic color change based on energy level
                 if (energyLevel <= 30) {
                     document.getElementById('level').className = 'level low';
@@ -215,7 +228,7 @@
                     document.getElementById('level').className = 'level high';
                 }
             } else {
-                alert("The Beginning Band is FULL OF POWER!");
+                document.getElementById('energy-feedback').innerText = "The Beginning Band is FULL OF POWER!";
             }
         }
     </script>
