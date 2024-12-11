@@ -115,55 +115,85 @@
             color: black;
         }
 
-        /* Modal (Popup) Styling */
-        .modal {
+        /* Stylish Pop-Up */
+        .popup {
             display: none; /* Hidden by default */
-            position: fixed;
-            z-index: 1; /* Sit on top */
+            position: fixed; /* Stay in place */
+            z-index: 100; /* Sit on top */
             left: 0;
             top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(0, 0, 0); /* Fallback color */
-            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-            padding-top: 60px;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            justify-content: center;
+            align-items: center;
         }
 
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
+        .popup-content {
+            background: #4CAF50;
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            width: 60%;
             max-width: 500px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .modal-header {
-            font-size: 1.8em;
-            margin-bottom: 15px;
+        .popup h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
         }
 
-        .modal-body p {
+        .popup p {
             font-size: 1.2em;
-            line-height: 1.5;
+            margin-bottom: 20px;
         }
 
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
+        .popup button {
+            background-color: #f44336;
+            font-size: 1.5em;
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: none;
+            color: white;
             cursor: pointer;
         }
 
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
+        .popup button:hover {
+            background-color: #d32f2f;
+        }
+
+        /* Concert Info Section */
+        #concert-info {
+            background: #4CAF50;
+            color: white;
+            padding: 40px 0;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .concert {
+            background-color: #388e3c;
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+            display: inline-block;
+            width: 45%;
+            min-width: 250px;
+            margin-right: 5%;
+        }
+
+        .concert h4 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .concert p {
+            font-size: 1.2em;
+            margin: 5px 0;
         }
 
         footer {
@@ -173,6 +203,7 @@
             padding: 15px 0;
             font-size: 1em;
         }
+
     </style>
 </head>
 <body>
@@ -193,22 +224,27 @@
         <div id="energy-feedback">Energy Level: 0%</div>
     </section>
 
-    <!-- Button to Trigger the Modal -->
-    <button id="concertBtn">View Concert Info</button>
+    <!-- Concert Info Section -->
+    <section id="concert-info">
+        <h3>Upcoming Concert</h3>
+        <div class="concert">
+            <h4>🎄 Christmas Concert 🎄</h4>
+            <p><strong>Date:</strong> Wednesday, December 12th</p>
+            <p><strong>Time:</strong> Starts at 7:00 PM ⚠️</p>
+            <p><strong>Important:</strong> Be at school by 6:30 PM or earlier ⚠️</p>
+            <p><strong>Location:</strong> PJMS Cafeteria</p>
+        </div>
 
-    <!-- Modal (Popup) -->
-    <div id="concertModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="modal-header">
-                🎄 Christmas Concert 🎄
-            </div>
-            <div class="modal-body">
-                <p><strong>Date:</strong> Wednesday, December 12th</p>
-                <p><strong>Time:</strong> Starts at 7:00 PM ⚠️</p>
-                <p><strong>Important:</strong> Be at school by 6:30 PM or earlier ⚠️</p>
-                <p><strong>Location:</strong> PJMS Cafeteria</p>
-            </div>
+        <!-- Button to Trigger Pop-Up when the Band is FULL OF POWER -->
+        <button onclick="showPopup()">View Band Info</button>
+    </section>
+
+    <!-- Pop-Up for "Band is FULL OF POWER" -->
+    <div id="powerPopup" class="popup">
+        <div class="popup-content">
+            <h2>🎉 Beginning Band is FULL OF POWER! 🎉</h2>
+            <p>The Beginning Band has reached 100% energy!</p>
+            <button onclick="closePopup()">Close</button>
         </div>
     </div>
 
@@ -218,6 +254,22 @@
     </footer>
 
     <script>
+        // Pop-Up Functionality
+        var popup = document.getElementById("powerPopup");
+
+        // Show the popup when the energy reaches 100%
+        function showPopup() {
+            if (beginningEnergyLevel >= 100) {
+                popup.style.display = "flex"; // Display the popup
+            }
+        }
+
+        // Close the popup
+        function closePopup() {
+            popup.style.display = "none"; // Hide the popup
+        }
+
+        // Energy Level Logic
         let beginningEnergyLevel = 0;
 
         function increaseEnergy() {
@@ -229,6 +281,7 @@
                 updateLevelClass(beginningEnergyLevel);
             } else {
                 document.getElementById('energy-feedback').innerText = "The Beginning Band is FULL OF POWER!";
+                showPopup(); // Show the pop-up when energy reaches 100%
             }
         }
 
@@ -241,28 +294,6 @@
                 levelElement.className = 'level medium';
             } else {
                 levelElement.className = 'level high';
-            }
-        }
-
-        // Modal functionality
-        var modal = document.getElementById("concertModal");
-        var btn = document.getElementById("concertBtn");
-        var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks the button, open the modal
-        btn.onclick = function() {
-            modal.style.display = "block";
-        }
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
             }
         }
     </script>
