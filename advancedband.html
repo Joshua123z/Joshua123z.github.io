@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ms. Millette's Band</title>
+    <title>Ms. Millette's Beginning Band</title>
     <style>
         /* Resetting default styles */
         * {
@@ -17,15 +17,16 @@
             font-family: 'Arial', sans-serif;
             background-color: #f3f4f7;
             color: #333;
+            cursor: url('CC.png'), auto; /* Custom Cursor (ensure CC.png is in the same directory or adjust path accordingly) */
         }
 
-        h1, h2, h3, h4, p {
+        h1, h2, h3, p {
             margin: 20px 0;
         }
 
         /* Header Section */
         header {
-            background: #4CAF50;
+            background: #0099CC; /* Lighter blue for Beginning Band */
             color: white;
             text-align: center;
             padding: 40px 0;
@@ -41,17 +42,9 @@
             font-weight: 300;
         }
 
-        /* Container for the sections */
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Millette-O-Meter Section */
+        /* Millette-O-Meter Section for Beginning Band */
         #millette-o-meter {
-            background: linear-gradient(135deg, #ffb3ba, #ff66cc);
+            background: linear-gradient(135deg, #b3e0ff, #66ccff); /* Lighter colors for Beginning Band */
             color: white;
             text-align: center;
             padding: 40px 0;
@@ -63,7 +56,7 @@
         #millette-o-meter h3 {
             font-size: 2.5em;
             margin-bottom: 20px;
-            color: #ff66cc;
+            color: black;
         }
 
         /* Band Power Meter */
@@ -73,7 +66,7 @@
             height: 50px;
             margin: 30px auto;
             border-radius: 25px;
-            border: 2px solid #ff66cc;
+            border: 2px solid #66ccff;
             position: relative;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
@@ -100,7 +93,7 @@
 
         /* Button Style */
         button {
-            background-color: #ff66cc;
+            background-color: #66ccff;
             color: white;
             font-size: 1.2em;
             padding: 10px 30px;
@@ -112,12 +105,69 @@
         }
 
         button:hover {
-            background-color: #ff3385;
+            background-color: #33b5cc;
+        }
+
+        /* Energy Level Feedback Section */
+        #energy-feedback {
+            font-size: 1.5em;
+            margin-top: 20px;
+            font-weight: bold;
+            color: black;
+        }
+
+        /* Stylish Pop-Up */
+        .popup {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 100; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background: #4CAF50;
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            width: 60%;
+            max-width: 500px;
+        }
+
+        .popup h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .popup p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .popup button {
+            background-color: #f44336;
+            font-size: 1.5em;
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        .popup button:hover {
+            background-color: #d32f2f;
         }
 
         /* Concert Info Section */
         #concert-info {
-            background: #2196F3;
+            background: #4CAF50;
             color: white;
             padding: 40px 0;
             border-radius: 10px;
@@ -126,7 +176,7 @@
         }
 
         .concert {
-            background-color: #1e88e5;
+            background-color: #388e3c;
             margin: 15px 0;
             padding: 20px;
             border-radius: 10px;
@@ -147,7 +197,6 @@
             margin: 5px 0;
         }
 
-        /* Footer */
         footer {
             background: #333;
             color: white;
@@ -161,64 +210,30 @@
 <body>
 
     <header>
-        <div class="container">
-            <h1>Ms. Millette's PJMS Band</h1>
-            <h2>Unleashing the Power of Music!</h2>
-        </div>
+        <h1>Ms. Millette's PJMS Beginning Band</h1>
+        <h2>Starting the Journey of Music!</h2>
     </header>
 
-    <!-- Millette-O-Meter Section -->
+    <!-- Millette-O-Meter for Beginning Band -->
     <section id="millette-o-meter">
-        <div class="container">
-            <h3>Advanced Band POWER</h3>
-            <p>Click below to increase the energy of the band!</p>
-            <div id="meter">
-                <div id="level" class="level low"></div>
-            </div>
-            <button onclick="increaseEnergy()">Increase Energy!</button>
+        <h3>Beginning Band POWER</h3>
+        <p>Click below to increase the energy of the Beginning Band!</p>
+        <div id="meter">
+            <div id="level" class="level low"></div>
         </div>
+        <button onclick="increaseEnergy()">Increase Energy!</button>
+        <div id="energy-feedback">Energy Level: 0%</div>
     </section>
 
     <!-- Concert Info Section -->
     <section id="concert-info">
-        <div class="container">
-            <h3>Upcoming Concert</h3>
-            <div class="concert">
-                <h4>🎄 Christmas Concert 🎄</h4>
-                <p><strong>Date:</strong> Wednesday, December 12th</p>
-                <p><strong>Time:</strong> Starts at 7:00 PM ⚠️</p>
-                <p><strong>Important:</strong> Be at school by 6:30 PM or earlier ⚠️</p>
-                <p><strong>Location:</strong> PJMS Cafeteria</p>
-            </div>
+        <h3>Upcoming Concert</h3>
+        <div class="concert">
+            <h4>🎄 Christmas Concert 🎄</h4>
+            <p><strong>Date:</strong> Wednesday, December 12th</p>
+            <p><strong>Time:</strong> Starts at 7:00 PM ⚠️</p>
+            <p><strong>Important:</strong> Be at school by 6:30 PM or earlier ⚠️</p>
+            <p><strong>Location:</strong> PJMS Cafeteria</p>
         </div>
-    </section>
 
-    <!-- Footer Section -->
-    <footer>
-        <p>&copy; 2024 PJMS Band. All rights reserved.</p>
-    </footer>
-
-    <script>
-        let energyLevel = 0;
-
-        function increaseEnergy() {
-            if (energyLevel < 100) {
-                energyLevel += 10;
-                document.getElementById('level').style.width = energyLevel + '%';
-
-                // Add a class for dynamic color change based on energy level
-                if (energyLevel <= 30) {
-                    document.getElementById('level').className = 'level low';
-                } else if (energyLevel <= 70) {
-                    document.getElementById('level').className = 'level medium';
-                } else {
-                    document.getElementById('level').className = 'level high';
-                }
-            } else {
-                alert("The Advanced Band is FULL OF POWER!");
-            }
-        }
-    </script>
-
-</body>
-</html>
+        <!-- Button to Trigger Pop-Up
