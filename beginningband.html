@@ -3,41 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beginning Band</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ms. Millette's Beginning Band</title>
+    <style>
+        /* Resetting default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f3f4f7;
+            color: #333;
+        }
+
+        h1, h2, h3, h4, p {
+            margin: 20px 0;
+        }
+
+        /* Header Section */
+        header {
+            background: #0099CC; /* Change for Beginning Band */
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        header h2 {
+            font-size: 1.5em;
+            font-weight: 300;
+        }
+
+        /* Container for the sections */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Millette-O-Meter Section for Beginning Band */
+        #millette-o-meter {
+            background: linear-gradient(135deg, #b3e0ff, #66ccff); /* Lighter colors for Beginning Band */
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #millette-o-meter h3 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #66ccff;
+        }
+
+        /* Band Power Meter */
+        #meter {
+            background-color: #f1f1f1;
+            width: 80%;
+            height: 50px;
+            margin: 30px auto;
+            border-radius: 25px;
+            border: 2px solid #66ccff;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .level {
+            height: 100%;
+            width: 0%;
+            border-radius: 25px;
+            transition: width 0.3s ease;
+        }
+
+        /* Adding color gradients for energy levels */
+        .level.low {
+            background: #ff4d4d;
+        }
+
+        .level.medium {
+            background: #ffcc00;
+        }
+
+        .level.high {
+            background: #66ff66;
+        }
+
+        /* Button Style */
+        button {
+            background-color: #66ccff; /* Change button color */
+            color: white;
+            font-size: 1.2em;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #33b5cc;
+        }
+
+        /* Concert Info Section */
+        #concert-info {
+            background: #4CAF50; /* Change to green for Beginning Band */
+            color: white;
+            padding: 40px 0;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .concert {
+            background-color: #388e3c; /* Darker green */
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+            display: inline-block;
+            width: 45%;
+            min-width: 250px;
+            margin-right: 5%;
+        }
+
+        .concert h4 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .concert p {
+            font-size: 1.2em;
+            margin: 5px 0;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 1em;
+        }
+
+    </style>
 </head>
-<body style="text-align: center; font-family: Arial, sans-serif; margin: 20px; background-color: #f0f8ff; color: #333;">
+<body>
 
-    <h1 style="color: #2c3e50; margin-bottom: 10px;">Beginning Band</h1>
-    <p style="color: #7f8c8d; font-size: 18px; margin-bottom: 30px;">Welcome to the Beginning Band page!</p>
+    <header>
+        <div class="container">
+            <h1>Ms. Millette's PJMS Beginning Band</h1>
+            <h2>Starting the Journey of Music!</h2>
+        </div>
+    </header>
 
-    <!-- Big Buttons -->
-    <a href="begmeter.html" style="
-        display: inline-block;
-        text-decoration: none;
-        background-color: #3498db;
-        color: white;
-        padding: 20px 60px;
-        border-radius: 30px;
-        font-size: 28px;
-        font-weight: bold;
-        margin: 20px;
-        box-shadow: 0 6px #21618c;
-        transition: transform 0.2s;
-    " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">Millette-O-Meter</a>
+    <!-- Millette-O-Meter Section for Beginning Band -->
+    <section id="millette-o-meter">
+        <div class="container">
+            <h3>Beginning Band POWER</h3>
+            <p>Click below to increase the energy of the Beginning Band!</p>
+            <div id="meter">
+                <div id="level" class="level low"></div>
+            </div>
+            <button onclick="increaseEnergy()">Increase Energy!</button>
+        </div>
+    </section>
 
-    <a href="beginfo.html" style="
-        display: inline-block;
-        text-decoration: none;
-        background-color: #e74c3c;
-        color: white;
-        padding: 20px 60px;
-        border-radius: 30px;
-        font-size: 28px;
-        font-weight: bold;
-        margin: 20px;
-        box-shadow: 0 6px #c0392b;
-        transition: transform 0.2s;
-    " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">Concert Info</a>
+    <!-- Concert Info Section -->
+    <section id="concert-info">
+        <div class="container">
+            <h3>Upcoming Concert</h3>
+            <div class="concert">
+                <h4>🎄 Christmas Concert 🎄</h4>
+                <p><strong>Date:</strong> Wednesday, December 12th</p>
+                <p><strong>Time:</strong> Starts at 7:00 PM ⚠️</p>
+                <p><strong>Important:</strong> Be at school by 6:30 PM or earlier ⚠️</p>
+                <p><strong>Location:</strong> PJMS Cafeteria</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 PJMS Beginning Band. All rights reserved.</p>
+    </footer>
+
+    <script>
+        let energyLevel = 0;
+
+        function increaseEnergy() {
+            if (energyLevel < 100) {
+                energyLevel += 10;
+                document.getElementById('level').style.width = energyLevel + '%';
+
+                // Add a class for dynamic color change based on energy level
+                if (energyLevel <= 30) {
+                    document.getElementById('level').className = 'level low';
+                } else if (energyLevel <= 70) {
+                    document.getElementById('level').className = 'level medium';
+                } else {
+                    document.getElementById('level').className = 'level high';
+                }
+            } else {
+                alert("The Beginning Band is FULL OF POWER!");
+            }
+        }
+    </script>
 
 </body>
 </html>
