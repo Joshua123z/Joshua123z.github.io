@@ -19,13 +19,13 @@
             color: #333;
         }
 
-        h1, h2, h3, h4, p {
+        h1, h2, h3, p {
             margin: 20px 0;
         }
 
         /* Header Section */
         header {
-            background: #0099CC; /* Change for Beginning Band */
+            background: #0099CC; /* Lighter blue for Beginning Band */
             color: white;
             text-align: center;
             padding: 40px 0;
@@ -39,14 +39,6 @@
         header h2 {
             font-size: 1.5em;
             font-weight: 300;
-        }
-
-        /* Container for the sections */
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
         }
 
         /* Millette-O-Meter Section for Beginning Band */
@@ -63,7 +55,7 @@
         #millette-o-meter h3 {
             font-size: 2.5em;
             margin-bottom: 20px;
-            color: black; /* Changed the color to black */
+            color: black;
         }
 
         /* Band Power Meter */
@@ -100,7 +92,7 @@
 
         /* Button Style */
         button {
-            background-color: #66ccff; /* Change button color */
+            background-color: #66ccff;
             color: white;
             font-size: 1.2em;
             padding: 10px 30px;
@@ -123,39 +115,57 @@
             color: black;
         }
 
-        /* Concert Info Section */
-        #concert-info {
-            background: #4CAF50; /* Change to green for Beginning Band */
-            color: white;
-            padding: 40px 0;
-            border-radius: 10px;
-            margin-bottom: 40px;
-            text-align: center;
+        /* Modal (Popup) Styling */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+            padding-top: 60px;
         }
 
-        .concert {
-            background-color: #388e3c; /* Darker green */
-            margin: 15px 0;
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
             padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
             border-radius: 10px;
-            text-align: left;
-            display: inline-block;
-            width: 45%;
-            min-width: 250px;
-            margin-right: 5%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .concert h4 {
+        .modal-header {
             font-size: 1.8em;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
-        .concert p {
+        .modal-body p {
             font-size: 1.2em;
-            margin: 5px 0;
+            line-height: 1.5;
         }
 
-        /* Footer */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
         footer {
             background: #333;
             color: white;
@@ -163,72 +173,96 @@
             padding: 15px 0;
             font-size: 1em;
         }
-
     </style>
 </head>
 <body>
 
     <header>
-        <div class="container">
-            <h1>Ms. Millette's PJMS Beginning Band</h1>
-            <h2>Starting the Journey of Music!</h2>
-        </div>
+        <h1>Ms. Millette's PJMS Beginning Band</h1>
+        <h2>Starting the Journey of Music!</h2>
     </header>
 
-    <!-- Millette-O-Meter Section for Beginning Band -->
+    <!-- Millette-O-Meter for Beginning Band -->
     <section id="millette-o-meter">
-        <div class="container">
-            <h3>Beginning Band POWER</h3>
-            <p>Click below to increase the energy of the Beginning Band!</p>
-            <div id="meter">
-                <div id="level" class="level low"></div>
-            </div>
-            <button onclick="increaseEnergy()">Increase Energy!</button>
-            <!-- Feedback for energy level -->
-            <div id="energy-feedback">Energy Level: 0%</div>
+        <h3>Beginning Band POWER</h3>
+        <p>Click below to increase the energy of the Beginning Band!</p>
+        <div id="meter">
+            <div id="level" class="level low"></div>
         </div>
+        <button onclick="increaseEnergy()">Increase Energy!</button>
+        <div id="energy-feedback">Energy Level: 0%</div>
     </section>
 
-    <!-- Concert Info Section -->
-    <section id="concert-info">
-        <div class="container">
-            <h3>Upcoming Concert</h3>
-            <div class="concert">
-                <h4>🎄 Christmas Concert 🎄</h4>
+    <!-- Button to Trigger the Modal -->
+    <button id="concertBtn">View Concert Info</button>
+
+    <!-- Modal (Popup) -->
+    <div id="concertModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-header">
+                🎄 Christmas Concert 🎄
+            </div>
+            <div class="modal-body">
                 <p><strong>Date:</strong> Wednesday, December 12th</p>
                 <p><strong>Time:</strong> Starts at 7:00 PM ⚠️</p>
                 <p><strong>Important:</strong> Be at school by 6:30 PM or earlier ⚠️</p>
                 <p><strong>Location:</strong> PJMS Cafeteria</p>
             </div>
         </div>
-    </section>
+    </div>
 
     <!-- Footer Section -->
     <footer>
-        <p>&copy; 2024 PJMS Beginning Band. All rights reserved.</p>
+        <p>&copy; 2024 PJMS Band. All rights reserved.</p>
     </footer>
 
     <script>
-        let energyLevel = 0;
+        let beginningEnergyLevel = 0;
 
         function increaseEnergy() {
-            if (energyLevel < 100) {
-                energyLevel += 10;
-                document.getElementById('level').style.width = energyLevel + '%';
+            if (beginningEnergyLevel < 100) {
+                beginningEnergyLevel += 10;
+                document.getElementById('level').style.width = beginningEnergyLevel + '%';
+                document.getElementById('energy-feedback').innerText = `Energy Level: ${beginningEnergyLevel}%`;
 
-                // Update the feedback text
-                document.getElementById('energy-feedback').innerText = `Energy Level: ${energyLevel}%`;
-
-                // Add a class for dynamic color change based on energy level
-                if (energyLevel <= 30) {
-                    document.getElementById('level').className = 'level low';
-                } else if (energyLevel <= 70) {
-                    document.getElementById('level').className = 'level medium';
-                } else {
-                    document.getElementById('level').className = 'level high';
-                }
+                updateLevelClass(beginningEnergyLevel);
             } else {
                 document.getElementById('energy-feedback').innerText = "The Beginning Band is FULL OF POWER!";
+            }
+        }
+
+        function updateLevelClass(energyLevel) {
+            const levelElement = document.getElementById('level');
+
+            if (energyLevel <= 30) {
+                levelElement.className = 'level low';
+            } else if (energyLevel <= 70) {
+                levelElement.className = 'level medium';
+            } else {
+                levelElement.className = 'level high';
+            }
+        }
+
+        // Modal functionality
+        var modal = document.getElementById("concertModal");
+        var btn = document.getElementById("concertBtn");
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
             }
         }
     </script>
