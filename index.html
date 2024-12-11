@@ -85,14 +85,13 @@
             animation: fadeInOut 4s infinite;
         }
 
-        /* Fun Facts flashing animation */
+        /* Fun Facts text styling */
         .fun-facts {
-            font-size: 18px;
+            font-size: 20px;
             color: #27ae60;
-            margin-top: 30px;
+            margin-top: 20px;
             font-style: italic;
-            animation: flashFacts 50s steps(10) infinite; /* Adjust the time for flashing */
-            white-space: nowrap;
+            min-height: 40px; /* Ensure space is reserved for the fun facts */
         }
 
         /* Icon styling */
@@ -136,43 +135,6 @@
                 transform: translateY(20px);
             }
         }
-
-        /* Animation for Flashing Fun Facts */
-        @keyframes flashFacts {
-            0% {
-                content: "Did you know? The shortest musical composition ever is just two notes!";
-            }
-            10% {
-                content: "Musical notes can represent frequencies, which are vibrations!";
-            }
-            20% {
-                content: "The longest symphony ever lasted 639 years!";
-            }
-            30% {
-                content: "A single note can have different durations depending on time signature!";
-            }
-            40% {
-                content: "Musical instruments existed even in ancient Egypt!";
-            }
-            50% {
-                content: "There are over 1,000 different types of musical scales!";
-            }
-            60% {
-                content: "The cello is considered one of the most expressive instruments!";
-            }
-            70% {
-                content: "The largest piano in the world weighs over a ton!";
-            }
-            80% {
-                content: "In ancient Greece, music was considered a mathematical science!";
-            }
-            90% {
-                content: "Music has the power to alter your mood almost instantly!";
-            }
-            100% {
-                content: "Beethoven composed some of his greatest works after going deaf!";
-            }
-        }
     </style>
 </head>
 <body>
@@ -189,10 +151,8 @@
             <!-- Animated Text -->
             <div class="animated-text">🎶 Let’s make some music! 🎶</div>
 
-            <!-- Fun Facts flashing -->
-            <div class="fun-facts">
-                <!-- Fun facts will be animated and change every few seconds -->
-            </div>
+            <!-- Fun Facts Section -->
+            <div class="fun-facts" id="funFacts">Loading fun facts...</div>
 
             <!-- Icon Section -->
             <div class="icon-container">
@@ -204,8 +164,8 @@
 
         <!-- Small Gray Text -->
         <p class="small-text">hello! I'm Josh</p>
-        <p class="small-text">Hi, I'm CC :)</p> <!-- New text added for CC -->
-         <p class="small-text">isaaccooldude6000.Com (don't go to that website)</p>
+        <p class="small-text">Hi, I'm CC :)</p>
+        <p class="small-text">isaaccooldude6000.Com (don't go to that website)</p>
 
         <!-- Hidden iframe for audio (if needed) -->
         <iframe src="audio.html" style="display:none;"></iframe>
@@ -214,5 +174,39 @@
     <footer>
         <p>#BringBackIntermediateBand!! Ms. Millette's Band Website. No rights reserved.</p>
     </footer>
+
+    <script>
+        // Array of fun facts
+        const funFacts = [
+            "Did you know? The shortest musical composition ever is just two notes!",
+            "Musical notes can represent frequencies, which are vibrations!",
+            "The longest symphony ever lasted 639 years!",
+            "A single note can have different durations depending on the time signature!",
+            "Musical instruments existed even in ancient Egypt!",
+            "There are over 1,000 different types of musical scales!",
+            "The cello is considered one of the most expressive instruments!",
+            "The largest piano in the world weighs over a ton!",
+            "In ancient Greece, music was considered a mathematical science!",
+            "Music has the power to alter your mood almost instantly!",
+        ];
+
+        // Get the fun facts container
+        const funFactsContainer = document.getElementById("funFacts");
+
+        // Initialize index to keep track of the current fact
+        let factIndex = 0;
+
+        // Function to update the fun fact
+        function updateFunFact() {
+            funFactsContainer.textContent = funFacts[factIndex];
+            factIndex = (factIndex + 1) % funFacts.length; // Loop back to the first fact
+        }
+
+        // Start the fun facts loop
+        setInterval(updateFunFact, 3000); // Change fact every 3 seconds
+
+        // Display the first fact immediately
+        updateFunFact();
+    </script>
 </body>
 </html>
