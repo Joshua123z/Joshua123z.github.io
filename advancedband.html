@@ -57,27 +57,62 @@
             padding: 40px 0;
             border-radius: 10px;
             margin-bottom: 40px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         #millette-o-meter h3 {
-            font-size: 2em;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #ff66cc;
         }
 
+        /* Band Power Meter */
         #meter {
-            background-color: #fff;
+            background-color: #f1f1f1;
             width: 80%;
-            margin: 30px auto;
             height: 50px;
+            margin: 30px auto;
             border-radius: 25px;
             border: 2px solid #ff66cc;
             position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .level {
             height: 100%;
             width: 0%;
-            background-color: #ff66cc;
             border-radius: 25px;
+            transition: width 0.3s ease;
+        }
+
+        /* Adding color gradients for energy levels */
+        .level.low {
+            background: #ff4d4d;
+        }
+
+        .level.medium {
+            background: #ffcc00;
+        }
+
+        .level.high {
+            background: #66ff66;
+        }
+
+        /* Button Style */
+        button {
+            background-color: #ff66cc;
+            color: white;
+            font-size: 1.2em;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ff3385;
         }
 
         /* Concert Info Section */
@@ -121,22 +156,6 @@
             font-size: 1em;
         }
 
-        /* Button Style */
-        button {
-            background-color: #ff66cc;
-            color: white;
-            font-size: 1.2em;
-            padding: 10px 30px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            margin-top: 30px;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #ff3385;
-        }
     </style>
 </head>
 <body>
@@ -151,10 +170,10 @@
     <!-- Millette-O-Meter Section -->
     <section id="millette-o-meter">
         <div class="container">
-            <h3>Millette-O-Meter</h3>
+            <h3>Advanced Band POWER</h3>
             <p>Click below to increase the energy of the band!</p>
             <div id="meter">
-                <div id="level" class="level"></div>
+                <div id="level" class="level low"></div>
             </div>
             <button onclick="increaseEnergy()">Increase Energy!</button>
         </div>
@@ -163,7 +182,7 @@
     <!-- Concert Info Section -->
     <section id="concert-info">
         <div class="container">
-            <h3>Upcoming Concerts</h3>
+            <h3>Upcoming Concert</h3>
             <div class="concert">
                 <h4>🎄 Christmas Concert 🎄</h4>
                 <p><strong>Date:</strong> Wednesday, December 12th</p>
@@ -171,18 +190,12 @@
                 <p><strong>Important:</strong> Be at school by 6:30 PM or earlier ⚠️</p>
                 <p><strong>Location:</strong> PJMS Cafeteria</p>
             </div>
-            <div class="concert">
-                <h4>Spring Concert</h4>
-                <p><strong>Date:</strong> May 15, 2025</p>
-                <p><strong>Time:</strong> 7:00 PM</p>
-                <p><strong>Location:</strong> PJMS Auditorium</p>
-            </div>
         </div>
     </section>
 
     <!-- Footer Section -->
     <footer>
-        <p>&copy; Joshua. no rights reserved.</p>
+        <p>&copy; 2024 PJMS Band. All rights reserved.</p>
     </footer>
 
     <script>
@@ -192,8 +205,17 @@
             if (energyLevel < 100) {
                 energyLevel += 10;
                 document.getElementById('level').style.width = energyLevel + '%';
+
+                // Add a class for dynamic color change based on energy level
+                if (energyLevel <= 30) {
+                    document.getElementById('level').className = 'level low';
+                } else if (energyLevel <= 70) {
+                    document.getElementById('level').className = 'level medium';
+                } else {
+                    document.getElementById('level').className = 'level high';
+                }
             } else {
-                alert("The band is FULL OF ENERGY!");
+                alert("The Advanced Band is FULL OF POWER!");
             }
         }
     </script>
