@@ -1,41 +1,58 @@
-// Ask for the user's name every time the page is loaded
-const username = prompt("What is your name?");
-if (!username) {
-  alert("Name is required to chat!");
-  return; // Stop execution if no name is entered
-}
-
-// Load messages from local storage when the page loads
+// Wait for the DOM to fully load before starting
 document.addEventListener("DOMContentLoaded", () => {
+  // Check if username is saved in localStorage, if not, ask for the name
+  let username = localStorage.getItem("username");
+
+  if (!username) {
+    // Ask for the name and store it in localStorage if it's not already saved
+    username = prompt("What is your name?");
+    if (username) {
+      localStorage.setItem("username", username);  // Store username in localStorage
+    } else {
+      alert("Name is required to chat!");
+      return;  // Stop if no name is provided
+    }
+  }
+
+  // Load and display the messages when the page loads
   loadMessages();
-  
-  // Refresh chat every 0.1 seconds (100ms)
-  setInterval(loadMessages, 100);  // This will reload the chat every 100 milliseconds
+
+  // Refresh the chat every 0.1 seconds
+  setInterval(loadMessages, 100);  // Reloads messages every 100 milliseconds
 });
 
+// Function to load messages from localStorage
 function loadMessages() {
   const messages = JSON.parse(localStorage.getItem("chatMessages")) || [];
   const messagesContainer = document.getElementById("messages");
 
   // Clear previous messages and load the new ones
   messagesContainer.innerHTML = messages.map(message => 
-    `<div class="message ${message.username === username ? 'user' : ''}">
+    `<div class="message ${message.username === localStorage.getItem("username") ? 'user' : ''}">
       <strong>${message.username}:</strong> ${message.text}
     </div>`
   ).join("");
 }
 
+// Function to send a message
 function sendMessage() {
-  const input = document.getElementById("message-input");
-  const messageText = input.value.trim();
-  
+  const messageInput = document.getElementById("message-input");
+  const messageText = messageInput.value.trim();
+
   if (messageText) {
+    // Retrieve existing messages from localStorage or create an empty array
     const messages = JSON.parse(localStorage.getItem("chatMessages")) || [];
-    
-    // Push message with username
+
+    // Get the stored username from localStorage
+    const username = localStorage.getItem("username");
+
+    // Push the new message with the username
     messages.push({ username: username, text: messageText });
+
+    // Save the updated messages back to localStorage
     localStorage.setItem("chatMessages", JSON.stringify(messages));
-    
-    input.value = ''; // Clear the input field
+
+    // Clear the message input field after sending the message
+    messageInput.value = '';
   }
 }
