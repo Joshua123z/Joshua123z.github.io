@@ -1,305 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matanuska-Susitna School District</title>
-    <style>
-        /* General Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+<section class="hero">
+    <div class="hero-content">
+        <h1>WE PREPARE</h1>
+        <p>ALL STUDENTS FOR SUCCESS</p>
 
-        body {
-            background-color: #fff;
-        }
-
-        /* Header Section */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 40px;
-            background-color: #002c5f;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            color: #fff;
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        .logo img {
-            height: 40px;
-            margin-right: 10px;
-        }
-
-        .nav-options {
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-options a {
-            color: #fff;
-            margin-left: 20px;
-            text-decoration: none;
-            font-size: 16px;
-        }
-
-        .nav-options a:hover {
-            text-decoration: underline;
-        }
-
-        /* Hero Section */
-        .hero {
-            position: relative;
-            height: 90vh;
-            background: url('your-mountain-image.jpg') no-repeat center center/cover;
-            color: #fff;
-        }
-
-        .hero-content {
-            position: absolute;
-            top: 20%;
-            left: 10%;
-            max-width: 600px;
-        }
-
-        .hero-content h1 {
-            font-size: 3rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .hero-content p {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #0073e6;
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
-        }
-
-        .cta-button:hover {
-            background-color: #005bb5;
-        }
-
-        /* Video Overlay */
-        .video-section {
-            position: absolute;
-            top: 40%;
-            right: 5%;
-            height: 300px;
-            width: 40%;
-            background-color: #000;
-            opacity: 0.9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #fff;
-            text-align: center;
-            font-size: 1.5rem;
-        }
-
-        .video-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('your-video-placeholder.jpg') no-repeat center center/cover;
-            opacity: 0.4;
-            z-index: -1;
-        }
-
-        /* Social Section */
-        .social-section {
-            padding: 50px 10%;
-            background-color: #f5f5f5;
-            text-align: center;
-        }
-
-        .social-section h2 {
-            font-size: 2.5rem;
-            color: #002c5f;
-            margin-bottom: 30px;
-        }
-
-        .social-grid {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-        }
-
-        .social-card {
-            flex: 1;
-            background-color: #fff;
-            padding: 15px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 5px;
-        }
-
-        .social-card img {
-            width: 100%;
-            height: auto;
-            margin-bottom: 10px;
-            border-radius: 5px;
-        }
-
-        .social-card p {
-            font-size: 1rem;
-            color: #444;
-        }
-
-        /* Statistics Section */
-        .stats-section {
-            background-color: #002c5f;
-            color: #fff;
-            padding: 50px 10%;
-            text-align: center;
-        }
-
-        .stats-container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .stat-item {
-            text-align: center;
-            flex: 1 1 200px;
-        }
-
-        .stat-item h3 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        .stat-item p {
-            font-size: 1rem;
-            text-transform: uppercase;
-        }
-    </style>
-</head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="logo">
-            <img src="your-logo.png" alt="Logo">
-            MATANUSKA-SUSITNA BOROUGH SCHOOL DISTRICT
-        </div>
-        <div class="nav-options">
-            <a href="#">I want to...</a>
-            <a href="#">English</a>
-            <a href="#">&#128269;</a>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
+        <!-- Typing Animation Text -->
+        <div class="typing-animation">
             <span id="text1">We Prepare </span>
-<span id="text2"></span>
+            <span id="text2"></span>
+        </div>
+
+        <a href="#" class="cta-button">EXPLORE OUR NEW WEBSITE!</a>
+    </div>
+    <div class="video-section">
+        MATANUSKA-SUSITNA BOROUGH SCHOOL DISTRICT
+    </div>
+</section>
 
 <script>
-  const phrases = ["failure", "Sadness", "Pain"];
-  let currentIndex = 0;
-  const textElement = document.getElementById("text2");
+    const phrases = ["failure", "Sadness", "Pain"];
+    let currentIndex = 0;
+    const textElement = document.getElementById("text2");
 
-  function typeText() {
-    const currentPhrase = phrases[currentIndex];
-    let i = 0;
-    textElement.textContent = ""; // Clear previous text
+    function typeText() {
+        const currentPhrase = phrases[currentIndex];
+        let i = 0;
+        textElement.textContent = ""; // Clear previous text
 
-    function type() {
-      if (i < currentPhrase.length) {
-        textElement.textContent += currentPhrase.charAt(i);
-        i++;
-        setTimeout(type, 100);
-      } else {
-        // After typing a phrase, wait and change to the next one
-        setTimeout(changeText, 1000);
-      }
+        function type() {
+            if (i < currentPhrase.length) {
+                textElement.textContent += currentPhrase.charAt(i);
+                i++;
+                setTimeout(type, 100);
+            } else {
+                // After typing a phrase, wait and change to the next one
+                setTimeout(changeText, 1000);
+            }
+        }
+
+        type();
     }
 
-    type();
-  }
+    function changeText() {
+        currentIndex = (currentIndex + 1) % phrases.length;
+        typeText();
+    }
 
-  function changeText() {
-    currentIndex = (currentIndex + 1) % phrases.length;
     typeText();
-  }
-
-  typeText();
 </script>
-
-            <a href="#" class="cta-button">EXPLORE OUR NEW WEBSITE!</a>
-        </div>
-        <div class="video-section">
-            MATANUSKA-SUSITNA BOROUGH SCHOOL DISTRICT
-        </div>
-    </section>
-
-    <!-- Social Section -->
-    <section class="social-section">
-        <h2>STAY CONNECTED</h2>
-        <div class="social-grid">
-            <div class="social-card">
-                <img src="social-image-1.jpg" alt="Social Post 1">
-                <p>Dual Enrollment Programs - Spring 2025</p>
-            </div>
-            <div class="social-card">
-                <img src="social-image-2.jpg" alt="Social Post 2">
-                <p>No School - Region 6 - December 11, 2024</p>
-            </div>
-            <div class="social-card">
-                <img src="social-image-3.jpg" alt="Social Post 3">
-                <p>Thank you, Snowshoe Elementary Choir!</p>
-            </div>
-            <div class="social-card">
-                <img src="social-image-4.jpg" alt="Social Post 4">
-                <p>Hands-on learning in our classrooms.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Statistics Section -->
-    <section class="stats-section">
-        <div class="stats-container">
-            <div class="stat-item">
-                <h3>19,000+</h3>
-                <p>Students</p>
-            </div>
-            <div class="stat-item">
-                <h3>49</h3>
-                <p>Schools</p>
-            </div>
-            <div class="stat-item">
-                <h3>1</h3>
-                <p>Mission</p>
-            </div>
-            <div class="stat-item">
-                <h3>2</h3>
-                <p>Cults</p>
-            </div>
-            <div class="stat-item">
-                <h3>19.44</h3>
-                <p>Student/Teacher Ratio</p>
-            </div>
-        </div>
-    </section>
-</body>
-</html>
