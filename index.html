@@ -8,7 +8,7 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: #002e5d;
+            background-color: #1d2a3a; /* Dark blue color */
             color: white;
             text-align: center;
             font-family: Arial, sans-serif;
@@ -17,10 +17,13 @@
             background-image: url('your-background-image.jpg'); /* Replace with the path to your image */
             background-size: cover;
             padding: 200px 0;
+            background-position: center;
         }
         #dynamicText {
             font-size: 48px;
             font-weight: bold;
+            color: #ffffff; /* White color */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Subtle shadow for better contrast */
             transition: all 1s ease;
         }
         #logo {
@@ -29,13 +32,18 @@
             margin-top: 20px;
         }
         .button {
-            background-color: #00aaff;
+            background-color: #006a8f; /* A solid blue color */
             color: white;
             padding: 15px 30px;
             border: none;
             font-size: 18px;
             cursor: pointer;
             margin-top: 20px;
+            border-radius: 5px;
+            text-transform: uppercase;
+        }
+        .button:hover {
+            background-color: #004f6a; /* Darker blue for hover effect */
         }
         .video-container {
             margin-top: 40px;
