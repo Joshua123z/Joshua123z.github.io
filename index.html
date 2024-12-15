@@ -1,1901 +1,272 @@
 <!DOCTYPE html>
-<!--[if lte IE 8]>         <html lang="en-US" class="lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en-US"> <!--<![endif]-->
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-		 <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-RNHBCB31FZ"></script> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matanuska-Susitna School District</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
 
+        body {
+            background-color: #fff;
+        }
 
-<script async src="https://siteimproveanalytics.com/js/siteanalyze_6014908.js"></script>
+        /* Header Section */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            background-color: #002c5f;
+        }
 
-<script>   window.dataLayer = window.dataLayer || [];   function gtag(){dataLayer.push(arguments);}   gtag('js', new Date());    gtag('co
-	
-	<title>MSBSD Home - Matanuska-Susitna Borough School District</title>
-	
+        .logo {
+            display: flex;
+            align-items: center;
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+        }
 
-		<script>
-				dataLayer = [{ 'schoolDomain': 'www.matsuk12.us' }];
-					dataLayer.push({'measurementID-GA4': '58310106' });
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
 
-		</script>
+        .nav-options {
+            display: flex;
+            align-items: center;
+        }
 
-			<script>
-			(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-				new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-				j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-				'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-				})(window,document,'script','dataLayer','GTM-P3BGC7');
-			</script>
-			<script>
-			(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-				new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-				j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-				'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-				})(window,document,'script','dataLayer','G-RNHBCB31FZ');
-			</script>
+        .nav-options a {
+            color: #fff;
+            margin-left: 20px;
+            text-decoration: none;
+            font-size: 16px;
+        }
 
+        .nav-options a:hover {
+            text-decoration: underline;
+        }
 
-		<link rel="icon" href="https://resources.finalsite.net/images/f_auto,q_auto/v1712848980/matsuk12us/zgiyewnjlkgnzzc318ai/favicon3copy.ico">
-	<meta name="description" content="MSBSD Home - Matanuska-Susitna Borough School District">
-	<meta name="keywords" content="MSBSD Home, Matanuska-Susitna Borough School District">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		
-			<link rel="canonical" href="https://www.matsuk12.us/">
-			<meta property="og:url" content="https://www.matsuk12.us/">
-		<meta property="og:description" content="MSBSD Home - Matanuska-Susitna Borough School District">
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 90vh;
+            background: url('your-mountain-image.jpg') no-repeat center center/cover;
+            color: #fff;
+        }
 
+        .hero-content {
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            max-width: 600px;
+        }
 
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
 
-	<meta property="og:title" content="MSBSD Home - Matanuska-Susitna Borough School District">
-	<meta property="og:type" content="website">
+        .hero-content p {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
 
-	<link rel="stylesheet" media="all" href="/assets/application-10aed13268d7f123decf2fced4c0d1a278e17ca513d850a71ea77442246c0d71.css" />
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #0073e6;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+        }
 
-	
+        .cta-button:hover {
+            background-color: #005bb5;
+        }
 
-	
+        /* Video Overlay */
+        .video-section {
+            position: absolute;
+            top: 40%;
+            right: 5%;
+            height: 300px;
+            width: 40%;
+            background-color: #000;
+            opacity: 0.9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            text-align: center;
+            font-size: 1.5rem;
+        }
 
-	<style>
- 	
-</style>
+        .video-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('your-video-placeholder.jpg') no-repeat center center/cover;
+            opacity: 0.4;
+            z-index: -1;
+        }
 
+        /* Social Section */
+        .social-section {
+            padding: 50px 10%;
+            background-color: #f5f5f5;
+            text-align: center;
+        }
 
-		<style id="fsHSLColors">
-			:root {
-				--primary-color-h: 213.51;
-				--primary-color-s: 100.00%;
-				--primary-color-l: 15.10%;
-				--primary-color-hsl: var(--primary-color-h), var(--primary-color-s), var(--primary-color-l);
-				--primary-color: #00224D;
-				--secondary-color-h: 39.08;
-				--secondary-color-s: 66.67%;
-				--secondary-color-l: 55.29%;
-				--secondary-color-hsl: var(--secondary-color-h), var(--secondary-color-s), var(--secondary-color-l);
-				--secondary-color: #D9A441;
-			}
-		</style>
+        .social-section h2 {
+            font-size: 2.5rem;
+            color: #002c5f;
+            margin-bottom: 30px;
+        }
 
-		<link rel="stylesheet" media="all" href="/uploaded/themes/default_24/main.css?1726848195" />
+        .social-grid {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
 
-		<script src="/assets/in_layout_head2-73f5b703a9352363cd8c423e976eae1fa1c206d1e456d555def0817fedae4217.js"></script>
+        .social-card {
+            flex: 1;
+            background-color: #fff;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
 
-		<script type="text/javascript" src="https://cdn.weglot.com/weglot.min.js"></script>
-<script>
-    Weglot.initialize({
-        api_key: 'wg_c6a318c2f897dabea6d7637fe97e4a551'
-    });
-</script>
-		<script async src="https://siteimproveanalytics.com/js/siteanalyze_6014908.js"></script>
+        .social-card img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
 
-	<script type="text/javascript">
-		(function(window) {
-			window.FS.currentPage = {
-				dateFormat: 'md',
-				homepageVideoOptimization: true,
-				timeFormat: '12'
-			};
-			const settings = FS.getNS('settings');
-			settings.styleManagerEnabled = true;
-			settings.calendarsEnabled = true;
-		})(window);
+        .social-card p {
+            font-size: 1rem;
+            color: #444;
+        }
 
-			!function(){const b=function(){window.__AudioEyeSiteHash = '60febef6ab7316bb648788fe450ad438';
-				const a=document.createElement('script');
-				a.src='https://wsmcdn.audioeye.com/aem.js';
-				a.type='text/javascript';
-				a.async=!0;
-				a.onload = () => document.getElementById('fsPageContent').style.outline = 'none';
-				document.body.appendChild(a)};
-				window.addEventListener("load",b)}();
-	</script>
+        /* Statistics Section */
+        .stats-section {
+            background-color: #002c5f;
+            color: #fff;
+            padding: 50px 10%;
+            text-align: center;
+        }
 
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
 
-	
+        .stat-item {
+            text-align: center;
+            flex: 1 1 200px;
+        }
+
+        .stat-item h3 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .stat-item p {
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+    </style>
 </head>
-
-<body data-logged-in="false" data-pageid="2" data-lazy-load-media="false" data-resource-optimizations="true" class="fsLiveMode fsHasHeader fsHasMenu fsHasFooter fsHasOneColumnLayout home fsLocation1 fsAccountBarTop fsHasTheme2">
-
-			<noscript>
-				<iframe src="//www.googletagmanager.com/ns.html?id=GTM-P3BGC7"
-					height="0" width="0" style="display:none;visibility:hidden">
-				</iframe>
-			</noscript>
-			<noscript>
-				<iframe src="//www.googletagmanager.com/ns.html?id=G-RNHBCB31FZ"
-					height="0" width="0" style="display:none;visibility:hidden">
-				</iframe>
-			</noscript>
-
-
-
-	<a id="fsSkipToMainContentLink" href="#fsPageContent">Skip To Main Content</a>
-
-<div id="fsPageWrapper">
-
-
-
-				<div id="fsMenu">
-					<div class=" fsMenu fsStyleAutoclear" id="fsEl_493" data-settings-id="496" data-use-new="true">
-
-			<section class="fsElement fsEmbed toggle-close-container mobile" id="fsEl_3005" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Toggle Close Container - Mobile</h2>
-	</header>
-	<div class="fsElementContent" >
-		    <button aria-label="Hide Canvas Menu" class="mobile-close" role="button" type="button">
-  <span>Close Menu</span>
-</button>
-
-	</div>
-
-
-	</section>
-	<section class="fsElement fsSearchElement fsSearchForm mobile--search custom--search" id="fsEl_3007"  >
-
-				<header>
-			<h2 class="fsElementTitle">Mobile Search</h2>
-	</header>
-	<div class="fsElementContent" >
-		<form action="https://www.matsuk12.us/search-results" method="get" novalidate="novalidate"><label class="fsFieldLabel" for="fsSearchInput_3007">Search</label><div class="fsSearchElementKeyword"><input class="fsStyleSearchField fsStyleDefaultField" id="fsSearchInput_3007" name="q" placeholder="Search..." type="text"><button aria-label="Clear" class="fsButtonClear fsStateHidden" type="reset"><span>Clear</span></button></div><button class="fsSearchElementSearchButton fsStyleUpdateButton" type="submit">Search</button></form>
-	</div>
-
-
-	</section>
-	<section class="fsElement fsContainer mobile--elements--wrapper" id="fsEl_61655" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Mobile Elements Wrapper</h2>
-	</header>
-	<div class="fsElementContent" >
-			<section class="fsElement fsNavigation fsList mobile--home--link" id="fsEl_61657" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Mobile Home Link</h2>
-	</header>
-	<div class="fsElementContent" >
-		<nav><ul class="fsNavLevel1"><li class="icon-home-link"><a href="/">District</a></li></ul></nav>
-	</div>
-
-
-	</section>
-	<section class="fsElement fsEmbed translate-container" id="fsEl_61656" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">English</h2>
-	</header>
-	<div class="fsElementContent" >
-		    
-
-	</div>
-
-
-	</section>
-
-
-
-	</div>
-
-
-	</section>
-	<section class="fsElement fsContainer mobile--navs--container" id="fsEl_61679" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">I want to...</h2>
-	</header>
-	<div class="fsElementContent" >
-			<section class="fsElement fsNavigation fsList quicklinks--nav--mobile" id="fsEl_61680" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">District Nav - Below Selected Page</h2>
-	</header>
-	<div class="fsElementContent" >
-		<nav><ul class="fsNavLevel1"><li><a href="https://ak-matsu-psv.edupoint.com/PXP2_Login_Parent.aspx?regenerateSessionId=True" target="_blank">GO TO PARENTVUE<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="https://linkprotect.cudasvc.com/url?a=https%3a%2f%2fappweb.stopitsolutions.com%2flogin&c=E,1,K1T-NifZAkbaEjMCDeZS97PmJlbF1l4rTwncajQiGY-6qZwDAMthBxvSfoulkjlnm1Q1MwzIrwjlHiNWEOuaSPyGL_TfUzIYuX7oM8B5qgjp7PJdjw6pkGR2hB1p_w,,&typo=1" target="_blank">STOPit<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="/about-us/registration" target="_blank">REGISTER MY STUDENT<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="https://pikmykid.freshdesk.com/support/solutions/articles/8000114556-parent-app-registration" target="_blank">PikMyKid (Elementary Schools)<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="/about-us/school-supplies" target="_blank">SCHOOL SUPPLY LISTS<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="/about-us/calendars">VIEW MSBSD CALENDARS</a></li><li><a href="https://www.schoolcafe.com/msbsd" target="_blank">SEE LUNCH MENUS<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="https://www.matsuk12.us/business-departments/transportation/transportation-overview">GET BUS INFO</a></li><li><a href="/business-departments/human-resources/hr-jobs-page" target="_blank">SEARCH MSBSD JOBS<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="/business-departments/facilities/community-use" target="_blank">RENT A FACILITY<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="/about-us/our-district/flyers-and-community-information">GET A COMMUNITY FLYER APPROVED</a></li></ul></nav>
-	</div>
-
-
-	</section>
-	<section class="fsElement fsNavigation fsList quicklinks--nav--mobile" id="fsEl_61681" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Schools Nav - Below Tagged Branch </h2>
-	</header>
-	<div class="fsElementContent" >
-		<nav></nav>
-	</div>
-
-
-	</section>
-
-
-
-	</div>
-
-
-	</section>
-	<section class="fsElement fsNavigation fsList mobile--main--nav" id="fsEl_3008" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Mobile Main Nav</h2>
-	</header>
-	<div class="fsElementContent" >
-		<nav><ul class="fsNavLevel1"><li class="fsNavParentPage"><a href="/about-us">About Us</a><div class="fsNavPageInfo"><ul class="fsNavLevel2"><li><a href="/about-us/our-new-website">Our New Website!</a></li><li><a href="/about-us/our-district/public-information-overview">Our District</a></li><li><a href="/about-us/calendars">Calendars</a></li><li><a href="/about-us/registration">Registration</a></li><li><a href="/about-us/superintendent">Superintendent</a></li><li><a href="/about-us/school-supplies">School Supplies</a></li><li><a href="/business-departments/human-resources/hr-jobs-page" target="_blank">Employment Opportunities<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="https://matsuk12us.finalsite.com/fs/resource-manager/view/b99d96d0-3b57-457a-aaed-47bf18d58774" target="_blank">At-Home Learning<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="https://matsuk12.teamdynamix.com/TDClient/3349/Public/KB/ArticleDet?ID=153728" target="_blank">Public Forms<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="/business-departments/budget-and-finance/financial-reporting-acfr" target="_blank">Financial Information<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="/instructional-departments/teaching-and-learning/counseling/msbsd-scholarship-information" target="_blank">Scholarship Information<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="/business-departments/transportation/boundary-changes" target="_blank">What School Do I Go To?<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="/about-us/kindergarten">Kindergarten</a></li><li><a href="/about-us/partner-with-msbsd">Partner with MSBSD!</a></li><li><a href="/about-us/transcript-request">Transcript Request</a></li></ul></div></li><li class="fsNavParentPage"><a href="/school-board/overview-and-members">School Board</a><div class="fsNavPageInfo"><ul class="fsNavLevel2"><li><a href="/school-board/overview-and-members">Overview and Members</a></li><li><a href="/school-board/mission-and-beliefs">Mission and Beliefs</a></li><li><a href="https://matsuk12.diligent.community/Portal/Policy.aspx" target="_blank">School Board Policies<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="/school-board/board-policy-feedback">Board Policy Feedback</a></li><li><a href="/school-board/board-calendar">Board Calendar</a></li><li><a href="https://matsuk12.diligent.community/Portal/Default.aspx" target="_blank">Agendas/Minutes/Info<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="https://vimeo.com/event/2409708" target="_blank">Watch Live Board Meeting<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="https://vimeo.com/showcase/11062381" target="_blank">Archived Board Meetings<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li></ul></div></li><li class="fsNavParentPage"><a href="https://matsuk12us.finalsite.com/departmentshome?post_category_id=8">Business Dept</a><div class="fsNavPageInfo"><ul class="fsNavLevel2"><li><a href="/business-departments/accounting-and-grants/accounting-overview">Accounting and Grants</a></li><li><a href="/business-departments/budget-and-finance/budget-and-finance-overview">Budget and Finance</a></li><li><a href="/business-departments/business-services/business-services-overview">Business Services</a></li><li><a href="/business-departments/facilities/facilities-overview">Facilities</a></li><li><a href="/business-departments/human-resources/human-resources-overview">Human Resources</a></li><li><a href="/business-departments/information-technology/it-overview">Information Technology</a></li><li><a href="/business-departments/nutrition-services/nutrition-services-overview">Nutrition Services</a></li><li><a href="/business-departments/payroll/payroll-overview">Payroll</a></li><li><a href="/business-departments/purchasing/purchasing-overview">Purchasing</a></li><li><a href="/business-departments/budget-and-finance/risk-management-overview">Risk Management</a></li><li><a href="/business-departments/facilities/safety-and-security-overview">Safety and Security</a></li><li><a href="/business-departments/transportation/transportation-overview">Transportation</a></li><li><a href="/business-departments/nutrition-services/warehouse-overview">Warehouse</a></li></ul></div></li><li class="fsNavParentPage"><a href="https://matsuk12us.finalsite.com/departmentshome?post_category_id=10">Instructional Dept</a><div class="fsNavPageInfo"><ul class="fsNavLevel2"><li><a href="/instructional-departments/federal-programs/federal-programs-overview">Federal Programs</a></li><li><a href="/instructional-departments/special-education-office/health-services" target="_blank">Health Services<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="/instructional-departments/special-education-office/student-support-overview">Special Education Office</a></li><li><a href="/instructional-departments/teaching-and-learning/office-of-teaching-learning">Teaching and Learning</a></li><li><a href="https://cte.matsuk12.us" target="_blank">Career and Technical Education<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li></ul></div></li><li class="fsNavParentPage"><a href="https://matsuk12us.finalsite.com/departmentshome?post_category_id=9">Superintendent Dept</a><div class="fsNavPageInfo"><ul class="fsNavLevel2"><li><a href="/about-us/our-district/public-information-overview">Public Information (PIO)</a></li><li><a href="/superintendent-departments/superintendent-office">Superintendent Office</a></li><li><a href="/superintendent-departments/equal-employment-education-opportunity-eeo/eeo-overview">Equal Employment Education Opportunity (EEO)</a></li></ul></div></li><li class="fsNavParentPage"><a href="/programs">Programs</a><div class="fsNavPageInfo"><ul class="fsNavLevel2"><li><a href="https://www.ansep.net/" target="_blank">ANSEP<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="/programs/music-education/msbsd-music-overview">Music Education</a></li><li><a href="/programs/itech-online-learning">iTech Online Learning</a></li><li><a href="/instructional-departments/teaching-and-learning/counseling" target="_blank">MSBSD Counseling<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="/programs/summer-programs">Summer Programs</a></li><li><a href="/programs/mat-su-schools-foundation/mat-su-schools-foundation">Mat-Su Schools Foundation</a></li><li><a href="/programs/project-search">Project Search</a></li><li><a href="/programs/msbsd-tech-information/msbsd-tech-information">Tech Information</a></li><li><a href="/instructional-departments/teaching-and-learning/library-resources" target="_blank">Library Resources<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li></ul></div></li><li class="fsNavParentPage"><a href="/athletics-activities">Athletics & Activities</a><div class="fsNavPageInfo"><ul class="fsNavLevel2"><li><a href="/athletics-activities/athletics-information/athletic-schedules">Athletics Information</a></li><li><a href="/athletics-activities/athletics-information/athletic-registration" target="_blank">Athletic Registration<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="/athletics-activities/elementary-running-programs/overview">Elementary Programs</a></li><li><a href="/athletics-activities/msbsd-chess">MSBSD Chess</a></li></ul></div></li></ul></nav>
-	</div>
-
-
-	</section>
-	<section class="fsElement fsNavigation fsList nav-main" id="fsEl_3002" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Main Nav Desktop</h2>
-	</header>
-	<div class="fsElementContent" >
-		<nav><ul class="fsNavLevel1"><li class="fsNavParentPage"><a href="/about-us">About Us</a><div class="fsNavPageInfo"><ul class="fsNavLevel2"><li><a href="/about-us/our-new-website">Our New Website!</a></li><li><a href="/about-us/our-district/public-information-overview">Our District</a></li><li><a href="/about-us/calendars">Calendars</a></li><li><a href="/about-us/registration">Registration</a></li><li><a href="/about-us/superintendent">Superintendent</a></li><li><a href="/about-us/school-supplies">School Supplies</a></li><li><a href="/business-departments/human-resources/hr-jobs-page" target="_blank">Employment Opportunities<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="https://matsuk12us.finalsite.com/fs/resource-manager/view/b99d96d0-3b57-457a-aaed-47bf18d58774" target="_blank">At-Home Learning<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="https://matsuk12.teamdynamix.com/TDClient/3349/Public/KB/ArticleDet?ID=153728" target="_blank">Public Forms<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="/business-departments/budget-and-finance/financial-reporting-acfr" target="_blank">Financial Information<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="/instructional-departments/teaching-and-learning/counseling/msbsd-scholarship-information" target="_blank">Scholarship Information<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="/business-departments/transportation/boundary-changes" target="_blank">What School Do I Go To?<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="/about-us/kindergarten">Kindergarten</a></li><li><a href="/about-us/partner-with-msbsd">Partner with MSBSD!</a></li><li><a href="/about-us/transcript-request">Transcript Request</a></li></ul></div></li><li class="fsNavParentPage"><a href="/school-board/overview-and-members">School Board</a><div class="fsNavPageInfo"><ul class="fsNavLevel2"><li><a href="/school-board/overview-and-members">Overview and Members</a></li><li><a href="/school-board/mission-and-beliefs">Mission and Beliefs</a></li><li><a href="https://matsuk12.diligent.community/Portal/Policy.aspx" target="_blank">School Board Policies<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="/school-board/board-policy-feedback">Board Policy Feedback</a></li><li><a href="/school-board/board-calendar">Board Calendar</a></li><li><a href="https://matsuk12.diligent.community/Portal/Default.aspx" target="_blank">Agendas/Minutes/Info<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="https://vimeo.com/event/2409708" target="_blank">Watch Live Board Meeting<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="https://vimeo.com/showcase/11062381" target="_blank">Archived Board Meetings<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li></ul></div></li><li class="fsNavParentPage"><a href="https://matsuk12us.finalsite.com/departmentshome?post_category_id=8">Business Dept</a><div class="fsNavPageInfo"><ul class="fsNavLevel2"><li><a href="/business-departments/accounting-and-grants/accounting-overview">Accounting and Grants</a></li><li><a href="/business-departments/budget-and-finance/budget-and-finance-overview">Budget and Finance</a></li><li><a href="/business-departments/business-services/business-services-overview">Business Services</a></li><li><a href="/business-departments/facilities/facilities-overview">Facilities</a></li><li><a href="/business-departments/human-resources/human-resources-overview">Human Resources</a></li><li><a href="/business-departments/information-technology/it-overview">Information Technology</a></li><li><a href="/business-departments/nutrition-services/nutrition-services-overview">Nutrition Services</a></li><li><a href="/business-departments/payroll/payroll-overview">Payroll</a></li><li><a href="/business-departments/purchasing/purchasing-overview">Purchasing</a></li><li><a href="/business-departments/budget-and-finance/risk-management-overview">Risk Management</a></li><li><a href="/business-departments/facilities/safety-and-security-overview">Safety and Security</a></li><li><a href="/business-departments/transportation/transportation-overview">Transportation</a></li><li><a href="/business-departments/nutrition-services/warehouse-overview">Warehouse</a></li></ul></div></li><li class="fsNavParentPage"><a href="https://matsuk12us.finalsite.com/departmentshome?post_category_id=10">Instructional Dept</a><div class="fsNavPageInfo"><ul class="fsNavLevel2"><li><a href="/instructional-departments/federal-programs/federal-programs-overview">Federal Programs</a></li><li><a href="/instructional-departments/special-education-office/health-services" target="_blank">Health Services<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="/instructional-departments/special-education-office/student-support-overview">Special Education Office</a></li><li><a href="/instructional-departments/teaching-and-learning/office-of-teaching-learning">Teaching and Learning</a></li><li><a href="https://cte.matsuk12.us" target="_blank">Career and Technical Education<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li></ul></div></li><li class="fsNavParentPage"><a href="https://matsuk12us.finalsite.com/departmentshome?post_category_id=9">Superintendent Dept</a><div class="fsNavPageInfo"><ul class="fsNavLevel2"><li><a href="/about-us/our-district/public-information-overview">Public Information (PIO)</a></li><li><a href="/superintendent-departments/superintendent-office">Superintendent Office</a></li><li><a href="/superintendent-departments/equal-employment-education-opportunity-eeo/eeo-overview">Equal Employment Education Opportunity (EEO)</a></li></ul></div></li><li class="fsNavParentPage"><a href="/programs">Programs</a><div class="fsNavPageInfo"><ul class="fsNavLevel2"><li><a href="https://www.ansep.net/" target="_blank">ANSEP<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="/programs/music-education/msbsd-music-overview">Music Education</a></li><li><a href="/programs/itech-online-learning">iTech Online Learning</a></li><li><a href="/instructional-departments/teaching-and-learning/counseling" target="_blank">MSBSD Counseling<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="/programs/summer-programs">Summer Programs</a></li><li><a href="/programs/mat-su-schools-foundation/mat-su-schools-foundation">Mat-Su Schools Foundation</a></li><li><a href="/programs/project-search">Project Search</a></li><li><a href="/programs/msbsd-tech-information/msbsd-tech-information">Tech Information</a></li><li><a href="/instructional-departments/teaching-and-learning/library-resources" target="_blank">Library Resources<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li></ul></div></li><li class="fsNavParentPage"><a href="/athletics-activities">Athletics & Activities</a><div class="fsNavPageInfo"><ul class="fsNavLevel2"><li><a href="/athletics-activities/athletics-information/athletic-schedules">Athletics Information</a></li><li><a href="/athletics-activities/athletics-information/athletic-registration" target="_blank">Athletic Registration<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="/athletics-activities/elementary-running-programs/overview">Elementary Programs</a></li><li><a href="/athletics-activities/msbsd-chess">MSBSD Chess</a></li></ul></div></li></ul></nav>
-	</div>
-
-
-	</section>
-	<section class="fsElement fsResourceElement fsSingleItem decorative--mountain--image" id="fsEl_3018" data-use-new="true" data-source-element-id="3018" data-source-page-id="6" >
-
-				<header>
-			<h2 class="fsElementTitle">Decorative Mountain Image</h2>
-	</header>
-	<div class="fsElementContent" >
-		<article class="fsResource fsResourceTypeImage"><figure><picture><img alt="Decorative Mountain Image" data-aspect-ratio="0.5066666666666667" data-image-sizes="[{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_1/v1711629421/matsuk12us/vlgeukijpanhz5ywr8q4/menu-mountains-image.png%22,%22width%22:256},{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1711629421/matsuk12us/vlgeukijpanhz5ywr8q4/menu-mountains-image.png%22,%22width%22:512},{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_3/v1711629421/matsuk12us/vlgeukijpanhz5ywr8q4/menu-mountains-image.png%22,%22width%22:800},{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_4/v1711629421/matsuk12us/vlgeukijpanhz5ywr8q4/menu-mountains-image.png%22,%22width%22:1200},{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_5/v1711629421/matsuk12us/vlgeukijpanhz5ywr8q4/menu-mountains-image.png%22,%22width%22:1600},{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_6/v1711629421/matsuk12us/vlgeukijpanhz5ywr8q4/menu-mountains-image.png%22,%22width%22:2200}]" data-permitted-user="true" data-resource-title="menu-mountains-image.png" data-resource-uuid="8077272d-117a-4513-a447-76d4f592f255"></picture></figure></article>
-	</div>
-
-
-	</section>
-
-
-
-</div>
-
-
-				</div>
-
-			<header id="fsHeader" class="fsHeader">
-				<div class=" fsBanner fsStyleAutoclear" id="fsEl_7" data-settings-id="7" data-use-new="true">
-
-			<section class="fsElement fsContainer header--holder" id="fsEl_2804" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Header Holder</h2>
-	</header>
-	<div class="fsElementContent" >
-			<section class="fsElement fsContainer desktop--navs--container" id="fsEl_61676" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">I want to...</h2>
-	</header>
-	<div class="fsElementContent" >
-			<section class="fsElement fsNavigation fsList quicklinks--nav--desktop" id="fsEl_61677" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">District Nav - Below Selected Page</h2>
-	</header>
-	<div class="fsElementContent" >
-		<nav><ul class="fsNavLevel1"><li><a href="https://ak-matsu-psv.edupoint.com/PXP2_Login_Parent.aspx?regenerateSessionId=True" target="_blank">GO TO PARENTVUE<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="https://linkprotect.cudasvc.com/url?a=https%3a%2f%2fappweb.stopitsolutions.com%2flogin&c=E,1,K1T-NifZAkbaEjMCDeZS97PmJlbF1l4rTwncajQiGY-6qZwDAMthBxvSfoulkjlnm1Q1MwzIrwjlHiNWEOuaSPyGL_TfUzIYuX7oM8B5qgjp7PJdjw6pkGR2hB1p_w,,&typo=1" target="_blank">STOPit<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="/about-us/registration" target="_blank">REGISTER MY STUDENT<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="https://pikmykid.freshdesk.com/support/solutions/articles/8000114556-parent-app-registration" target="_blank">PikMyKid (Elementary Schools)<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="/about-us/school-supplies" target="_blank">SCHOOL SUPPLY LISTS<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="/about-us/calendars">VIEW MSBSD CALENDARS</a></li><li><a href="https://www.schoolcafe.com/msbsd" target="_blank">SEE LUNCH MENUS<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="https://www.matsuk12.us/business-departments/transportation/transportation-overview">GET BUS INFO</a></li><li><a href="/business-departments/human-resources/hr-jobs-page" target="_blank">SEARCH MSBSD JOBS<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="/business-departments/facilities/community-use" target="_blank">RENT A FACILITY<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="/about-us/our-district/flyers-and-community-information">GET A COMMUNITY FLYER APPROVED</a></li></ul></nav>
-	</div>
-
-
-	</section>
-	<section class="fsElement fsNavigation fsList quicklinks--nav--desktop" id="fsEl_61678" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Schools Nav - Below Tagged Branch </h2>
-	</header>
-	<div class="fsElementContent" >
-		<nav></nav>
-	</div>
-
-
-	</section>
-
-
-
-	</div>
-
-
-	</section>
-	<section class="fsElement fsContainer header--logo--container" id="fsEl_2820" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Header Logo Container</h2>
-	</header>
-	<div class="fsElementContent" >
-			<section class="fsElement fsLocationElement fsSingleItem header--logo colored   fsThumbnailOriginal fsThumbnailFull" id="fsEl_2821" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Header Logo - Colored</h2>
-	</header>
-	<div class="fsElementContent" >
-		<article class="fsLocationSingleItem"><div class="fsThumbnail fsThumbnailLogo"><a class="fsLocationLink" href="https://www.matsuk12.us"><img alt="Matanuska-Susitna Borough School District" data-aspect-ratio="0.22406639004149378" data-image-sizes="[{%22url%22:%22https://resources.finalsite.net/images/v1711359995/matsuk12us/hpqxtekcdt1s2tpsia20/district-logo-colored.svg%22,%22width%22:241}]"></a></div><a class="fsLocationLink fsLocationLinkWrapper" href="https://www.matsuk12.us"><div class="fsTitle fsLocationTitle">Matanuska-Susitna </div><div class="fsLocationSubtitle">Borough School District </div></a></article>
-	</div>
-
-
-	</section>
-	<section class="fsElement fsLocationElement fsSingleItem header--logo transparent   fsThumbnailOriginal fsThumbnailFull" id="fsEl_2822" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Header Logo - Transparent</h2>
-	</header>
-	<div class="fsElementContent" >
-		<article class="fsLocationSingleItem"><div class="fsThumbnail fsThumbnailLogo"><a class="fsLocationLink" href="https://www.matsuk12.us"><img alt="Matanuska-Susitna Borough School District" data-aspect-ratio="0.2237960339943343" data-image-sizes="[{%22url%22:%22https://resources.finalsite.net/images/v1711359995/matsuk12us/hcjvjuhzg7c3nd75hxvk/district-logo-white.svg%22,%22width%22:353}]"></a></div><a class="fsLocationLink fsLocationLinkWrapper" href="https://www.matsuk12.us"><div class="fsTitle fsLocationTitle">Matanuska-Susitna </div><div class="fsLocationSubtitle">Borough School District </div></a></article>
-	</div>
-
-
-	</section>
-
-
-
-	</div>
-
-
-	</section>
-	<section class="fsElement fsNavigation fsList desktop--home--link" id="fsEl_4026" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Desktop Home Link</h2>
-	</header>
-	<div class="fsElementContent" >
-		<nav><ul class="fsNavLevel1"><li class="icon-home-link"><a href="/">District</a></li></ul></nav>
-	</div>
-
-
-	</section>
-	<section class="fsElement fsEmbed translate-container" id="fsEl_2808" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">English</h2>
-	</header>
-	<div class="fsElementContent" >
-		    <div class="weglot-box">
-  
-</div>
-
-	</div>
-
-
-	</section>
-	<section class="fsElement fsEmbed toggle-search-container" id="fsEl_2833" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Toggle Search Container</h2>
-	</header>
-	<div class="fsElementContent" >
-		    <button aria-label="Show Search Dropdown" class="toggle-search-dropdown" role="button" type="button">
-  <span>Toggle Search</span>
-</button>
-
-	</div>
-
-
-	</section>
-	<section class="fsElement fsSearchElement fsSearchForm desktop--search custom--search" id="fsEl_2809"  >
-
-				<header>
-			<h2 class="fsElementTitle">Desktop Search</h2>
-	</header>
-	<div class="fsElementContent" >
-		<form action="https://www.matsuk12.us/search-results" method="get" novalidate="novalidate"><label class="fsFieldLabel" for="fsSearchInput_2809">Search</label><div class="fsSearchElementKeyword"><input class="fsStyleSearchField fsStyleDefaultField" id="fsSearchInput_2809" name="q" placeholder="search" type="text"><button aria-label="Clear" class="fsButtonClear fsStateHidden" type="reset"><span>Clear</span></button></div><button class="fsSearchElementSearchButton fsStyleUpdateButton" type="submit">Search</button></form>
-	</div>
-	<footer>
-		<div class="fsElementFooterContent">
-			<button class="close-site-search" aria-label="Hide Search Dropdown" role="button" type="button"><span>Close Search</span></button>
-		</div>
-	</footer>
-
-
-	</section>
-	<section class="fsElement fsEmbed toggle-menu-container  mobile" id="fsEl_2823" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Toggle Menu Container - Mobile</h2>
-	</header>
-	<div class="fsElementContent" >
-		    <button aria-label="Show Canvas Menu" class="mobile-toggle" role="button" type="button">
-  <span>Open Menu</span>
-</button>
-
-	</div>
-
-
-	</section>
-
-
-
-	</div>
-
-
-	</section>
-	<section class="fsElement fsContainer header--sidebar" id="fsEl_2805" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Header Sidebar</h2>
-	</header>
-	<div class="fsElementContent" >
-			<section class="fsElement fsContainer container--triggers--menu" id="fsEl_2810" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Container Triggers</h2>
-	</header>
-	<div class="fsElementContent" >
-			<section class="fsElement fsEmbed toggle-menu-container  desktop" id="fsEl_2812" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Toggle Menu Container - Desktop</h2>
-	</header>
-	<div class="fsElementContent" >
-		    <button aria-label="Show Canvas Menu" class="mobile-toggle" role="button" type="button">
-  <span>Open Menu</span>
-</button>
-
-	</div>
-
-
-	</section>
-	<section class="fsElement fsEmbed toggle-close-container desktop" id="fsEl_2813" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Toggle Close Container  Desktop</h2>
-	</header>
-	<div class="fsElementContent" >
-		    <button aria-label="Hide Canvas Menu" class="mobile-close" role="button" type="button">
-  <span>Close Menu</span>
-</button>
-
-	</div>
-
-
-	</section>
-
-
-
-	</div>
-
-
-	</section>
-	<section class="fsElement fsEmbed toggle-schools-container" id="fsEl_2826" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Toggle Schools Container</h2>
-	</header>
-	<div class="fsElementContent" >
-		    <button aria-label="Show Disitrict Canvas" class="toggle-district-canvas" role="button" type="button">
-  <span>Schools</span>
-</button>
-
-	</div>
-
-
-	</section>
-	<section class="fsElement fsNavigation fsList utility--nav--desktop" id="fsEl_2814" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Utility Nav</h2>
-	</header>
-	<div class="fsElementContent" >
-		<nav><ul class="fsNavLevel1"><li class="icon-family-solid"><a href="/pql">PARENTS</a></li><li class="icon-report-card-solid"><a href="https://clever.com/oauth/saml/login?target=NTRkM2JkODU3NjA2YzQwMTAwMDAwMDU1;NGM2M2MxY2Y2MjNkY2U4MmNhYWM=;aHR0cHM6Ly9jbGV2ZXIuY29tL2luL2F1dGhfY2FsbGJhY2s=;OGVkM2JlOWQyM2U0ODE1ZjdlM2Y5NDZiODg3Y2IzMzgwMDA0N2EzMDY3YTY4NDY1YmY4MmJjMTMyN2IwN2QxMA==;Y29kZQ==;" target="_blank">STUDENTS<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li class="icon-name-badge-solid"><a href="/eql">EMPLOYEES</a></li><li class="icon-group-solid"><a href="/cql">COMMUNITY</a></li><li class="icon-phone-solid"><a href="/help">HELP</a></li><li class="icon-snowflake-solid"><a href="/delaysandclosures">Closures & Delays</a></li></ul></nav>
-	</div>
-
-
-	</section>
-
-
-
-	</div>
-
-
-	</section>
-	<section class="fsElement fsLocationElement fsSingleItem header--logo--home   fsThumbnailOriginal fsThumbnailFull" id="fsEl_2841" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Homepage Logo</h2>
-	</header>
-	<div class="fsElementContent" >
-		<article class="fsLocationSingleItem"><div class="fsThumbnail fsThumbnailLogo"><a class="fsLocationLink" href="https://www.matsuk12.us"><img alt="Matanuska-Susitna Borough School District" data-aspect-ratio="0.2237960339943343" data-image-sizes="[{%22url%22:%22https://resources.finalsite.net/images/v1711359995/matsuk12us/hcjvjuhzg7c3nd75hxvk/district-logo-white.svg%22,%22width%22:353}]"></a></div><a class="fsLocationLink fsLocationLinkWrapper" href="https://www.matsuk12.us"><div class="fsTitle fsLocationTitle">Matanuska-Susitna </div><div class="fsLocationSubtitle">Borough School District </div></a></article>
-	</div>
-
-
-	</section>
-	<section class="fsElement fsContainer district-canvas-container" id="fsEl_2845" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">District Canvas Container</h2>
-	</header>
-	<div class="fsElementContent" >
-			<section class="fsElement fsEmbed close-canvas-container" id="fsEl_2846" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Close District Canvas</h2>
-	</header>
-	<div class="fsElementContent" >
-		    <button aria-label="Hide District Canvas" class="close-btn close-district-canvas" role="button" type="button">
-  <span>Close Search Canvas</span>
-</button>
-
-	</div>
-
-
-	</section>
-	<section class="fsElement fsPanelGroup fsTabs desktop--schools--tabs fsPanelIconBefore" id="fsEl_2847" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Desktop Schools Tabs</h2>
-	</header>
-	<div class="fsElementContent" >
-		<ul class="fsTabsNav" role="tablist">
-    
-		<li id="fsTab-2848" class="fsTabsNavItem " role="presentation">
-			<a role="tab" aria-selected="false" href="#fs-panel-2848" aria-controls="fsEl_2848">ELEMENTARY</a>
-			
-        </li>
-		<li id="fsTab-2859" class="fsTabsNavItem " role="presentation">
-			<a role="tab" aria-selected="false" href="#fs-panel-2859" aria-controls="fsEl_2859">MIDDLE</a>
-			
-        </li>
-		<li id="fsTab-2861" class="fsTabsNavItem " role="presentation">
-			<a role="tab" aria-selected="false" href="#fs-panel-2861" aria-controls="fsEl_2861">HIGH</a>
-			
-        </li>
-		<li id="fsTab-2863" class="fsTabsNavItem " role="presentation">
-			<a role="tab" aria-selected="false" href="#fs-panel-2863" aria-controls="fsEl_2863">NON-TRADITIONAL</a>
-			
-        </li>
-
-</ul>
-
-	<section class="fsElement fsPanel fsStyleAutoclear" id="fsEl_2848" data-use-new="true" role="tabpanel" >
-
-				<header>
-			<h2 class="fsElementTitle"><a role="button" aria-expanded="false" href="#fs-panel-2848">ELEMENTARY</a></h2>
-	</header>
-	<div class="fsElementContent" aria-hidden="true">
-		<a id="fs-panel-2848"></a>
-	<section class="fsElement fsNavigation fsList" id="fsEl_2994" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Elementary Nav</h2>
-	</header>
-	<div class="fsElementContent" >
-		<nav><ul class="fsNavLevel1"><li><a href="https://ble.matsuk12.us">Big Lake Elementary</a></li><li><a href="https://bte.matsuk12.us">Butte Elementary</a></li><li><a href="https://cwe.matsuk12.us">Cottonwood Creek Elementary</a></li><li><a href="https://dne.matsuk12.us">Dena'ina Elementary</a></li><li><a href="https://fle.matsuk12.us">Finger Lake Elementary</a></li><li><a href="https://gbe.matsuk12.us">Goose Bay Elementary</a></li><li><a href="https://ide.matsuk12.us">Iditarod Elementary</a></li><li><a href="https://kne.matsuk12.us">Knik Elementary</a></li><li><a href="https://lre.matsuk12.us">Larson Elementary</a></li><li><a href="https://mze.matsuk12.us">Machetanz Elementary</a></li><li><a href="https://mle.matsuk12.us">Meadow Lakes Elementary</a></li><li><a href="https://ppe.matsuk12.us">Pioneer Peak Elementary</a></li><li><a href="https://jse.matsuk12.us">Shaw Elementary</a></li><li><a href="https://she.matsuk12.us">Sherrod Elementary</a></li><li><a href="https://sse.matsuk12.us">Snowshoe Elementary</a></li><li><a href="https://ste.matsuk12.us">Sutton Elementary</a></li><li><a href="https://swe.matsuk12.us">Swanson Elementary</a></li><li><a href="https://tke.matsuk12.us">Talkeetna Elementary</a></li><li><a href="https://tne.matsuk12.us">Tanaina Elementary</a></li><li><a href="https://tce.matsuk12.us">Trapper Creek Elementary</a></li><li><a href="https://wle.matsuk12.us">Willow Elementary</a></li></ul></nav>
-	</div>
-
-
-	</section>
-
-
-
-	</div>
-
-
-	</section>
-	<section class="fsElement fsPanel fsStyleAutoclear" id="fsEl_2859" data-use-new="true" role="tabpanel" >
-
-				<header>
-			<h2 class="fsElementTitle"><a role="button" aria-expanded="false" href="#fs-panel-2859">MIDDLE</a></h2>
-	</header>
-	<div class="fsElementContent" aria-hidden="true">
-		<a id="fs-panel-2859"></a>
-	<section class="fsElement fsNavigation fsList" id="fsEl_2995" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Middle Nav</h2>
-	</header>
-	<div class="fsElementContent" >
-		<nav><ul class="fsNavLevel1"><li><a href="https://cms.matsuk12.us">Colony Middle School</a></li><li><a href="https://hms.matsuk12.us">Houston Middle School</a></li><li><a href="https://pjm.matsuk12.us">Palmer Jr Middle School</a></li><li><a href="https://rjs.matsuk12.us">Redington Jr/Sr High School</a></li><li><a href="https://tms.matsuk12.us">Teeland Middle School</a></li><li><a href="https://svs.matsuk12.us">Su-Valley Jr/Sr High School</a></li><li><a href="https://wms.matsuk12.us">Wasilla Middle School</a></li></ul></nav>
-	</div>
-
-
-	</section>
-
-
-
-	</div>
-
-
-	</section>
-	<section class="fsElement fsPanel fsStyleAutoclear" id="fsEl_2861" data-use-new="true" role="tabpanel" >
-
-				<header>
-			<h2 class="fsElementTitle"><a role="button" aria-expanded="false" href="#fs-panel-2861">HIGH</a></h2>
-	</header>
-	<div class="fsElementContent" aria-hidden="true">
-		<a id="fs-panel-2861"></a>
-	<section class="fsElement fsNavigation fsList" id="fsEl_2996" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">High Nav</h2>
-	</header>
-	<div class="fsElementContent" >
-		<nav><ul class="fsNavLevel1"><li><a href="https://bhs.matsuk12.us">Burchell High School</a></li><li><a href="https://chs.matsuk12.us">Colony High School</a></li><li><a href="https://hhs.matsuk12.us">Houston High School</a></li><li><a href="https://cts.matsuk12.us">Mat-Su Career & Tech High School</a></li><li><a href="https://phs.matsuk12.us">Palmer High School</a></li><li><a href="https://rjs.matsuk12.us">Redington Jr/Sr High School</a></li><li><a href="https://svs.matsuk12.us">Su-Valley Jr/Sr High School</a></li><li><a href="https://vps.matsuk12.us">Valley Pathways School </a></li><li><a href="https://whs.matsuk12.us">Wasilla High School </a></li></ul></nav>
-	</div>
-
-
-	</section>
-
-
-
-	</div>
-
-
-	</section>
-	<section class="fsElement fsPanel fsStyleAutoclear" id="fsEl_2863" data-use-new="true" role="tabpanel" >
-
-				<header>
-			<h2 class="fsElementTitle"><a role="button" aria-expanded="false" href="#fs-panel-2863">NON-TRADITIONAL</a></h2>
-	</header>
-	<div class="fsElementContent" aria-hidden="true">
-		<a id="fs-panel-2863"></a>
-	<section class="fsElement fsNavigation fsList" id="fsEl_2997" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Non Traditional Nav</h2>
-	</header>
-	<div class="fsElementContent" >
-		<nav><ul class="fsNavLevel1"><li><a href="https://acc.matsuk12.us">Academy Charter School</a></li><li><a href="https://amc.matsuk12.us">American Charter Academy</a></li><li><a href="https://bzs.matsuk12.us">Beryozova School</a></li><li><a href="https://btc.matsuk12.us">Birchtree Charter School</a></li><li><a href="https://frc.matsuk12.us">Fronteras Charter School</a></li><li><a href="https://gvs.matsuk12.us">Glacier View School</a></li><li><a href="https://knc.matsuk12.us">Knik Charter School</a></li><li><a href="https://mcs.matsuk12.us">Mat-Su Central School</a></li><li><a href="https://mds.matsuk12.us">Mat-Su Day School</a></li><li><a href="https://msm.matsuk12.us">Mat-Su Middle College School</a></li><li><a href="https://mss.matsuk12.us">Mat-Su Secondary School</a></li><li><a href="https://mnc.matsuk12.us">Midnight Sun Charter School</a></li><li><a href="https://tbc.matsuk12.us">Twindly Bridge Charter School</a></li></ul></nav>
-	</div>
-
-
-	</section>
-
-
-
-	</div>
-
-
-	</section>
-
-
-
-
-	</div>
-
-
-	</section>
-	<section class="fsElement fsPanelGroup fsAccordion mobile--schools--accordions fsPanelIconAfter" id="fsEl_2850" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Mobile Schools Accordions</h2>
-	</header>
-	<div class="fsElementContent" >
-		<ul class="fsTabsNav" role="tablist">
-    
-		<li id="fsTab-2851" class="fsTabsNavItem " role="presentation">
-			<a role="tab" aria-selected="false" href="#fs-panel-2851" aria-controls="fsEl_2851">ELEMENTARY</a>
-			
-        </li>
-		<li id="fsTab-2853" class="fsTabsNavItem " role="presentation">
-			<a role="tab" aria-selected="false" href="#fs-panel-2853" aria-controls="fsEl_2853">MIDDLE</a>
-			
-        </li>
-		<li id="fsTab-2855" class="fsTabsNavItem " role="presentation">
-			<a role="tab" aria-selected="false" href="#fs-panel-2855" aria-controls="fsEl_2855">HIGH</a>
-			
-        </li>
-		<li id="fsTab-2857" class="fsTabsNavItem " role="presentation">
-			<a role="tab" aria-selected="false" href="#fs-panel-2857" aria-controls="fsEl_2857">NON-TRADITIONAL</a>
-			
-        </li>
-
-</ul>
-
-	<section class="fsElement fsPanel fsStyleAutoclear" id="fsEl_2851" data-use-new="true" role="tabpanel" >
-
-				<header>
-			<h2 class="fsElementTitle"><a role="button" aria-expanded="false" href="#fs-panel-2851">ELEMENTARY</a></h2>
-	</header>
-	<div class="fsElementContent" aria-hidden="true">
-		<a id="fs-panel-2851"></a>
-	<section class="fsElement fsNavigation fsList" id="fsEl_2998" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Elementary Nav</h2>
-	</header>
-	<div class="fsElementContent" >
-		<nav><ul class="fsNavLevel1"><li><a href="https://ble.matsuk12.us">Big Lake Elementary</a></li><li><a href="https://bte.matsuk12.us">Butte Elementary</a></li><li><a href="https://cwe.matsuk12.us">Cottonwood Creek Elementary</a></li><li><a href="https://dne.matsuk12.us">Dena'ina Elementary</a></li><li><a href="https://fle.matsuk12.us">Finger Lake Elementary</a></li><li><a href="https://gbe.matsuk12.us">Goose Bay Elementary</a></li><li><a href="https://ide.matsuk12.us">Iditarod Elementary</a></li><li><a href="https://kne.matsuk12.us">Knik Elementary</a></li><li><a href="https://lre.matsuk12.us">Larson Elementary</a></li><li><a href="https://mze.matsuk12.us">Machetanz Elementary</a></li><li><a href="https://mle.matsuk12.us">Meadow Lakes Elementary</a></li><li><a href="https://ppe.matsuk12.us">Pioneer Peak Elementary</a></li><li><a href="https://jse.matsuk12.us">Shaw Elementary</a></li><li><a href="https://she.matsuk12.us">Sherrod Elementary</a></li><li><a href="https://sse.matsuk12.us">Snowshoe Elementary</a></li><li><a href="https://ste.matsuk12.us">Sutton Elementary</a></li><li><a href="https://swe.matsuk12.us">Swanson Elementary</a></li><li><a href="https://tke.matsuk12.us">Talkeetna Elementary</a></li><li><a href="https://tne.matsuk12.us">Tanaina Elementary</a></li><li><a href="https://tce.matsuk12.us">Trapper Creek Elementary</a></li><li><a href="https://wle.matsuk12.us">Willow Elementary</a></li></ul></nav>
-	</div>
-
-
-	</section>
-
-
-
-	</div>
-
-
-	</section>
-	<section class="fsElement fsPanel fsStyleAutoclear" id="fsEl_2853" data-use-new="true" role="tabpanel" >
-
-				<header>
-			<h2 class="fsElementTitle"><a role="button" aria-expanded="false" href="#fs-panel-2853">MIDDLE</a></h2>
-	</header>
-	<div class="fsElementContent" aria-hidden="true">
-		<a id="fs-panel-2853"></a>
-	<section class="fsElement fsNavigation fsList" id="fsEl_2999" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Middle Nav</h2>
-	</header>
-	<div class="fsElementContent" >
-		<nav><ul class="fsNavLevel1"><li><a href="https://cms.matsuk12.us">Colony Middle School</a></li><li><a href="https://hms.matsuk12.us">Houston Middle School</a></li><li><a href="https://pjm.matsuk12.us">Palmer Jr Middle School</a></li><li><a href="https://rjs.matsuk12.us">Redington Jr/Sr High School</a></li><li><a href="https://tms.matsuk12.us">Teeland Middle School</a></li><li><a href="https://svs.matsuk12.us">Su-Valley Jr/Sr High School</a></li><li><a href="https://wms.matsuk12.us">Wasilla Middle School</a></li></ul></nav>
-	</div>
-
-
-	</section>
-
-
-
-	</div>
-
-
-	</section>
-	<section class="fsElement fsPanel fsStyleAutoclear" id="fsEl_2855" data-use-new="true" role="tabpanel" >
-
-				<header>
-			<h2 class="fsElementTitle"><a role="button" aria-expanded="false" href="#fs-panel-2855">HIGH</a></h2>
-	</header>
-	<div class="fsElementContent" aria-hidden="true">
-		<a id="fs-panel-2855"></a>
-	<section class="fsElement fsNavigation fsList" id="fsEl_3000" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">High Nav</h2>
-	</header>
-	<div class="fsElementContent" >
-		<nav><ul class="fsNavLevel1"><li><a href="https://bhs.matsuk12.us">Burchell High School</a></li><li><a href="https://chs.matsuk12.us">Colony High School</a></li><li><a href="https://hhs.matsuk12.us">Houston High School</a></li><li><a href="https://cts.matsuk12.us">Mat-Su Career & Tech High School</a></li><li><a href="https://phs.matsuk12.us">Palmer High School</a></li><li><a href="https://rjs.matsuk12.us">Redington Jr/Sr High School</a></li><li><a href="https://svs.matsuk12.us">Su-Valley Jr/Sr High School</a></li><li><a href="https://vps.matsuk12.us">Valley Pathways School </a></li><li><a href="https://whs.matsuk12.us">Wasilla High School </a></li></ul></nav>
-	</div>
-
-
-	</section>
-
-
-
-	</div>
-
-
-	</section>
-	<section class="fsElement fsPanel fsStyleAutoclear" id="fsEl_2857" data-use-new="true" role="tabpanel" >
-
-				<header>
-			<h2 class="fsElementTitle"><a role="button" aria-expanded="false" href="#fs-panel-2857">NON-TRADITIONAL</a></h2>
-	</header>
-	<div class="fsElementContent" aria-hidden="true">
-		<a id="fs-panel-2857"></a>
-	<section class="fsElement fsNavigation fsList" id="fsEl_3001" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Non Traditional Nav</h2>
-	</header>
-	<div class="fsElementContent" >
-		<nav><ul class="fsNavLevel1"><li><a href="https://acc.matsuk12.us">Academy Charter School</a></li><li><a href="https://amc.matsuk12.us">American Charter Academy</a></li><li><a href="https://bzs.matsuk12.us">Beryozova School</a></li><li><a href="https://btc.matsuk12.us">Birchtree Charter School</a></li><li><a href="https://frc.matsuk12.us">Fronteras Charter School</a></li><li><a href="https://gvs.matsuk12.us">Glacier View School</a></li><li><a href="https://knc.matsuk12.us">Knik Charter School</a></li><li><a href="https://mcs.matsuk12.us">Mat-Su Central School</a></li><li><a href="https://mds.matsuk12.us">Mat-Su Day School</a></li><li><a href="https://msm.matsuk12.us">Mat-Su Middle College School</a></li><li><a href="https://mss.matsuk12.us">Mat-Su Secondary School</a></li><li><a href="https://mnc.matsuk12.us">Midnight Sun Charter School</a></li><li><a href="https://tbc.matsuk12.us">Twindly Bridge Charter School</a></li></ul></nav>
-	</div>
-
-
-	</section>
-
-
-
-	</div>
-
-
-	</section>
-
-
-
-
-	</div>
-
-
-	</section>
-
-
-
-	</div>
-
-
-	</section>
-	<section class="fsElement fsNavigation fsList nav-sub mobile-nav-sub" id="fsEl_2837" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">In this Section...</h2>
-	</header>
-	<div class="fsElementContent" >
-		<nav></nav>
-	</div>
-
-
-	</section>
-	<section class="fsElement fsNavigation fsList horizontal-nav" id="fsEl_2838" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Horizontal Nav</h2>
-	</header>
-	<div class="fsElementContent" >
-		<nav></nav>
-	</div>
-
-
-	</section>
-	<section class="fsElement fsNavigation fsBreadcrumb" id="fsEl_2839" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Breadcrumb</h2>
-	</header>
-	<div class="fsElementContent" >
-		<nav aria-label="breadcrumbs">
-    <ul>
-        <li aria-current=location >
-			MSBSD Home
-</li>
-
-    </ul>
-</nav>
-
-	</div>
-
-
-	</section>
-	<div class="fsElement fsEmbed" id="fsEl_67698" data-use-new="true" >
-
-				<div class="fsElementContent" >
-		    <script async="" src="https://siteimproveanalytics.com/js/siteanalyze_6014908.js"></script>
-
-	</div>
-
-
-	</div>
-
-
-
-</div>
-
-
-			</header>
-
-		<div id="fsPageBodyWrapper" class="fsPageBodyWrapper">
-			<div id="fsPageBody" class="fsStyleAutoclear fsPageBody">
-
-				<main id="fsPageContent" class="fsPageContent">
-							<h1 class="fsPageTitle">MSBSD Home</h1>
-
-
-
-
-							<div class="fsPageLayout fsLayout fsOneColumnLayout fsStyleAutoclear" id="fsEl_2" data-use-new="true" >
-
-				<div class=" fsDiv fsStyleAutoclear" id="fsEl_3"  >
-
-				<section class="fsElement fsResourceElement fsSingleItem hero-banner" id="fsEl_2835" data-use-new="true" data-source-element-id="2835" data-source-page-id="2" >
-
-				<header>
-			<h2 class="fsElementTitle">Home Hero</h2>
-			<div class="fsElementHeaderContent">
-				<h2><em>We Prepare</em><br />
-All Students<br />
-For Success</h2>
-
-<p><a href="https://matsuk12us-22-us-west1-01.preview.finalsitecdn.com/about-us/our-new-website" target="_blank">Explore our new website!</a></p>
-
-			</div>
-	</header>
-	<div class="fsElementContent" >
-		<article class="fsResource fsResourceTypeVideo fsResourceDashVideo"><video autoplay="autoplay" data-dash-url="https://resources.finalsite.net/videos/sp_full_hd_wifi/v1726081461/matsuk12us/leydtdedergsryqqwszg/WeAreMoved1080.mpd" data-default-url="https://resources.finalsite.net/videos/t_video_mp4_1080/v1726081461/matsuk12us/leydtdedergsryqqwszg/WeAreMoved1080.mp4" data-permitted-user="true" data-resource-title="WeAreMoved1080.mp4" data-resource-uuid="bc31c781-8b12-4c1b-8fbe-27c14bc61ef0" muted="muted" playsinline="playsinline" poster="https://resources.finalsite.net/videos/v1726081461/matsuk12us/leydtdedergsryqqwszg/WeAreMoved1080.jpg"><div class="fsError">Your web browser does not support the <video> tag.</div></video></article>
-	</div>
-	<footer>
-		<div class="fsElementFooterContent">
-			<figure class="fsImage"><picture><img alt="Lorem Ipsum" data-image-sizes="[{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_1/v1711529474/matsuk12us/avdicsvuhxyk8gpfbwiw/home-hero-background.jpg%22,%22width%22:256},{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1711529474/matsuk12us/avdicsvuhxyk8gpfbwiw/home-hero-background.jpg%22,%22width%22:512},{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_3/v1711529474/matsuk12us/avdicsvuhxyk8gpfbwiw/home-hero-background.jpg%22,%22width%22:800},{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_4/v1711529474/matsuk12us/avdicsvuhxyk8gpfbwiw/home-hero-background.jpg%22,%22width%22:1200},{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_5/v1711529474/matsuk12us/avdicsvuhxyk8gpfbwiw/home-hero-background.jpg%22,%22width%22:1600},{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto/v1711529474/matsuk12us/avdicsvuhxyk8gpfbwiw/home-hero-background.jpg%22,%22width%22:2016}]" data-resource-description="" data-resource-filename="home-hero-background.jpg" data-resource-uuid="230517d1-1e70-42dd-a198-d1cfed7a0ef3" id="" src=""></picture></figure>
-
-		</div>
-	</footer>
-
-
-	</section>
-	<section class="fsElement fsResourceElement fsSingleItem hero-decorative-image" id="fsEl_62015" data-use-new="true" data-source-element-id="62015" data-source-page-id="2" >
-
-				<header>
-			<h2 class="fsElementTitle">Decorative Mountain Image - Over the Hero</h2>
-	</header>
-	<div class="fsElementContent" >
-		<article class="fsResource fsResourceTypeImage"><figure><picture><img alt="Mountain Image" data-aspect-ratio="0.3923611111111111" data-image-sizes="[{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_1/v1719471890/matsuk12us/wj42vhwf0qyjuue6najw/mountain-hero-image.png%22,%22width%22:256},{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1719471890/matsuk12us/wj42vhwf0qyjuue6najw/mountain-hero-image.png%22,%22width%22:512},{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_3/v1719471890/matsuk12us/wj42vhwf0qyjuue6najw/mountain-hero-image.png%22,%22width%22:800},{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_4/v1719471890/matsuk12us/wj42vhwf0qyjuue6najw/mountain-hero-image.png%22,%22width%22:1200},{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_5/v1719471890/matsuk12us/wj42vhwf0qyjuue6najw/mountain-hero-image.png%22,%22width%22:1600},{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_6/v1719471890/matsuk12us/wj42vhwf0qyjuue6najw/mountain-hero-image.png%22,%22width%22:2200}]" data-permitted-user="true" data-resource-title="mountain-hero-image.png" data-resource-uuid="e60244b9-61df-48c7-b9cb-32d76f575b09"></picture></figure></article>
-	</div>
-
-
-	</section>
-	<section class="fsElement fsContainer socials-container" id="fsEl_3049" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">MSBSD on social</h2>
-			<div class="fsElementHeaderContent">
-				<p>Stay Connected</p>
-
-			</div>
-	</header>
-	<div class="fsElementContent" >
-			<div class="fsElement fsNavigation fsList nav-social" id="fsEl_3050" data-use-new="true" >
-
-				<div class="fsElementContent" >
-		<nav><ul class="fsNavLevel1"><li><a href="https://www.facebook.com/akmatsuk12/" target="_blank">Facebook<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="https://www.instagram.com/we_are_msbsd/" target="_blank">Instagram<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="https://x.com/MSBSD" target="_blank">Twitter<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="https://www.youtube.com/@mat-suboroughschooldistric3073" target="_blank">YouTube<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li></ul></nav>
-	</div>
-
-
-	</div>
-	<div class="fsElement fsFeeds fsCustom custom-feeds" id="fsEl_3051" data-use-new="true" data-feed-url="https://www.juicer.io/api/feeds/382895?filter=760687" >
-
-				<div class="fsElementContent" >
-		
-	</div>
-
-
-	</div>
-
-
-
-	</div>
-
-
-	</section>
-	<section class="fsElement fsContent blue-overlay-area" id="fsEl_3061" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">WE ARE MSBSD</h2>
-	</header>
-	<div class="fsElementContent" >
-			
-
-	</div>
-
-
-	</section>
-	<section class="fsElement fsContainer upcoming-events-container" id="fsEl_3020" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Upcoming Events</h2>
-			<div class="fsElementHeaderContent">
-				<p>Coming Up</p>
-
-			</div>
-	</header>
-	<div class="fsElementContent" >
-			<div class="fsElement fsCalendar fsList upcoming-events-slider fsItemCount_15" id="fsEl_3022" data-calendar-ids=120,124 data-use-new="true" data-new-calendar-style=true >
-
-				<div class="fsElementContent" >
-		
-
-			<div class="fsListItems">
-									<div class="fsDayContainer">
-				<article aria-labelledby="fsArticle_3022_16704392_2024-12-19T03:00:00Z_2024-12-19T07:00:00Z" >
-		<div class="fsTitle" id="fsArticle_3022_16704392_2024-12-19T03:00:00Z_2024-12-19T07:00:00Z">
-				<span class='fsElementEventColorIcon' style='background:#1153a3' title=''></span>
-						<a class="fsCalendarEventLink" data-occur-id="16704392_2024-12-19T03:00:00Z_2024-12-19T07:00:00Z" href="#">School Board Meeting</a>
-						<a class="fsAlertIcon" data-eventid="16704392" href="#">
-							<span class="fsStyleSROnly">Subscribe to Alerts</span>
-</a>		</div>
-				<time datetime="2024-12-18T18:00:00-09:00" class="fsDate"><span class="fsMonth">Dec</span> <span class="fsDay">18</span></time>
-		<div class="fsEventDetails">
-					<div class="fsTimeRange">
-							<time datetime="2024-12-18T18:00:00-09:00" class="fsStartTime"><span class="fsHour"> 6</span>:<span class="fsMinute">00</span> <span class="fsMeridian">PM</span></time>
-									<span class="fsTimeSeperator"> - </span>
-									<time datetime="2024-12-18T22:00:00-09:00" class="fsEndTime"><span class="fsHour">10</span>:<span class="fsMinute">00</span> <span class="fsMeridian">PM</span></time>
-					</div>
-					<div class="fsLocation">MSBSD Central Office 501 N Gulkana St. Palmer</div>
-
-					<div class="fsDescription">
-						<p>Regular School Board MeetingÂ </p>
-
-<p>www.matsuk12.us/schoolboardmeetings</p>
-					</div>
-		</div>
-				<a class="fsCalendarEventLink fsReadMoreLink" data-occur-id="16704392_2024-12-19T03:00:00Z_2024-12-19T07:00:00Z" href="#">
-					Read More
-					<span class="fsStyleSROnly">about School Board Meeting</span>
-</a></article>
-
-				<article aria-labelledby="fsArticle_3022_5815093_2024-12-19T03:00:00Z_2024-12-19T06:00:00Z" >
-		<div class="fsTitle" id="fsArticle_3022_5815093_2024-12-19T03:00:00Z_2024-12-19T06:00:00Z">
-				<span class='fsElementEventColorIcon' style='background:#ddf744' title=''></span>
-						<a class="fsCalendarEventLink" data-occur-id="5815093_2024-12-19T03:00:00Z_2024-12-19T06:00:00Z" href="#">School Board Meeting </a>
-						<a class="fsAlertIcon" data-eventid="5815093" href="#">
-							<span class="fsStyleSROnly">Subscribe to Alerts</span>
-</a>		</div>
-				<time datetime="2024-12-18T18:00:00-09:00" class="fsDate"><span class="fsMonth">Dec</span> <span class="fsDay">18</span></time>
-		<div class="fsEventDetails">
-					<div class="fsTimeRange">
-							<time datetime="2024-12-18T18:00:00-09:00" class="fsStartTime"><span class="fsHour"> 6</span>:<span class="fsMinute">00</span> <span class="fsMeridian">PM</span></time>
-									<span class="fsTimeSeperator"> - </span>
-									<time datetime="2024-12-18T21:00:00-09:00" class="fsEndTime"><span class="fsHour"> 9</span>:<span class="fsMinute">00</span> <span class="fsMeridian">PM</span></time>
-					</div>
-					<div class="fsLocation">MSBSD Central Office 501 N Gulkana St Palmer</div>
-
-		</div>
-				<a class="fsCalendarEventLink fsReadMoreLink" data-occur-id="5815093_2024-12-19T03:00:00Z_2024-12-19T06:00:00Z" href="#">
-					Read More
-					<span class="fsStyleSROnly">about School Board Meeting </span>
-</a></article>
-
-</div>
-
-
-									<div class="fsDayContainer">
-				<article aria-labelledby="fsArticle_3022_4203601_2024-12-19T00:00:00Z_2024-12-20T00:00:00Z" >
-		<div class="fsTitle" id="fsArticle_3022_4203601_2024-12-19T00:00:00Z_2024-12-20T00:00:00Z">
-				<span class='fsElementEventColorIcon' style='background:#ddf744' title=''></span>
-						<a class="fsCalendarEventLink" data-occur-id="4203601_2024-12-19T00:00:00Z_2024-12-20T00:00:00Z" href="#">MSBSD FY25 - Quarter 2 Ends (38 Days)</a>
-						<a class="fsAlertIcon" data-eventid="4203601" href="#">
-							<span class="fsStyleSROnly">Subscribe to Alerts</span>
-</a>		</div>
-				<time datetime="2024-12-19T00:00:00-09:00" class="fsDate"><span class="fsMonth">Dec</span> <span class="fsDay">19</span></time>
-		<div class="fsEventDetails">
-					<div class="fsAllDay">all day</div>
-
-		</div>
-				<a class="fsCalendarEventLink fsReadMoreLink" data-occur-id="4203601_2024-12-19T00:00:00Z_2024-12-20T00:00:00Z" href="#">
-					Read More
-					<span class="fsStyleSROnly">about MSBSD FY25 - Quarter 2 Ends (38 Days)</span>
-</a></article>
-
-				<article aria-labelledby="fsArticle_3022_28119095_2024-12-19T21:00:00Z_2024-12-19T22:00:00Z" >
-		<div class="fsTitle" id="fsArticle_3022_28119095_2024-12-19T21:00:00Z_2024-12-19T22:00:00Z">
-				<span class='fsElementEventColorIcon' style='background:#1153a3' title=''></span>
-						<a class="fsCalendarEventLink" data-occur-id="28119095_2024-12-19T21:00:00Z_2024-12-19T22:00:00Z" href="#">School Board - Mat-Su Legislative Delegation Luncheon</a>
-						<a class="fsAlertIcon" data-eventid="28119095" href="#">
-							<span class="fsStyleSROnly">Subscribe to Alerts</span>
-</a>		</div>
-				<time datetime="2024-12-19T12:00:00-09:00" class="fsDate"><span class="fsMonth">Dec</span> <span class="fsDay">19</span></time>
-		<div class="fsEventDetails">
-					<div class="fsTimeRange">
-							<time datetime="2024-12-19T12:00:00-09:00" class="fsStartTime"><span class="fsHour">12</span>:<span class="fsMinute">00</span> <span class="fsMeridian">PM</span></time>
-									<span class="fsTimeSeperator"> - </span>
-									<time datetime="2024-12-19T13:00:00-09:00" class="fsEndTime"><span class="fsHour"> 1</span>:<span class="fsMinute">00</span> <span class="fsMeridian">PM</span></time>
-					</div>
-
-					<div class="fsDescription">
-						<p>School Board will meet with the Mat-Su Legislative Delegation at the Legislative Information Office 600 E. Railroad AvenueÂ </p>
-					</div>
-		</div>
-				<a class="fsCalendarEventLink fsReadMoreLink" data-occur-id="28119095_2024-12-19T21:00:00Z_2024-12-19T22:00:00Z" href="#">
-					Read More
-					<span class="fsStyleSROnly">about School Board - Mat-Su Legislative Delegation Luncheon</span>
-</a></article>
-
-</div>
-
-
-									<div class="fsDayContainer">
-				<article aria-labelledby="fsArticle_3022_4203602_2024-12-20T00:00:00Z_2024-12-21T00:00:00Z" >
-		<div class="fsTitle" id="fsArticle_3022_4203602_2024-12-20T00:00:00Z_2024-12-21T00:00:00Z">
-				<span class='fsElementEventColorIcon' style='background:#ddf744' title=''></span>
-						<a class="fsCalendarEventLink" data-occur-id="4203602_2024-12-20T00:00:00Z_2024-12-21T00:00:00Z" href="#">MSBSD FY25 - Work Day for Teachers (WD)*</a>
-						<a class="fsAlertIcon" data-eventid="4203602" href="#">
-							<span class="fsStyleSROnly">Subscribe to Alerts</span>
-</a>		</div>
-				<time datetime="2024-12-20T00:00:00-09:00" class="fsDate"><span class="fsMonth">Dec</span> <span class="fsDay">20</span></time>
-		<div class="fsEventDetails">
-					<div class="fsAllDay">all day</div>
-
-		</div>
-				<a class="fsCalendarEventLink fsReadMoreLink" data-occur-id="4203602_2024-12-20T00:00:00Z_2024-12-21T00:00:00Z" href="#">
-					Read More
-					<span class="fsStyleSROnly">about MSBSD FY25 - Work Day for Teachers (WD)*</span>
-</a></article>
-
-</div>
-
-
-									<div class="fsDayContainer">
-				<article aria-labelledby="fsArticle_3022_4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z" >
-		<div class="fsTitle" id="fsArticle_3022_4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z">
-				<span class='fsElementEventColorIcon' style='background:#ddf744' title=''></span>
-						<a class="fsCalendarEventLink" data-occur-id="4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z" href="#">MSBSD FY25 - Winter Vacation (V)*</a>
-						<a class="fsAlertIcon" data-eventid="4203603" href="#">
-							<span class="fsStyleSROnly">Subscribe to Alerts</span>
-</a>		</div>
-				<time datetime="2024-12-23T00:00:00-09:00" class="fsDate"><span class="fsMonth">Dec</span> <span class="fsDay">23</span></time>
-		<div class="fsEventDetails">
-					<div class="fsAllDay">all day</div>
-
-		</div>
-				<a class="fsCalendarEventLink fsReadMoreLink" data-occur-id="4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z" href="#">
-					Read More
-					<span class="fsStyleSROnly">about MSBSD FY25 - Winter Vacation (V)*</span>
-</a></article>
-
-</div>
-
-
-									<div class="fsDayContainer">
-				<article aria-labelledby="fsArticle_3022_4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z" >
-		<div class="fsTitle" id="fsArticle_3022_4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z">
-				<span class='fsElementEventColorIcon' style='background:#ddf744' title=''></span>
-						<a class="fsCalendarEventLink" data-occur-id="4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z" href="#">MSBSD FY25 - Winter Vacation (V)*</a>
-						<a class="fsAlertIcon" data-eventid="4203603" href="#">
-							<span class="fsStyleSROnly">Subscribe to Alerts</span>
-</a>		</div>
-				<time datetime="2024-12-24T00:00:00-09:00" class="fsDate"><span class="fsMonth">Dec</span> <span class="fsDay">24</span></time>
-		<div class="fsEventDetails">
-					<div class="fsAllDay">all day</div>
-
-		</div>
-				<a class="fsCalendarEventLink fsReadMoreLink" data-occur-id="4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z" href="#">
-					Read More
-					<span class="fsStyleSROnly">about MSBSD FY25 - Winter Vacation (V)*</span>
-</a></article>
-
-</div>
-
-
-									<div class="fsDayContainer">
-				<article aria-labelledby="fsArticle_3022_4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z" >
-		<div class="fsTitle" id="fsArticle_3022_4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z">
-				<span class='fsElementEventColorIcon' style='background:#ddf744' title=''></span>
-						<a class="fsCalendarEventLink" data-occur-id="4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z" href="#">MSBSD FY25 - Winter Vacation (V)*</a>
-						<a class="fsAlertIcon" data-eventid="4203603" href="#">
-							<span class="fsStyleSROnly">Subscribe to Alerts</span>
-</a>		</div>
-				<time datetime="2024-12-25T00:00:00-09:00" class="fsDate"><span class="fsMonth">Dec</span> <span class="fsDay">25</span></time>
-		<div class="fsEventDetails">
-					<div class="fsAllDay">all day</div>
-
-		</div>
-				<a class="fsCalendarEventLink fsReadMoreLink" data-occur-id="4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z" href="#">
-					Read More
-					<span class="fsStyleSROnly">about MSBSD FY25 - Winter Vacation (V)*</span>
-</a></article>
-
-				<article aria-labelledby="fsArticle_3022_4203604_2024-12-25T00:00:00Z_2024-12-26T00:00:00Z" >
-		<div class="fsTitle" id="fsArticle_3022_4203604_2024-12-25T00:00:00Z_2024-12-26T00:00:00Z">
-				<span class='fsElementEventColorIcon' style='background:#ddf744' title=''></span>
-						<a class="fsCalendarEventLink" data-occur-id="4203604_2024-12-25T00:00:00Z_2024-12-26T00:00:00Z" href="#">MSBSD FY25 - Christmas Holiday (H)*</a>
-						<a class="fsAlertIcon" data-eventid="4203604" href="#">
-							<span class="fsStyleSROnly">Subscribe to Alerts</span>
-</a>		</div>
-				<time datetime="2024-12-25T00:00:00-09:00" class="fsDate"><span class="fsMonth">Dec</span> <span class="fsDay">25</span></time>
-		<div class="fsEventDetails">
-					<div class="fsAllDay">all day</div>
-
-		</div>
-				<a class="fsCalendarEventLink fsReadMoreLink" data-occur-id="4203604_2024-12-25T00:00:00Z_2024-12-26T00:00:00Z" href="#">
-					Read More
-					<span class="fsStyleSROnly">about MSBSD FY25 - Christmas Holiday (H)*</span>
-</a></article>
-
-</div>
-
-
-									<div class="fsDayContainer">
-				<article aria-labelledby="fsArticle_3022_4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z" >
-		<div class="fsTitle" id="fsArticle_3022_4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z">
-				<span class='fsElementEventColorIcon' style='background:#ddf744' title=''></span>
-						<a class="fsCalendarEventLink" data-occur-id="4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z" href="#">MSBSD FY25 - Winter Vacation (V)*</a>
-						<a class="fsAlertIcon" data-eventid="4203603" href="#">
-							<span class="fsStyleSROnly">Subscribe to Alerts</span>
-</a>		</div>
-				<time datetime="2024-12-26T00:00:00-09:00" class="fsDate"><span class="fsMonth">Dec</span> <span class="fsDay">26</span></time>
-		<div class="fsEventDetails">
-					<div class="fsAllDay">all day</div>
-
-		</div>
-				<a class="fsCalendarEventLink fsReadMoreLink" data-occur-id="4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z" href="#">
-					Read More
-					<span class="fsStyleSROnly">about MSBSD FY25 - Winter Vacation (V)*</span>
-</a></article>
-
-</div>
-
-
-									<div class="fsDayContainer">
-				<article aria-labelledby="fsArticle_3022_4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z" >
-		<div class="fsTitle" id="fsArticle_3022_4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z">
-				<span class='fsElementEventColorIcon' style='background:#ddf744' title=''></span>
-						<a class="fsCalendarEventLink" data-occur-id="4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z" href="#">MSBSD FY25 - Winter Vacation (V)*</a>
-						<a class="fsAlertIcon" data-eventid="4203603" href="#">
-							<span class="fsStyleSROnly">Subscribe to Alerts</span>
-</a>		</div>
-				<time datetime="2024-12-27T00:00:00-09:00" class="fsDate"><span class="fsMonth">Dec</span> <span class="fsDay">27</span></time>
-		<div class="fsEventDetails">
-					<div class="fsAllDay">all day</div>
-
-		</div>
-				<a class="fsCalendarEventLink fsReadMoreLink" data-occur-id="4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z" href="#">
-					Read More
-					<span class="fsStyleSROnly">about MSBSD FY25 - Winter Vacation (V)*</span>
-</a></article>
-
-</div>
-
-
-									<div class="fsDayContainer">
-				<article aria-labelledby="fsArticle_3022_4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z" >
-		<div class="fsTitle" id="fsArticle_3022_4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z">
-				<span class='fsElementEventColorIcon' style='background:#ddf744' title=''></span>
-						<a class="fsCalendarEventLink" data-occur-id="4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z" href="#">MSBSD FY25 - Winter Vacation (V)*</a>
-						<a class="fsAlertIcon" data-eventid="4203603" href="#">
-							<span class="fsStyleSROnly">Subscribe to Alerts</span>
-</a>		</div>
-				<time datetime="2024-12-28T00:00:00-09:00" class="fsDate"><span class="fsMonth">Dec</span> <span class="fsDay">28</span></time>
-		<div class="fsEventDetails">
-					<div class="fsAllDay">all day</div>
-
-		</div>
-				<a class="fsCalendarEventLink fsReadMoreLink" data-occur-id="4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z" href="#">
-					Read More
-					<span class="fsStyleSROnly">about MSBSD FY25 - Winter Vacation (V)*</span>
-</a></article>
-
-</div>
-
-
-									<div class="fsDayContainer">
-				<article aria-labelledby="fsArticle_3022_4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z" >
-		<div class="fsTitle" id="fsArticle_3022_4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z">
-				<span class='fsElementEventColorIcon' style='background:#ddf744' title=''></span>
-						<a class="fsCalendarEventLink" data-occur-id="4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z" href="#">MSBSD FY25 - Winter Vacation (V)*</a>
-						<a class="fsAlertIcon" data-eventid="4203603" href="#">
-							<span class="fsStyleSROnly">Subscribe to Alerts</span>
-</a>		</div>
-				<time datetime="2024-12-29T00:00:00-09:00" class="fsDate"><span class="fsMonth">Dec</span> <span class="fsDay">29</span></time>
-		<div class="fsEventDetails">
-					<div class="fsAllDay">all day</div>
-
-		</div>
-				<a class="fsCalendarEventLink fsReadMoreLink" data-occur-id="4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z" href="#">
-					Read More
-					<span class="fsStyleSROnly">about MSBSD FY25 - Winter Vacation (V)*</span>
-</a></article>
-
-</div>
-
-
-									<div class="fsDayContainer">
-				<article aria-labelledby="fsArticle_3022_4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z" >
-		<div class="fsTitle" id="fsArticle_3022_4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z">
-				<span class='fsElementEventColorIcon' style='background:#ddf744' title=''></span>
-						<a class="fsCalendarEventLink" data-occur-id="4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z" href="#">MSBSD FY25 - Winter Vacation (V)*</a>
-						<a class="fsAlertIcon" data-eventid="4203603" href="#">
-							<span class="fsStyleSROnly">Subscribe to Alerts</span>
-</a>		</div>
-				<time datetime="2024-12-30T00:00:00-09:00" class="fsDate"><span class="fsMonth">Dec</span> <span class="fsDay">30</span></time>
-		<div class="fsEventDetails">
-					<div class="fsAllDay">all day</div>
-
-		</div>
-				<a class="fsCalendarEventLink fsReadMoreLink" data-occur-id="4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z" href="#">
-					Read More
-					<span class="fsStyleSROnly">about MSBSD FY25 - Winter Vacation (V)*</span>
-</a></article>
-
-</div>
-
-
-									<div class="fsDayContainer">
-				<article aria-labelledby="fsArticle_3022_4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z" >
-		<div class="fsTitle" id="fsArticle_3022_4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z">
-				<span class='fsElementEventColorIcon' style='background:#ddf744' title=''></span>
-						<a class="fsCalendarEventLink" data-occur-id="4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z" href="#">MSBSD FY25 - Winter Vacation (V)*</a>
-						<a class="fsAlertIcon" data-eventid="4203603" href="#">
-							<span class="fsStyleSROnly">Subscribe to Alerts</span>
-</a>		</div>
-				<time datetime="2024-12-31T00:00:00-09:00" class="fsDate"><span class="fsMonth">Dec</span> <span class="fsDay">31</span></time>
-		<div class="fsEventDetails">
-					<div class="fsAllDay">all day</div>
-
-		</div>
-				<a class="fsCalendarEventLink fsReadMoreLink" data-occur-id="4203603_2024-12-23T00:00:00Z_2025-01-04T00:00:00Z" href="#">
-					Read More
-					<span class="fsStyleSROnly">about MSBSD FY25 - Winter Vacation (V)*</span>
-</a></article>
-
-</div>
-
-
-			</div>
-
-	</div>
-
-
-	</div>
-
-
-
-	</div>
-	<footer>
-		<div class="fsElementFooterContent">
-			<div> </div>
-
-<div style="text-align: center;"><a href="https://www.matsuk12.us/about-us/calendars" target="_blank" title="MSBSD Outlook Calendar"><span class="button-1"><span class="button-large">MSBSD Full Calendar</span></span></a></div>
-
-		</div>
-	</footer>
-
-
-	</section>
-	<div class="fsElement fsContent words-rotator" id="fsEl_3054" data-use-new="true" >
-
-				<div class="fsElementContent" >
-			<ul>
-	<li>Stewardship</li>
-	<li>Accountability</li>
-	<li>Empathy</li>
-	<li>Quality</li>
-	<li>Integrity</li>
-	<li>Respect</li>
-	<li>Collaboration</li>
-</ul>
-
-
-	</div>
-
-
-	</div>
-	<div class="fsElement fsContainer our-mission-container" id="fsEl_67579" data-use-new="true" >
-
-				<div class="fsElementContent" >
-			<section class="fsElement fsContent custom-article" id="fsEl_67581" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Our Vision & Mission</h2>
-			<div class="fsElementHeaderContent">
-				<p>Mission & Beliefs</p>
-
-			</div>
-	</header>
-	<div class="fsElementContent" >
-			<p><b>VISION:</b> Mat-Su Borough School District will be a model of excellence in teaching, learning, and engaging all students.</p>
-
-<p><strong>MISSION:</strong> Mat-Su Borough School District prepares all students for success.</p>
-
-<p>In addition to MSBSD's core mission and beliefs, the MSBSD Strategic Plan sets long-term goals and objectives, guided by the Superintendent and reviewed annually with the School Board, and includes five main goals; for detailed objectives, click on <a href="https://drive.google.com/file/d/1JLSd_3QPXxSnel-R-SCkevrv1dp9eBSt/view?usp=drive_link" target="_blank"><strong>MSBSD Strategic Plan</strong></a>.</p>
-
-
-	</div>
-	<footer>
-		<div class="fsElementFooterContent">
-			<figure class="fsImage"><picture><img alt="" data-image-sizes="[{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_1/v1718927555/matsuk12us/ouckpcgm29cqcp0wuns4/Mission.png%22,%22width%22:256},{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1718927555/matsuk12us/ouckpcgm29cqcp0wuns4/Mission.png%22,%22width%22:512},{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_3/v1718927555/matsuk12us/ouckpcgm29cqcp0wuns4/Mission.png%22,%22width%22:800},{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_4/v1718927555/matsuk12us/ouckpcgm29cqcp0wuns4/Mission.png%22,%22width%22:1200},{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_5/v1718927555/matsuk12us/ouckpcgm29cqcp0wuns4/Mission.png%22,%22width%22:1600},{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_6/v1718927555/matsuk12us/ouckpcgm29cqcp0wuns4/Mission.png%22,%22width%22:2200}]" data-resource-description="" data-resource-filename="Mission.png" data-resource-uuid="cf100fa4-7577-4caf-8e3b-3db5ac7072c8" role="presentation" src="" /></picture></figure>
- 
-<p> </p>
-		</div>
-	</footer>
-
-
-	</section>
-	<section class="fsElement fsContent custom-article" id="fsEl_67582" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Our Goals & Beliefs</h2>
-			<div class="fsElementHeaderContent">
-				<p>Mission & Beliefs</p>
-
-			</div>
-	</header>
-	<div class="fsElementContent" >
-			<ul>
-	<li><strong>GOALS</strong>: Improve student success, achievement, and performance.</li>
-	<li>Develop excellent educators and leaders.</li>
-	<li>Use innovative practices to improve the education system.</li>
-	<li>Include families and community members in the education of our students.</li>
-	<li>Promote safe and healthy environments for all.</li>
-</ul>
-
-<ul>
-	<li><strong>BELIEFS</strong>: We believe that the needs and best interests of students drive all decisions.</li>
-	<li>All students can and want to learn.</li>
-	<li>Educational choices and community participation are essential to student success.</li>
-</ul>
-
-<p>In addition to MSBSD's core mission and beliefs, the MSBSD Strategic Plan sets long-term goals and objectives, guided by the Superintendent and reviewed annually with the School Board, and includes five main goals; for detailed objectives, click on <a href="https://drive.google.com/file/d/1JLSd_3QPXxSnel-R-SCkevrv1dp9eBSt/view?usp=drive_link" target="_blank"><strong>MSBSD Strategic Plan</strong></a>.</p>
-
-
-	</div>
-	<footer>
-		<div class="fsElementFooterContent">
-			<figure class="fsImage"><picture><img alt="" data-image-sizes="[{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_1/v1718927555/matsuk12us/ouckpcgm29cqcp0wuns4/Mission.png%22,%22width%22:256},{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1718927555/matsuk12us/ouckpcgm29cqcp0wuns4/Mission.png%22,%22width%22:512},{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_3/v1718927555/matsuk12us/ouckpcgm29cqcp0wuns4/Mission.png%22,%22width%22:800},{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_4/v1718927555/matsuk12us/ouckpcgm29cqcp0wuns4/Mission.png%22,%22width%22:1200},{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_5/v1718927555/matsuk12us/ouckpcgm29cqcp0wuns4/Mission.png%22,%22width%22:1600},{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_6/v1718927555/matsuk12us/ouckpcgm29cqcp0wuns4/Mission.png%22,%22width%22:2200}]" data-resource-description="" data-resource-filename="Mission.png" data-resource-uuid="cf100fa4-7577-4caf-8e3b-3db5ac7072c8" role="presentation" src="" /></picture></figure>
- 
-<p> </p>
-		</div>
-	</footer>
-
-
-	</section>
-
-
-
-	</div>
-
-
-	</div>
-	<section class="fsElement fsContainer latest-news" id="fsEl_3004" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Latest News</h2>
-			<div class="fsElementHeaderContent">
-				<p>Stay Informed</p>
-
-			</div>
-	</header>
-	<div class="fsElementContent" >
-			<div class="fsElement fsPostElement fsList news-slider fsThumbnailOriginal fsThumbnailSmall fsItemCount_0" id="fsEl_3019" data-use-new="true" data-board-id="5,57" data-overwrite-title="" >
-
-				<div class="fsElementContent" >
-		<div class="fsListItems">
-
-<article class="fsStyleAutoclear fsBoard-57" data-post-id="352" data-authenticated-comments="true">
-
-	<a class="fsThumbnail fsPostLink " data-slug="msbsd-district-news/post/goguardian-parent-app" data-opens-in="popup" href="https://www.matsuk12.us/post-detail/~board/msbsd-district-news/post/goguardian-parent-app"><img data-aspect-ratio="0.525" data-image-sizes="[{"url":"https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_1/v1727764156/matsuk12us/lyve5idqmaqhklabgrpy/60f1c72afb0e0b94b19291fb_parent-app-screens.jpg","width":256},{"url":"https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1727764156/matsuk12us/lyve5idqmaqhklabgrpy/60f1c72afb0e0b94b19291fb_parent-app-screens.jpg","width":512},{"url":"https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_3/v1727764156/matsuk12us/lyve5idqmaqhklabgrpy/60f1c72afb0e0b94b19291fb_parent-app-screens.jpg","width":800},{"url":"https://resources.finalsite.net/images/f_auto,q_auto/v1727764156/matsuk12us/lyve5idqmaqhklabgrpy/60f1c72afb0e0b94b19291fb_parent-app-screens.jpg","width":1200}]" alt="GoGuardian Parent App" /></a>
-
-		
-		<div class="fsTitle fsStateHidden" id="fsArticle_3019_352">
-		<a class="fsPostLink" data-slug="msbsd-district-news/post/goguardian-parent-app" data-opens-in="popup" href="https://www.matsuk12.us/post-detail/~board/msbsd-district-news/post/goguardian-parent-app">
-			GoGuardian Parent App
-</a></div>
-
-	
-
-
-
-
-
-
-
-		<div class="fsSummary">
-			<p><strong>The GoGuardian Parent app</strong> is a mobile app designed to provide parents/guardians insight and control over their student's online activity when on school-managed devices and accounts.</p>
-
-		</div>
-
-		<div class="fsBody">
-			<p><strong>The GoGuardian Parent app</strong> is a mobile app designed to provide parents/guardians insight and control over their student's online activity when on school-managed devices and accounts.</p>
-
-<p>The GoGuardian Parent app provides you with an additional set of internet controls that you can set for out-of-school hours. GoGuardian Parent was created to help provide students with additional educational support and is a companion to the classroom engagement and internet filtering tools that our schools use.</p>
-
-<p><strong>To access the app</strong>, please follow the instructions below:</p>
-
-<ol>
-	<li>Download the app
-	<ol>
-		<li><a aria-describedby="audioeye_new_window_message" href="https://apps.apple.com/us/app/goguardian-parent-app/id1470168511" rel="noopener" target="_blank">Download via Apple Store</a></li>
-		<li><a href="https://play.google.com/store/apps/details?id=com.goguardian.parent&hl=en_US&gl=US">Download via Google Play Store</a></li>
-	</ol>
-	</li>
-	<li>After the app is successfully downloaded and installed, open it up and enter the email address registered with the school. Note: If you forgot your registered email address, please reach out to your child's school.  If the email you used at registration does not work, please contact the <strong>MSBSD Callcenter at (907) 761-HELP</strong></li>
-	<li>Login/Check Email: Check your email on your phone for a link to log in to the app. Tap the "Verify your email", and it will take you straight to the app. Note: If you don't have access to your email through the device you used to log in, tap on "Login with verification code", and copy and paste the verification code from the email into the app.</li>
-</ol>
-
-		</div>
-
-
-
-</article>
-<article class="fsStyleAutoclear fsBoard-57" data-post-id="351" data-authenticated-comments="true">
-
-	<a class="fsThumbnail fsPostLink " data-slug="msbsd-district-news/post/msbsd-hiring-special-ed-assistants-tutor-advisors" data-opens-in="popup" href="https://www.matsuk12.us/post-detail/~board/msbsd-district-news/post/msbsd-hiring-special-ed-assistants-tutor-advisors"><img data-aspect-ratio="0.8382978723404255" data-image-sizes="[{"url":"https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_1/v1727763870/matsuk12us/pk476oypj9ivcqcd4nah/Paras-MSBSDhiring.png","width":256},{"url":"https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1727763870/matsuk12us/pk476oypj9ivcqcd4nah/Paras-MSBSDhiring.png","width":512},{"url":"https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_3/v1727763870/matsuk12us/pk476oypj9ivcqcd4nah/Paras-MSBSDhiring.png","width":800},{"url":"https://resources.finalsite.net/images/f_auto,q_auto/v1727763870/matsuk12us/pk476oypj9ivcqcd4nah/Paras-MSBSDhiring.png","width":940}]" alt="MSBSD Hiring Special Ed Assistants & Tutor Advisors!" /></a>
-
-		
-		<div class="fsTitle fsStateHidden" id="fsArticle_3019_351">
-		<a class="fsPostLink" data-slug="msbsd-district-news/post/msbsd-hiring-special-ed-assistants-tutor-advisors" data-opens-in="popup" href="https://www.matsuk12.us/post-detail/~board/msbsd-district-news/post/msbsd-hiring-special-ed-assistants-tutor-advisors">
-			MSBSD Hiring Special Ed Assistants & Tutor Advisors!
-</a></div>
-
-	
-
-
-
-
-
-
-
-		<div class="fsSummary">
-			<p>MSBSD is looking to hire Special Education Assistants and Tutor Advisors at several school sites across the district! </p>
-
-		</div>
-
-		<div class="fsBody">
-			<p>MSBSD is looking to hire Special Education Assistants and Tutor Advisors at several school sites across the district!  Paraprofessionals play an essential role at our schools.  Under the supervision of a certified teacher, a paraprofessional supports schools in meeting the educational, behavioral, and socio-emotional needs of students.</p>
-
-<p data-ogsb="white">Interested in applying?  Head to <a data-auth="NotApplicable" data-linkindex="1" data-ogsc="" href="https://www.matsuk12.us/jobs" rel="noopener noreferrer" target="_blank">https://www.matsuk12.us/jobs</a></p>
-
-		</div>
-
-
-
-</article>
-<article class="fsStyleAutoclear fsBoard-57" data-post-id="321" data-authenticated-comments="true">
-
-	<a class="fsThumbnail fsPostLink " data-slug="msbsd-district-news/post/stopit-anonymous-reporting" data-opens-in="linked_url" href="https://resources.finalsite.net/images/v1726636295/matsuk12us/vz0qiw2sbvfpzdijkqcc/460327738_931601295678317_7573503592420254036_n.jpg"><img data-aspect-ratio="1.2916666666666667" data-image-sizes="[{"url":"https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_1/v1726636295/matsuk12us/vz0qiw2sbvfpzdijkqcc/460327738_931601295678317_7573503592420254036_n.jpg","width":256},{"url":"https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1726636295/matsuk12us/vz0qiw2sbvfpzdijkqcc/460327738_931601295678317_7573503592420254036_n.jpg","width":512},{"url":"https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_3/v1726636295/matsuk12us/vz0qiw2sbvfpzdijkqcc/460327738_931601295678317_7573503592420254036_n.jpg","width":800},{"url":"https://resources.finalsite.net/images/f_auto,q_auto/v1726636295/matsuk12us/vz0qiw2sbvfpzdijkqcc/460327738_931601295678317_7573503592420254036_n.jpg","width":1080}]" alt="STOPiT Anonymous Reporting" /></a>
-
-		
-		<div class="fsTitle fsStateHidden" id="fsArticle_3019_321">
-		<a class="fsPostLink" data-slug="msbsd-district-news/post/stopit-anonymous-reporting" data-opens-in="linked_url" href="https://resources.finalsite.net/images/v1726636295/matsuk12us/vz0qiw2sbvfpzdijkqcc/460327738_931601295678317_7573503592420254036_n.jpg">
-			STOPiT Anonymous Reporting
-</a></div>
-
-	
-
-
-
-
-
-
-
-		<div class="fsSummary">
-			<p>To help keep our schools safe, we encourage you to use STOPiT, MSBSD’s anonymous reporting tool.</p>
-
-		</div>
-
-		<div class="fsBody">
-			<p>To help keep our schools safe, we encourage you to use STOPiT, MSBSD’s anonymous reporting tool.</p>
-
-<p>Here’s how STOPiT can help:</p>
-
-<ul>
-	<li>Students: Report bullying, harassment, alcohol or drug use, depression, campus violence, and more.</li>
-	<li>Community Members: Report individuals who may be a danger to themselves or others, or involved in unlawful activity.</li>
-	<li>Employees: Report safety, misconduct, or compliance concerns.</li>
-</ul>
-
-<p>How to Report:</p>
-
-<ul>
-	<li>For urgent threats, call 9-1-1.</li>
-	<li>Use STOPiT for anonymous reports.</li>
-</ul>
-
-<p>Thank you for helping us keep our schools secure!</p>
-
-		</div>
-
-
-
-</article>
-
-</div>
-
-
-	</div>
-
-
-	</div>
-
-
-
-	</div>
-
-
-	</section>
-	<div class="fsElement fsContent" id="fsEl_68628" data-use-new="true" >
-
-				<div class="fsElementContent" >
-			<p> </p>
-
-<p> </p>
-
-<p> </p>
-
-
-	</div>
-
-
-	</div>
-	<div class="fsElement fsContainer icon-panel" id="fsEl_3055" data-use-new="true" >
-
-				<div class="fsElementContent" >
-			<section class="fsElement fsContent icon-article" id="fsEl_3056" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">19,000+</h2>
-			<div class="fsElementHeaderContent">
-				<figure class="fsImage"><a href="http://www.matsuk12.us" target="_blank"><picture><img alt="Icon" data-image-sizes="[{%22url%22:%22https://resources.finalsite.net/images/v1710767269/matsuk12us/w1zfckemy18oqgo0l9xr/backpack.svg%22,%22width%22:67}]" data-resource-description="" data-resource-filename="backpack.svg" data-resource-uuid="f3d77a0d-51c2-4e37-a7c5-6714426f74fa" id="" src="" /></picture></a></figure>
-
-			</div>
-	</header>
-	<div class="fsElementContent" >
-			<p>students</p>
-
-
-	</div>
-
-
-	</section>
-	<section class="fsElement fsContent icon-article" id="fsEl_3057" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">49</h2>
-			<div class="fsElementHeaderContent">
-				<figure class="fsImage"><picture><img alt="Icon" data-image-sizes="[{%22url%22:%22https://resources.finalsite.net/images/v1710767276/matsuk12us/ytm5bwu7bfbs4pv3p0ct/School.svg%22,%22width%22:67}]" data-resource-description="" data-resource-filename="School.svg" data-resource-uuid="8068bd12-3521-4c3e-99ac-476908259579" id="" src="" /></picture></figure>
-
-			</div>
-	</header>
-	<div class="fsElementContent" >
-			<p>schools</p>
-
-
-	</div>
-
-
-	</section>
-	<section class="fsElement fsContent icon-article" id="fsEl_3058" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">1</h2>
-			<div class="fsElementHeaderContent">
-				<figure class="fsImage"><picture><img alt="Icon" data-image-sizes="[{%22url%22:%22https://resources.finalsite.net/images/v1710767275/matsuk12us/fw00ebuncoohio08nwjd/Paper.svg%22,%22width%22:67}]" data-resource-description="" data-resource-filename="Paper.svg" data-resource-uuid="79b2d427-26dc-4ab5-9c20-61efdc1fea65" id="" src="" /></picture></figure>
-
-			</div>
-	</header>
-	<div class="fsElementContent" >
-			<p>mission</p>
-
-
-	</div>
-
-
-	</section>
-	<section class="fsElement fsContent icon-article" id="fsEl_3059" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">25,000</h2>
-			<div class="fsElementHeaderContent">
-				<figure class="fsImage"><picture><img alt="Icon" data-image-sizes="[{%22url%22:%22https://resources.finalsite.net/images/v1710767273/matsuk12us/ztxigf5qikbpz6tjmy1a/Map.svg%22,%22width%22:67}]" data-resource-description="" data-resource-filename="Map.svg" data-resource-uuid="436c8a5f-0829-498b-a787-c28a26bba1fe" id="" src="" /></picture></figure>
-
-			</div>
-	</header>
-	<div class="fsElementContent" >
-			<p>square miles</p>
-
-
-	</div>
-
-
-	</section>
-	<section class="fsElement fsContent icon-article" id="fsEl_3060" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">19.44</h2>
-			<div class="fsElementHeaderContent">
-				<figure class="fsImage"><picture><img alt="Icon" data-image-sizes="[{%22url%22:%22https://resources.finalsite.net/images/v1710767279/matsuk12us/zzhwxfffcb2hr3gf9nnt/teacher.svg%22,%22width%22:101}]" data-resource-description="" data-resource-filename="teacher.svg" data-resource-uuid="0dca980a-6099-41ac-88e8-d34764504023" id="" src="" /></picture></figure>
-
-			</div>
-	</header>
-	<div class="fsElementContent" >
-			<p>student/teacher ratio</p>
-
-
-	</div>
-
-
-	</section>
-
-
-
-	</div>
-
-
-	</div>
-
-
-
-
-	</div>
-
-
-
-
-	</div>
-
-
-
-				</main>
-			</div>
-		</div>
-
-			<footer id="fsFooter" class="fsFooter">
-				<div class=" fsBanner fsStyleAutoclear" id="fsEl_9" data-settings-id="9" data-use-new="true">
-
-			<div class="fsElement fsEmbed" id="fsEl_67683" data-use-new="true" >
-
-				<div class="fsElementContent" >
-		    <script async="" src="https://siteimproveanalytics.com/js/siteanalyze_6014908.js"></script>
-
-	</div>
-
-
-	</div>
-	<section class="fsElement fsLocationElement fsSingleItem footer--students--image   fsThumbnailOriginal fsThumbnailFull" id="fsEl_3048" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Footer Students</h2>
-	</header>
-	<div class="fsElementContent" >
-		<article class="fsLocationSingleItem"><div class="fsThumbnail"><img alt="Footer - Graduates Students" data-aspect-ratio="1.3592436974789917" data-image-sizes="[{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_1/v1712047125/matsuk12us/uxquaomf5t1qpshc1tmf/footer-students-image.png%22,%22width%22:256},{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto/v1712047125/matsuk12us/uxquaomf5t1qpshc1tmf/footer-students-image.png%22,%22width%22:476}]"></div></article>
-	</div>
-
-
-	</section>
-	<section class="fsElement fsContainer footer--holder" id="fsEl_3033" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Footer Holder</h2>
-	</header>
-	<div class="fsElementContent" >
-			<div class="fsElement fsLayout fsThreeColumnLayout fsStyleAutoclear" id="fsEl_3034" data-use-new="true" >
-
-						<div class=" fsDiv fsStyleColumn fsStyleColumn-1 fsStyleAutoclear" id="fsEl_3035"  >
-
-				<section class="fsElement fsLocationElement fsSingleItem footer--logo   fsThumbnailOriginal fsThumbnailFull" id="fsEl_3040" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Footer Logo</h2>
-	</header>
-	<div class="fsElementContent" >
-		<article class="fsLocationSingleItem"><div class="fsThumbnail fsThumbnailLogo"><a class="fsLocationLink" href="https://www.matsuk12.us"><img alt="Matanuska-Susitna Borough School District" data-aspect-ratio="0.2237960339943343" data-image-sizes="[{%22url%22:%22https://resources.finalsite.net/images/v1711359995/matsuk12us/hcjvjuhzg7c3nd75hxvk/district-logo-white.svg%22,%22width%22:353}]"></a></div><a class="fsLocationLink fsLocationLinkWrapper" href="https://www.matsuk12.us"><div class="fsTitle fsLocationTitle">Matanuska-Susitna </div><div class="fsLocationSubtitle">Borough School District </div></a></article>
-	</div>
-
-
-	</section>
-	<div class="fsElement fsContent footer--statement" id="fsEl_3042" data-use-new="true" >
-
-				<div class="fsElementContent" >
-			
-
-	</div>
-
-
-	</div>
-
-
-
-
-	</div>
-	<div class=" fsDiv fsStyleColumn fsStyleColumn-2 fsStyleAutoclear" id="fsEl_3036"  >
-
-				<section class="fsElement fsLocationElement fsSingleItem footer--address   fsThumbnailOriginal fsThumbnailSmall" id="fsEl_3044" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Our Address</h2>
-	</header>
-	<div class="fsElementContent" >
-		<article class="fsLocationSingleItem"><div class="fsLocationAddress fsLocationAddress-1">501 N Gulkana St.</div><div class="fsLocationCity">Palmer</div><div class="fsLocationState">AK</div><div class="fsLocationZip">99645</div><div class="fsLocationPhone"><a href="tel:907.746.9200">907.746.9200</a></div><div class="fsLocationFax">907.761.4076</div></article>
-	</div>
-
-
-	</section>
-
-
-
-
-	</div>
-	<div class=" fsDiv fsStyleColumn fsStyleColumn-3 fsStyleColumn-last fsStyleAutoclear" id="fsEl_3037"  >
-
-				<section class="fsElement fsLocationElement fsSingleItem footer--contact   fsThumbnailOriginal fsThumbnailSmall" id="fsEl_3045" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">contact us</h2>
-	</header>
-	<div class="fsElementContent" >
-		<article class="fsLocationSingleItem"><div class="fsLocationEmail" id="fsEmail_1_3045"><script type="text/javascript">setTimeout(function(){ FS.util.insertEmail('fsEmail_1_3045', 'su.21kustam', 'retsambewdsbsm', false); }, 20);</script></div></article>
-	</div>
-
-
-	</section>
-	<section class="fsElement fsNavigation fsList nav-social" id="fsEl_3046" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Connect</h2>
-	</header>
-	<div class="fsElementContent" >
-		<nav><ul class="fsNavLevel1"><li><a href="https://www.facebook.com/akmatsuk12/" target="_blank">Facebook<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="https://www.instagram.com/we_are_msbsd/" target="_blank">Instagram<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="https://x.com/MSBSD" target="_blank">Twitter<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li><li><a href="https://www.youtube.com/@mat-suboroughschooldistric3073" target="_blank">YouTube<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li></ul></nav>
-	</div>
-
-
-	</section>
-	<section class="fsElement fsEmbed footer--scroll--up" id="fsEl_3052" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Scroll Up</h2>
-	</header>
-	<div class="fsElementContent" >
-		    <button class="scroll-up-btn" role="button" type="button">
-  <span>Scroll Up</span>
-</button>
-
-	</div>
-
-
-	</section>
-
-
-
-
-	</div>
-
-
-
-
-
-	</div>
-
-
-
-	</div>
-
-
-	</section>
-	<section class="fsElement fsNavigation fsList footer--utility" id="fsEl_3038" data-use-new="true" >
-
-				<header>
-			<h2 class="fsElementTitle">Footer Utility</h2>
-	</header>
-	<div class="fsElementContent" >
-		<nav><ul class="fsNavLevel1"><li><a href="/site-map">Site Map</a></li><li><a href="/google-map">Google Map</a></li><li><a href="/accessibility-statement">Accessibility</a></li><li><a href="https://www.matsuk12.us/admin" target="_blank">Webmaster Login<span class="fsStyleSROnly">(opens in new window/tab)</span></a></li></ul></nav>
-	</div>
-
-
-	</section>
-	<section class="fsElement fsResourceElement fsSingleItem footer--mountain--image" id="fsEl_3039" data-use-new="true" data-source-element-id="3039" data-source-page-id="5" >
-
-				<header>
-			<h2 class="fsElementTitle">Mountain Image</h2>
-	</header>
-	<div class="fsElementContent" >
-		<article class="fsResource fsResourceTypeImage"><figure><picture><img alt="Footer Glacier" data-aspect-ratio="0.68125" data-image-sizes="[{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_1/v1712043019/matsuk12us/brjjtpzltblda7qsx2iw/footer-glacier-background.png%22,%22width%22:256},{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1712043019/matsuk12us/brjjtpzltblda7qsx2iw/footer-glacier-background.png%22,%22width%22:512},{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_3/v1712043019/matsuk12us/brjjtpzltblda7qsx2iw/footer-glacier-background.png%22,%22width%22:800},{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_4/v1712043019/matsuk12us/brjjtpzltblda7qsx2iw/footer-glacier-background.png%22,%22width%22:1200},{%22url%22:%22https://resources.finalsite.net/images/f_auto,q_auto/v1712043019/matsuk12us/brjjtpzltblda7qsx2iw/footer-glacier-background.png%22,%22width%22:1440}]" data-permitted-user="true" data-resource-title="footer-glacier-background.png" data-resource-uuid="820d989e-de20-4a65-93bf-f628d12c4028"></picture></figure></article>
-	</div>
-
-
-	</section>
-	<div class="fsElement fsEmbed" id="fsEl_67625" data-use-new="true" >
-
-				<div class="fsElementContent" >
-		    <script async="" src="https://siteimproveanalytics.com/js/siteanalyze_6014908.js"></script>
-
-	</div>
-
-
-	</div>
-
-
-
-
-				<div id="fsPoweredByFinalsite" role="complementary">
-		<div>
-			<a href="https://www.finalsite.com/districts" title="Powered by Finalsite opens in a new window" target="_blank">Powered by Finalsite</a>
-		</div>
-	</div>
-
-</div>
-
-
-			</footer>
-
-</div>
-
-
-<script src="/assets/application-06929361842eca053770927caacd7d98c34a6fe89cb4cb725de52dd3d0a33205.js"></script>
-
-	<script src="/uploaded/themes/default_24/main.js?1726848195"></script>
-
-
-
-
-
-
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'8f2985cd1a6847e6',t:'MTczNDI5ODA5OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body></html>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="your-logo.png" alt="Logo">
+            MATANUSKA-SUSITNA BOROUGH SCHOOL DISTRICT
+        </div>
+        <div class="nav-options">
+            <a href="#">I want to...</a>
+            <a href="#">English</a>
+            <a href="#">&#128269;</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>WE PREPARE</h1>
+            <p>ALL STUDENTS FOR SUCCESS</p>
+            <a href="#" class="cta-button">EXPLORE OUR NEW WEBSITE!</a>
+        </div>
+        <div class="video-section">
+            MATANUSKA-SUSITNA BOROUGH SCHOOL DISTRICT
+        </div>
+    </section>
+
+    <!-- Social Section -->
+    <section class="social-section">
+        <h2>STAY CONNECTED</h2>
+        <div class="social-grid">
+            <div class="social-card">
+                <img src="social-image-1.jpg" alt="Social Post 1">
+                <p>Dual Enrollment Programs - Spring 2025</p>
+            </div>
+            <div class="social-card">
+                <img src="social-image-2.jpg" alt="Social Post 2">
+                <p>No School - Region 6 - December 11, 2024</p>
+            </div>
+            <div class="social-card">
+                <img src="social-image-3.jpg" alt="Social Post 3">
+                <p>Thank you, Snowshoe Elementary Choir!</p>
+            </div>
+            <div class="social-card">
+                <img src="social-image-4.jpg" alt="Social Post 4">
+                <p>Hands-on learning in our classrooms.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stat-item">
+                <h3>19,000+</h3>
+                <p>Students</p>
+            </div>
+            <div class="stat-item">
+                <h3>49</h3>
+                <p>Schools</p>
+            </div>
+            <div class="stat-item">
+                <h3>1</h3>
+                <p>Mission</p>
+            </div>
+            <div class="stat-item">
+                <h3>2</h3>
+                <p>Cults</p>
+            </div>
+            <div class="stat-item">
+                <h3>19.44</h3>
+                <p>Student/Teacher Ratio</p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
