@@ -3,36 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>hello</title>
+    <title>Matanuska-Susitna Borough School District</title>
     <style>
+        /* Global Styles */
         body {
             margin: 0;
             padding: 0;
-            background-color: #1d2a3a; /* Dark blue color */
+            font-family: 'Helvetica Neue', sans-serif;
+            background-color: #002e5d;
             color: white;
             text-align: center;
-            font-family: Arial, sans-serif;
         }
-        .header {
-            background-image: url('your-background-image.jpg'); /* Replace with the path to your image */
-            background-size: cover;
-            padding: 200px 0;
-            background-position: center;
-        }
-        #dynamicText {
+        h1 {
             font-size: 48px;
             font-weight: bold;
-            color: #ffffff; /* White color */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Subtle shadow for better contrast */
-            transition: all 1s ease;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Shadow for contrast */
         }
+        
+        /* Header Section */
+        .header {
+            position: relative;
+            background-image: url('your-background-image.jpg'); /* Replace with the path to your background image */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            padding: 40px;
+        }
+
+        /* Logo */
         #logo {
             width: 200px;
             height: auto;
-            margin-top: 20px;
+            position: absolute;
+            top: 20px;
+            left: 20px;
         }
+
+        /* Dynamic Text */
+        #dynamicText {
+            font-size: 50px;
+            font-weight: bold;
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        /* Button Styles */
         .button {
-            background-color: #006a8f; /* A solid blue color */
+            background-color: #00aaff; /* Light blue button color */
             color: white;
             padding: 15px 30px;
             border: none;
@@ -41,13 +63,20 @@
             margin-top: 20px;
             border-radius: 5px;
             text-transform: uppercase;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
         }
         .button:hover {
-            background-color: #004f6a; /* Darker blue for hover effect */
+            background-color: #0088cc; /* Darker blue on hover */
         }
+
+        /* Video Embed */
         .video-container {
             margin-top: 40px;
         }
+
         iframe {
             width: 560px;
             height: 315px;
@@ -55,14 +84,16 @@
     </style>
 </head>
 <body>
+
+    <!-- Header Section with Background Image -->
     <div class="header">
-        <img src="logo.PNG" alt="Matanuska-Susitna Borough School District Logo" id="logo"/>
+        <img src="logo.png" alt="Matanuska-Susitna Borough School District Logo" id="logo" />
         <h1 id="dynamicText">WE PREPARE ALL STUDENTS FOR FAILURE</h1>
         <button class="button" onclick="location.href='https://www.matsuk12.us'">EXPLORE OUR NEW WEBSITE!</button>
     </div>
 
+    <!-- Video Section -->
     <div class="video-container">
-        <!-- Example YouTube video embed -->
         <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID_HERE" frameborder="0" allowfullscreen></iframe>
     </div>
 
@@ -76,7 +107,7 @@
             index = (index + 1) % textArray.length;
         }
 
-        setInterval(changeText, 2000); // Changes text every 2 seconds
+        setInterval(changeText, 2000); // Change text every 2 seconds
     </script>
 </body>
 </html>
