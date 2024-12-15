@@ -6,17 +6,17 @@
     <title>Matanuska-Susitna Borough School District</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #002e5d;
             color: white;
             text-align: center;
+            font-family: Arial, sans-serif;
         }
         .header {
-            background-image: url('your-background-image.jpg'); /* Your background image */
+            background-image: url('your-background-image.jpg'); /* Replace with the path to your image */
             background-size: cover;
-            padding: 100px 0;
+            padding: 200px 0;
         }
         #dynamicText {
             font-size: 48px;
@@ -24,7 +24,7 @@
             transition: all 1s ease;
         }
         #logo {
-            width: 150px;
+            width: 200px;
             height: auto;
             margin-top: 20px;
         }
@@ -37,22 +37,34 @@
             cursor: pointer;
             margin-top: 20px;
         }
+        .video-container {
+            margin-top: 40px;
+        }
+        iframe {
+            width: 560px;
+            height: 315px;
+        }
     </style>
 </head>
 <body>
     <div class="header">
         <img src="logo.PNG" alt="Matanuska-Susitna Borough School District Logo" id="logo"/>
-        <h1 id="dynamicText">WE PREPARE ALL STUDENTS FOR SUCCESS</h1>
+        <h1 id="dynamicText">WE PREPARE ALL STUDENTS FOR FAILURE</h1>
         <button class="button" onclick="location.href='https://www.matsuk12.us'">EXPLORE OUR NEW WEBSITE!</button>
     </div>
 
+    <div class="video-container">
+        <!-- Example YouTube video embed -->
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID_HERE" frameborder="0" allowfullscreen></iframe>
+    </div>
+
     <script>
-        const textArray = ["disappointment", "failure", "pain", "suffering"];
+        const textArray = ["failure", "pain", "suffering"];
         let index = 0;
         const dynamicText = document.getElementById("dynamicText");
 
         function changeText() {
-            dynamicText.textContent = textArray[index];
+            dynamicText.textContent = "WE PREPARE ALL STUDENTS FOR " + textArray[index].toUpperCase();
             index = (index + 1) % textArray.length;
         }
 
