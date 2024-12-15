@@ -211,8 +211,41 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>WE PREPARE</h1>
-            <p>ALL STUDENTS FOR SUCCESS</p>
+            <span id="text1">We Prepare </span>
+<span id="text2"></span>
+
+<script>
+  const phrases = ["failure", "Sadness", "Pain"];
+  let currentIndex = 0;
+  const textElement = document.getElementById("text2");
+
+  function typeText() {
+    const currentPhrase = phrases[currentIndex];
+    let i = 0;
+    textElement.textContent = ""; // Clear previous text
+
+    function type() {
+      if (i < currentPhrase.length) {
+        textElement.textContent += currentPhrase.charAt(i);
+        i++;
+        setTimeout(type, 100);
+      } else {
+        // After typing a phrase, wait and change to the next one
+        setTimeout(changeText, 1000);
+      }
+    }
+
+    type();
+  }
+
+  function changeText() {
+    currentIndex = (currentIndex + 1) % phrases.length;
+    typeText();
+  }
+
+  typeText();
+</script>
+
             <a href="#" class="cta-button">EXPLORE OUR NEW WEBSITE!</a>
         </div>
         <div class="video-section">
