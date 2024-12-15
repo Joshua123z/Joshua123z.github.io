@@ -59,7 +59,7 @@
         .hero {
             position: relative;
             height: 80vh;
-            background: url('your-mountain-image.jpg') no-repeat center center/cover;
+            background-color: #002c5f; /* Blue background */
             color: #fff;
             text-align: center;
             padding: 60px 20px;
@@ -69,6 +69,7 @@
             font-size: 3.5rem;
             font-weight: bold;
             margin-bottom: 10px;
+            color: #0073e6; /* Blue color for 'We Prepare' */
         }
 
         .hero-content p {
@@ -80,21 +81,6 @@
             margin-bottom: 30px;
             font-size: 2.5rem;
             color: white;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 12px 25px;
-            background-color: #0073e6;
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .cta-button:hover {
-            background-color: #005bb5;
         }
 
         /* Video Overlay */
@@ -216,15 +202,13 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>WE PREPARE ALL STUDENTS FOR</h1>
+            <h1>WE PREPARE</h1>
 
             <!-- Typing Animation Text -->
             <div class="typing-animation">
                 <span id="text1"></span>
                 <span id="text2"></span>
             </div>
-
-            <a href="#" class="cta-button">EXPLORE OUR NEW WEBSITE!</a>
         </div>
         <div class="video-section">
             MATANUSKA-SUSITNA BOROUGH SCHOOL DISTRICT
@@ -306,12 +290,13 @@
         }
 
         function changeText() {
-            textElement1.textContent = "We Prepare All Students For "; // Static part of the sentence
+            textElement1.textContent = "We Prepare"; // Static part of the sentence
             currentIndex = (currentIndex + 1) % phrases.length;
             typeText();
         }
 
         changeText(); // Initialize the first word change
     </script>
+
 </body>
 </html>
