@@ -87,7 +87,11 @@
     function refreshChat() {
       const chatBox = document.getElementById("chat-box");
       const messages = JSON.parse(localStorage.getItem("messages")) || [];
+      
+      // Clear current messages
       chatBox.innerHTML = "";
+      
+      // Loop through messages and display them
       messages.forEach(message => {
         const messageElement = document.createElement("div");
         messageElement.classList.add("message");
@@ -95,6 +99,7 @@
         messageElement.textContent = `${message.sender}: ${message.text}`;
         chatBox.appendChild(messageElement);
       });
+
       // Auto-scroll to the bottom
       chatBox.scrollTop = chatBox.scrollHeight;
     }
@@ -104,14 +109,24 @@
       const inputField = document.getElementById("message-input");
       const messageText = inputField.value.trim();
       if (messageText === "") return; // Don't send empty messages
+
+      // Retrieve existing messages from localStorage
       const messages = JSON.parse(localStorage.getItem("messages")) || [];
+
+      // Add the new message to the messages array
       messages.push({
         sender: userName,
         text: messageText,
         timestamp: new Date().toISOString()
       });
+
+      // Save updated messages back to localStorage
       localStorage.setItem("messages", JSON.stringify(messages));
+
+      // Clear the input field
       inputField.value = "";
+      
+      // Refresh chat UI to show new message
       refreshChat();
     }
 
