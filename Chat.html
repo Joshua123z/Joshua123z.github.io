@@ -1,148 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chat Application</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f9;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-    .chat-container {
-      width: 350px;
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-    }
-    .chat-box {
-      height: 300px;
-      overflow-y: scroll;
-      padding: 10px;
-      background-color: #eaeaea;
-      border-bottom: 1px solid #ccc;
-    }
-    .chat-input {
-      display: flex;
-      padding: 10px;
-      background-color: #fff;
-    }
-    .chat-input input {
-      width: 80%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    .chat-input button {
-      width: 15%;
-      padding: 10px;
-      margin-left: 5px;
-      background-color: #4CAF50;
-      border: none;
-      border-radius: 5px;
-      color: white;
-      cursor: pointer;
-    }
-    .chat-input button:hover {
-      background-color: #45a049;
-    }
-    .message {
-      margin: 5px 0;
-      padding: 8px;
-      border-radius: 5px;
-      background-color: #d9f7be;
-    }
-    .message.from-user {
-      background-color: #d0e6ff;
-      text-align: right;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Chat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+        .chat-container {
+            width: 400px;
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            height: 500px;
+        }
+        .messages {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .message {
+            padding: 5px;
+            margin: 5px 0;
+            border-radius: 5px;
+            background-color: #e9e9e9;
+        }
+        .input-container {
+            display: flex;
+            margin-top: 10px;
+        }
+        input[type="text"] {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .name-container {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-  <div class="chat-container">
-    <div class="chat-box" id="chat-box">
-      <!-- Messages will be displayed here -->
+
+    <div class="chat-container">
+        <div class="name-container" id="name-container">
+            <input type="text" id="userName" placeholder="Enter your name" />
+            <button onclick="startChat()">Start Chat</button>
+        </div>
+        <div class="messages" id="messages"></div>
+        <div class="input-container" id="input-container">
+            <input type="text" id="messageInput" placeholder="Type a message" />
+            <button onclick="sendMessage()">Send</button>
+        </div>
     </div>
-    <div class="chat-input">
-      <input type="text" id="message-input" placeholder="Type a message...">
-      <button id="send-btn">Send</button>
-    </div>
-  </div>
 
-  <script>
-    // Check if the user has a stored name
-    let userName = localStorage.getItem("userName");
-    if (!userName) {
-      userName = prompt("Enter your name:");
-      localStorage.setItem("userName", userName);
-    }
+    <script>
+        // Retrieve stored messages and name from localStorage
+        window.onload = function () {
+            if(localStorage.getItem('messages')) {
+                displayMessages();
+            }
+            if(localStorage.getItem('userName')) {
+                document.getElementById('userName').value = localStorage.getItem('userName');
+                toggleChat(true);
+            }
+        }
 
-    // Function to refresh and display chat messages
-    function refreshChat() {
-      const chatBox = document.getElementById("chat-box");
-      const messages = JSON.parse(localStorage.getItem("messages")) || [];
-      
-      // Clear current messages
-      chatBox.innerHTML = "";
-      
-      // Loop through messages and display them
-      messages.forEach(message => {
-        const messageElement = document.createElement("div");
-        messageElement.classList.add("message");
-        messageElement.classList.add(message.sender === userName ? "from-user" : "from-others");
-        messageElement.textContent = `${message.sender}: ${message.text}`;
-        chatBox.appendChild(messageElement);
-      });
+        // Toggle chat container (show input area after name is set)
+        function toggleChat(isChatting) {
+            document.getElementById('name-container').style.display = isChatting ? 'none' : 'block';
+            document.getElementById('input-container').style.display = isChatting ? 'flex' : 'none';
+        }
 
-      // Auto-scroll to the bottom
-      chatBox.scrollTop = chatBox.scrollHeight;
-    }
+        // Start chat by saving user name
+        function startChat() {
+            const name = document.getElementById('userName').value;
+            if(name.trim()) {
+                localStorage.setItem('userName', name);
+                toggleChat(true);
+            }
+        }
 
-    // Function to send a message
-    function sendMessage() {
-      const inputField = document.getElementById("message-input");
-      const messageText = inputField.value.trim();
-      if (messageText === "") return; // Don't send empty messages
+        // Display stored messages
+        function displayMessages() {
+            const messages = JSON.parse(localStorage.getItem('messages')) || [];
+            const messagesDiv = document.getElementById('messages');
+            messagesDiv.innerHTML = ''; // Clear existing messages
+            messages.forEach(message => {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message';
+                messageDiv.textContent = `${message.name}: ${message.text}`;
+                messagesDiv.appendChild(messageDiv);
+            });
+            messagesDiv.scrollTop = messagesDiv.scrollHeight; // Scroll to bottom
+        }
 
-      // Retrieve existing messages from localStorage
-      const messages = JSON.parse(localStorage.getItem("messages")) || [];
+        // Send a message and save it to localStorage
+        function sendMessage() {
+            const messageInput = document.getElementById('messageInput');
+            const messageText = messageInput.value.trim();
+            const userName = localStorage.getItem('userName');
 
-      // Add the new message to the messages array
-      messages.push({
-        sender: userName,
-        text: messageText,
-        timestamp: new Date().toISOString()
-      });
+            if (messageText) {
+                const newMessage = { name: userName, text: messageText };
+                let messages = JSON.parse(localStorage.getItem('messages')) || [];
+                messages.push(newMessage);
+                localStorage.setItem('messages', JSON.stringify(messages));
 
-      // Save updated messages back to localStorage
-      localStorage.setItem("messages", JSON.stringify(messages));
+                messageInput.value = ''; // Clear input field
+                displayMessages(); // Refresh messages
+            }
+        }
+    </script>
 
-      // Clear the input field
-      inputField.value = "";
-      
-      // Refresh chat UI to show new message
-      refreshChat();
-    }
-
-    // Set up event listeners
-    document.getElementById("send-btn").addEventListener("click", sendMessage);
-    document.getElementById("message-input").addEventListener("keypress", function(event) {
-      if (event.key === "Enter") {
-        sendMessage();
-      }
-    });
-
-    // Initial chat refresh
-    refreshChat();
-
-    // Periodically refresh the chat to show new messages
-    setInterval(refreshChat, 3000); // Refresh every 3 seconds
-  </script>
 </body>
 </html>
