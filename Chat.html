@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real-Time Chat</title>
+    <title>BonkBros Chat</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -60,9 +60,23 @@
         .name-container {
             margin-bottom: 20px;
         }
+        .notification {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
+
+    <div class="notification" id="notification">New message received!</div>
 
     <div class="chat-container">
         <div class="name-container" id="name-container">
@@ -73,6 +87,9 @@
         <div class="input-container" id="input-container">
             <input type="text" id="messageInput" placeholder="Type a message" />
             <button onclick="sendMessage()">Send</button>
+        </div>
+        <div id="changeNameButtonContainer" style="display: none;">
+            <button onclick="changeName()">Change Name</button>
         </div>
     </div>
 
@@ -94,6 +111,7 @@
         function toggleChat(isChatting) {
             document.getElementById('name-container').style.display = isChatting ? 'none' : 'block';
             document.getElementById('input-container').style.display = isChatting ? 'flex' : 'none';
+            document.getElementById('changeNameButtonContainer').style.display = isChatting ? 'block' : 'none';
         }
 
         // Start chat by saving user name and force name input
@@ -137,6 +155,9 @@
 
                 messageInput.value = ''; // Clear input field
                 displayMessages(); // Refresh messages immediately
+
+                // Show notification for new message
+                showNotification();
             }
         }
 
@@ -146,7 +167,30 @@
                 displayMessages();
             }, 1000); // 1000 ms = 1 second
         }
+
+        // Show notification for new messages
+        function showNotification() {
+            const notification = document.getElementById('notification');
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000); // Hide after 3 seconds
+        }
+
+        // Allow user to change their name
+        function changeName() {
+            const newName = prompt("Enter your new name:");
+            if (newName && newName.trim() !== '') {
+                localStorage.setItem('userName', newName);
+                alert("Your name has been updated!");
+                // Refresh the page to reflect the new name in chat
+                location.reload();
+            }
+        }
     </script>
+<footer>
+<h1>Made with LOVE by Josh</h1>
+</footer>
 
 </body>
 </html>
