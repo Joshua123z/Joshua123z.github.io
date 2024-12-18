@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Image Search Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f9;
+        }
+        #game-container {
+            margin-top: 50px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #image-display {
+            margin-top: 20px;
+            max-width: 80%;
+            max-height: 400px;
+            display: none;
+        }
+        #error-message {
+            color: red;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <h1>Type and See an Image!</h1>
+        <input type="text" id="searchInput" placeholder="Type something..." />
+        <button onclick="searchImage()">Search</button>
+        <p id="error-message"></p>
+        <img id="image-display" src="" alt="Image will appear here">
+    </div>
+
+    <script>
+        function searchImage() {
+            const query = document.getElementById("searchInput").value.trim();
+            const imageDisplay = document.getElementById("image-display");
+            const errorMessage = document.getElementById("error-message");
+
+            // Clear previous image and error message
+            imageDisplay.style.display = 'none';
+            errorMessage.innerText = '';
+
+            if (!query) {
+                errorMessage.innerText = "Please type something!";
+                return;
+            }
+
+            // Construct a Google Image Search URL with the query
+            const searchUrl = `https://www.google.com/search?hl=en&tbm=isch&q=${encodeURIComponent(query)}`;
+
+            // Create an iframe to load the Google Image search result page
+            const iframe = document.createElement("iframe");
+            iframe.style.display = "none"; // hide iframe
+            iframe.src = searchUrl;
+            document.body.appendChild(iframe);
+
+            // Now search the page and extract the first image
+            iframe.onload = function () {
+                // Get the first image from the iframe content (Note: this part might be blocked)
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                const firstImage = iframeDoc.querySelector("img");
+
+                if (firstImage) {
+                    imageDisplay.src = firstImage.src;
+                    imageDisplay.style.display = 'block';
+                } else {
+                    errorMessage.innerText = "No images found.";
+                }
+                
+                // Remove iframe after loading
+                document.body.removeChild(iframe);
+            }
+        }
+    </script>
+</body>
+</html>
