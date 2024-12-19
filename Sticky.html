@@ -1,372 +1,232 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Whiteboard</title>
-    <style>
-        body {
-            font-family: 'Helvetica Neue', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-        }
-        .whiteboard {
-            width: 90%;
-            height: 80%;
-            background-color: white;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-wrap: wrap;
-            padding: 20px;
-            border-radius: 10px;
-        }
-        .note {
-            width: 250px;
-            height: 200px;
-            background-color: #ffeb3b;
-            margin: 15px;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            position: absolute;
-            cursor: move;
-            transition: transform 0.2s ease-in-out;
-        }
-        .note textarea {
-            width: 100%;
-            height: 70%;
-            border: none;
-            background: transparent;
-            resize: none;
-            font-size: 14px;
-            font-family: 'Arial', sans-serif;
-        }
-        .note img {
-            max-width: 100%;
-            max-height: 100px;
-        }
-        .add-note-button {
-            margin-top: 20px;
-            padding: 12px 24px;
-            background-color: #2196f3;
-            color: white;
-            font-size: 16px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .add-note-button:hover {
-            background-color: #1976d2;
-        }
-        .pop-out-button {
-            margin-top: 10px;
-            padding: 6px 12px;
-            background-color: #ff4081;
-            color: white;
-            font-size: 12px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .pop-out-button:hover {
-            background-color: #e91e63;
-        }
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-content {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            position: relative;
-            width: 500px;
-            max-height: 80%;
-            overflow-y: auto;
-        }
-        .modal-header {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-        .modal-close {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 22px;
-            cursor: pointer;
-            background: transparent;
-            border: none;
-            color: #333;
-        }
-        .drawing-area {
-            width: 100%;
-            height: 200px;
-            border: 1px solid #ccc;
-            margin-top: 10px;
-            cursor: crosshair;
-        }
-        .color-palette {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-        }
-        .color-palette div {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        .color-palette div:hover {
-            transform: scale(1.1);
-        }
-        .font-selector {
-            margin-top: 15px;
-        }
-        .font-selector select {
-            padding: 8px;
-            font-size: 14px;
-            border-radius: 5px;
-            width: 100%;
-        }
-        .upload-image {
-            margin-top: 20px;
-        }
-        input[type="file"] {
-            display: none;
-        }
-        label {
-            background-color: #2196f3;
-            color: white;
-            padding: 8px 12px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Whiteboard App</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      display: flex;
+      height: 100%;
+    }
+
+    .tools {
+      width: 200px;
+      background-color: #f0f0f0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .tools button, .tools input {
+      margin: 10px 0;
+    }
+
+    .canvas-container {
+      flex-grow: 1;
+      position: relative;
+    }
+
+    #whiteboardCanvas {
+      border: 2px solid #000;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
 </head>
 <body>
-
-<div class="whiteboard" id="whiteboard"></div>
-
-<button class="add-note-button" id="addNoteButton">+ Add a Note</button>
-
-<!-- Modal Popup -->
-<div class="modal" id="modal">
-    <div class="modal-content">
-        <button class="modal-close" id="closeModal">&times;</button>
-        <div class="modal-header">Adding a Note</div>
-        
-        <div class="font-selector">
-            <label for="fontSelect">Choose Font: </label>
-            <select id="fontSelect">
-                <option value="Arial">Arial</option>
-                <option value="Courier New">Courier New</option>
-                <option value="Verdana">Verdana</option>
-                <option value="Georgia">Georgia</option>
-                <option value="Times New Roman">Times New Roman</option>
-            </select>
-        </div>
-        
-        <textarea id="noteText" placeholder="Write your note here..." style="width: 100%; height: 100px;"></textarea>
-        
-        <div class="color-palette" id="colorPalette">
-            <div style="background-color: red;"></div>
-            <div style="background-color: green;"></div>
-            <div style="background-color: blue;"></div>
-            <div style="background-color: yellow;"></div>
-            <div style="background-color: orange;"></div>
-            <div style="background-color: purple;"></div>
-            <div style="background-color: pink;"></div>
-            <div style="background-color: brown;"></div>
-            <div style="background-color: black;"></div>
-        </div>
-        
-        <div class="drawing-area" id="drawingArea"></div>
-        
-        <div class="upload-image">
-            <label for="imageUpload">Upload Image</label>
-            <input type="file" id="imageUpload" accept="image/*">
-        </div>
-        
-        <button id="saveNoteButton" style="margin-top: 15px; padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Save Note</button>
+  <div class="container">
+    <div class="tools">
+      <button id="drawBtn">Draw</button>
+      <button id="textBtn">Text</button>
+      <button id="imageBtn">Add Image</button>
+      <input type="file" id="imageUpload" accept="image/*" style="display:none;">
+      <button id="clearBtn">Clear</button>
     </div>
-</div>
+    <div class="canvas-container">
+      <canvas id="whiteboardCanvas"></canvas>
+    </div>
+  </div>
 
-<script>
-    const whiteboard = document.getElementById('whiteboard');
-    const addNoteButton = document.getElementById('addNoteButton');
-    const modal = document.getElementById('modal');
-    const closeModal = document.getElementById('closeModal');
-    const noteText = document.getElementById('noteText');
-    const fontSelect = document.getElementById('fontSelect');
-    const colorPalette = document.getElementById('colorPalette');
-    const drawingArea = document.getElementById('drawingArea');
+  <script>
+    // Select DOM elements
+    const canvas = document.getElementById('whiteboardCanvas');
+    const ctx = canvas.getContext('2d');
+    const drawBtn = document.getElementById('drawBtn');
+    const textBtn = document.getElementById('textBtn');
+    const imageBtn = document.getElementById('imageBtn');
     const imageUpload = document.getElementById('imageUpload');
-    const saveNoteButton = document.getElementById('saveNoteButton');
-    
-    let currentColor = 'black';
-    let currentFont = 'Arial';
-    
-    // Show Modal
-    addNoteButton.addEventListener('click', () => {
-        modal.style.display = 'flex';
-    });
+    const clearBtn = document.getElementById('clearBtn');
 
-    // Close Modal
-    closeModal.addEventListener('click', () => {
-        modal.style.display = 'none';
-    });
+    let isDrawing = false;
+    let isTextMode = false;
+    let isImageMode = false;
+    let lastX = 0;
+    let lastY = 0;
+    let text = "";
+    let imageObj = null;
 
-    // Set Drawing Color
-    colorPalette.addEventListener('click', (e) => {
-        if (e.target && e.target.style.backgroundColor) {
-            currentColor = e.target.style.backgroundColor;
+    // Set canvas size
+    canvas.width = window.innerWidth - 220;  // Adjust width based on tools
+    canvas.height = window.innerHeight;
+
+    // Restore canvas state from localStorage
+    function loadCanvasState() {
+      const savedCanvas = localStorage.getItem('canvasState');
+      if (savedCanvas) {
+        const state = JSON.parse(savedCanvas);
+        ctx.putImageData(state.imageData, 0, 0);
+        state.texts.forEach(item => {
+          ctx.font = item.font;
+          ctx.fillText(item.text, item.x, item.y);
+        });
+        if (state.image) {
+          const img = new Image();
+          img.src = state.image;
+          img.onload = () => {
+            ctx.drawImage(img, state.imageX, state.imageY, state.imageWidth, state.imageHeight);
+          };
         }
-    });
+      }
+    }
 
-    // Handle Font Change
-    fontSelect.addEventListener('change', (e) => {
-        currentFont = e.target.value;
-        noteText.style.fontFamily = currentFont;
-    });
+    // Save canvas state to localStorage
+    function saveCanvasState() {
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const texts = [];
+      ctx.font = '20px Arial';
+      const originalFillStyle = ctx.fillStyle;
 
-    // Drawing Area
-    const ctx = drawingArea.getContext('2d');
-    drawingArea.addEventListener('mousedown', (e) => {
-        const startX = e.offsetX;
-        const startY = e.offsetY;
+      // Save texts to an array
+      const storedTexts = text.split("\n");
+      storedTexts.forEach((line, index) => {
+        texts.push({
+          text: line,
+          font: ctx.font,
+          x: 50,
+          y: 100 + index * 30
+        });
+      });
 
-        const draw = (e) => {
-            if (e.buttons !== 1) return;
-            ctx.lineTo(e.offsetX, e.offsetY);
-            ctx.strokeStyle = currentColor;
-            ctx.lineWidth = 3;
-            ctx.stroke();
+      const state = {
+        imageData: imageData,
+        texts: texts,
+        image: imageObj ? imageObj.src : null,
+        imageX: 50,
+        imageY: 150,
+        imageWidth: 100,
+        imageHeight: 100
+      };
+
+      localStorage.setItem('canvasState', JSON.stringify(state));
+    }
+
+    function startDrawing(e) {
+      isDrawing = true;
+      lastX = e.offsetX;
+      lastY = e.offsetY;
+    }
+
+    function stopDrawing() {
+      isDrawing = false;
+      saveCanvasState();  // Save state after drawing
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.strokeStyle = '#000';
+      ctx.lineWidth = 5;
+      ctx.stroke();
+      ctx.closePath();
+
+      lastX = e.offsetX;
+      lastY = e.offsetY;
+    }
+
+    function addText(e) {
+      if (!isTextMode) return;
+
+      const textInput = prompt('Enter text:');
+      if (textInput) {
+        text = textInput;
+        ctx.font = '20px Arial';
+        ctx.fillText(text, e.offsetX, e.offsetY);
+        saveCanvasState();  // Save state after adding text
+      }
+    }
+
+    function addImage(e) {
+      if (!isImageMode) return;
+
+      const file = imageUpload.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          imageObj = new Image();
+          imageObj.src = event.target.result;
+          imageObj.onload = () => {
+            ctx.drawImage(imageObj, 50, 150, 100, 100);
+            saveCanvasState();  // Save state after adding image
+          };
         };
+        reader.readAsDataURL(file);
+      }
+    }
 
-        drawingArea.addEventListener('mousemove', draw);
-        drawingArea.addEventListener('mouseup', () => {
-            drawingArea.removeEventListener('mousemove', draw);
-        });
+    function clearCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      localStorage.removeItem('canvasState');  // Remove saved state from cache
+    }
+
+    // Tool buttons
+    drawBtn.addEventListener('click', () => {
+      isTextMode = false;
+      isImageMode = false;
+      canvas.addEventListener('mousedown', startDrawing);
+      canvas.addEventListener('mouseup', stopDrawing);
+      canvas.addEventListener('mousemove', draw);
+      canvas.removeEventListener('click', addText);
+      canvas.removeEventListener('click', addImage);
     });
 
-    // Save Note
-    saveNoteButton.addEventListener('click', () => {
-        const note = document.createElement('div');
-        note.classList.add('note');
-        note.style.fontFamily = currentFont;
-        note.style.backgroundColor = currentColor; // Set sticky note color
-        note.style.left = '50px';
-        note.style.top = '50px';
-
-        const textArea = document.createElement('textarea');
-        textArea.value = noteText.value;
-        textArea.style.fontFamily = currentFont;
-        note.appendChild(textArea);
-
-        // Pop-out Button
-        const popOutButton = document.createElement('button');
-        popOutButton.classList.add('pop-out-button');
-        popOutButton.innerText = 'Pop Out';
-        popOutButton.addEventListener('click', () => {
-            const popOutWindow = window.open('', '_blank', 'width=400,height=400,resizable=yes,top=100,left=100');
-            popOutWindow.document.write(`
-                <html>
-                    <head><title>Sticky Note</title></head>
-                    <body style="font-family: ${currentFont}; background-color: ${currentColor};">
-                        <h3>Sticky Note</h3>
-                        <textarea style="width: 100%; height: 80%;" disabled>${noteText.value}</textarea>
-                        <br><button onclick="window.close()">Close</button>
-                    </body>
-                </html>
-            `);
-            popOutWindow.document.close();
-        });
-
-        note.appendChild(popOutButton);
-
-        // Make note draggable
-        note.addEventListener('mousedown', (e) => {
-            const offsetX = e.clientX - note.offsetLeft;
-            const offsetY = e.clientY - note.offsetTop;
-
-            const moveNote = (moveEvent) => {
-                note.style.left = `${moveEvent.clientX - offsetX}px`;
-                note.style.top = `${moveEvent.clientY - offsetY}px`;
-            };
-
-            const stopMovingNote = () => {
-                document.removeEventListener('mousemove', moveNote);
-                document.removeEventListener('mouseup', stopMovingNote);
-            };
-
-            document.addEventListener('mousemove', moveNote);
-            document.addEventListener('mouseup', stopMovingNote);
-        });
-
-        whiteboard.appendChild(note);
-        modal.style.display = 'none';  // Close modal after saving note
-        noteText.value = ''; // Clear text
+    textBtn.addEventListener('click', () => {
+      isTextMode = true;
+      isImageMode = false;
+      canvas.removeEventListener('mousedown', startDrawing);
+      canvas.removeEventListener('mouseup', stopDrawing);
+      canvas.removeEventListener('mousemove', draw);
+      canvas.addEventListener('click', addText);
+      canvas.removeEventListener('click', addImage);
     });
 
-    // Handle Image Upload
-    imageUpload.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (event) => {
-                const img = document.createElement('img');
-                img.src = event.target.result;
-                img.style.position = 'absolute';
-                img.style.maxWidth = '200px';
-                img.style.left = '50px';
-                img.style.top = '50px';
-
-                // Make image draggable
-                img.addEventListener('mousedown', (e) => {
-                    const offsetX = e.clientX - img.offsetLeft;
-                    const offsetY = e.clientY - img.offsetTop;
-
-                    const moveImage = (moveEvent) => {
-                        img.style.left = `${moveEvent.clientX - offsetX}px`;
-                        img.style.top = `${moveEvent.clientY - offsetY}px`;
-                    };
-
-                    const stopMovingImage = () => {
-                        document.removeEventListener('mousemove', moveImage);
-                        document.removeEventListener('mouseup', stopMovingImage);
-                    };
-
-                    document.addEventListener('mousemove', moveImage);
-                    document.addEventListener('mouseup', stopMovingImage);
-                });
-
-                whiteboard.appendChild(img);
-            };
-            reader.readAsDataURL(file);
-        }
+    imageBtn.addEventListener('click', () => {
+      isTextMode = false;
+      isImageMode = true;
+      canvas.removeEventListener('mousedown', startDrawing);
+      canvas.removeEventListener('mouseup', stopDrawing);
+      canvas.removeEventListener('mousemove', draw);
+      canvas.removeEventListener('click', addText);
+      canvas.addEventListener('click', addImage);
     });
-</script>
 
+    imageUpload.addEventListener('change', addImage);
+
+    clearBtn.addEventListener('click', clearCanvas);
+
+    // Load canvas state when the page is loaded
+    window.addEventListener('load', loadCanvasState);
+  </script>
 </body>
 </html>
