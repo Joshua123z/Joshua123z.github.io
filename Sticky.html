@@ -3,25 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Whiteboard StickyNotes</title>
+    <title>Interactive Whiteboard</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Helvetica Neue', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f0f0f0;
+            background-color: #f4f4f4;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             flex-direction: column;
-            overflow: hidden;
         }
         .whiteboard {
-            width: 80%;
+            width: 90%;
             height: 80%;
             background-color: white;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
             position: relative;
             overflow: hidden;
             display: flex;
@@ -33,206 +32,267 @@
             width: 250px;
             height: 200px;
             background-color: #ffeb3b;
-            margin: 10px;
-            padding: 10px;
-            border-radius: 10px;
+            margin: 15px;
+            padding: 15px;
+            border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            position: relative;
+            position: absolute;
+            cursor: move;
+            transition: transform 0.2s ease-in-out;
         }
         .note textarea {
             width: 100%;
-            height: 80%;
+            height: 70%;
             border: none;
             background: transparent;
             resize: none;
             font-size: 14px;
+            font-family: 'Arial', sans-serif;
         }
         .note img {
             max-width: 100%;
             max-height: 100px;
         }
-        .drawing-canvas {
-            width: 100%;
-            height: 100px;
-            border: 1px solid #333;
-            cursor: crosshair;
-        }
         .add-note-button {
             margin-top: 20px;
-            padding: 10px 20px;
+            padding: 12px 24px;
             background-color: #2196f3;
             color: white;
-            font-size: 18px;
+            font-size: 16px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
         .add-note-button:hover {
             background-color: #1976d2;
         }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+            width: 500px;
+            max-height: 80%;
+            overflow-y: auto;
+        }
+        .modal-header {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 22px;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            color: #333;
+        }
+        .drawing-area {
+            width: 100%;
+            height: 200px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+            cursor: crosshair;
+        }
+        .color-palette {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        .color-palette div {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .color-palette div:hover {
+            transform: scale(1.1);
+        }
+        .font-selector {
+            margin-top: 15px;
+        }
+        .font-selector select {
+            padding: 8px;
+            font-size: 14px;
+            border-radius: 5px;
+            width: 100%;
+        }
+        .upload-image {
+            margin-top: 20px;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        label {
+            background-color: #2196f3;
+            color: white;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+        }
         .footer {
             font-size: 12px;
             color: #888;
-            margin-top: 10px;
-        }
-        .warning {
-            font-size: 14px;
-            color: #d32f2f;
-            position: absolute;
-            bottom: 10px;
-            left: 20px;
-        }
-        .clear-button {
-            position: absolute;
-            bottom: 10px;
-            right: 20px;
-            font-size: 12px;
-            color: #333;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 5px;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
 
-<div class="whiteboard" id="whiteboard">
-    <!-- Sticky Notes will be added here -->
-    <div class="warning" id="warningMessage">Your notes are temporary and will disappear in 24 hours.</div>
-</div>
+<div class="whiteboard" id="whiteboard"></div>
 
 <button class="add-note-button" id="addNoteButton">+ Add a Note</button>
+
+<!-- Modal Popup -->
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <button class="modal-close" id="closeModal">&times;</button>
+        <div class="modal-header">Adding a Note</div>
+        
+        <div class="font-selector">
+            <label for="fontSelect">Choose Font: </label>
+            <select id="fontSelect">
+                <option value="Arial">Arial</option>
+                <option value="Courier New">Courier New</option>
+                <option value="Verdana">Verdana</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Times New Roman">Times New Roman</option>
+            </select>
+        </div>
+        
+        <textarea id="noteText" placeholder="Write your note here..." style="width: 100%; height: 100px;"></textarea>
+        
+        <div class="color-palette" id="colorPalette">
+            <div style="background-color: red;"></div>
+            <div style="background-color: green;"></div>
+            <div style="background-color: blue;"></div>
+            <div style="background-color: yellow;"></div>
+            <div style="background-color: orange;"></div>
+            <div style="background-color: purple;"></div>
+            <div style="background-color: pink;"></div>
+            <div style="background-color: brown;"></div>
+            <div style="background-color: black;"></div>
+        </div>
+        
+        <div class="drawing-area" id="drawingArea"></div>
+        
+        <div class="upload-image">
+            <label for="imageUpload">Upload Image</label>
+            <input type="file" id="imageUpload" accept="image/*">
+        </div>
+        
+        <button id="saveNoteButton" style="margin-top: 15px; padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Save Note</button>
+    </div>
+</div>
 
 <script>
     const whiteboard = document.getElementById('whiteboard');
     const addNoteButton = document.getElementById('addNoteButton');
-    const warningMessage = document.getElementById('warningMessage');
-    const storedNotesKey = 'stickyNotes';
-    const storedTimeKey = 'stickyNotesTimestamp';
+    const modal = document.getElementById('modal');
+    const closeModal = document.getElementById('closeModal');
+    const noteText = document.getElementById('noteText');
+    const fontSelect = document.getElementById('fontSelect');
+    const colorPalette = document.getElementById('colorPalette');
+    const drawingArea = document.getElementById('drawingArea');
+    const imageUpload = document.getElementById('imageUpload');
+    const saveNoteButton = document.getElementById('saveNoteButton');
+    
+    let currentColor = 'black';
+    let currentFont = 'Arial';
 
-    // Load sticky notes if available
-    function loadStickyNotes() {
-        const savedNotes = JSON.parse(localStorage.getItem(storedNotesKey));
-        const savedTimestamp = localStorage.getItem(storedTimeKey);
-
-        if (savedNotes && savedTimestamp) {
-            const timeElapsed = Date.now() - parseInt(savedTimestamp);
-            if (timeElapsed < 86400000) { // 24 hours = 86400000ms
-                savedNotes.forEach(note => {
-                    createNote(note.text, note.imageSrc, note.drawing);
-                });
-                warningMessage.innerHTML = `This board will clear in ${Math.ceil((86400000 - timeElapsed) / 1000)} seconds.`;
-            } else {
-                localStorage.removeItem(storedNotesKey);
-                localStorage.removeItem(storedTimeKey);
-                warningMessage.innerHTML = "All notes have expired.";
-            }
-        }
-    }
-
-    // Save sticky notes to localStorage
-    function saveStickyNotes(notes) {
-        const timestamp = Date.now();
-        localStorage.setItem(storedNotesKey, JSON.stringify(notes));
-        localStorage.setItem(storedTimeKey, timestamp.toString());
-    }
-
-    // Create a new sticky note
-    function createNote(text = '', imageSrc = '', drawing = []) {
-        const note = document.createElement('div');
-        note.classList.add('note');
-
-        // Text area
-        const textarea = document.createElement('textarea');
-        textarea.value = text;
-        textarea.placeholder = "Write something...";
-        note.appendChild(textarea);
-
-        // Drawing Canvas
-        const drawingCanvas = document.createElement('canvas');
-        drawingCanvas.classList.add('drawing-canvas');
-        const ctx = drawingCanvas.getContext('2d');
-        note.appendChild(drawingCanvas);
-
-        let drawing = false;
-        drawingCanvas.addEventListener('mousedown', (e) => {
-            drawing = true;
-            ctx.moveTo(e.offsetX, e.offsetY);
-        });
-
-        drawingCanvas.addEventListener('mousemove', (e) => {
-            if (drawing) {
-                ctx.lineTo(e.offsetX, e.offsetY);
-                ctx.stroke();
-            }
-        });
-
-        drawingCanvas.addEventListener('mouseup', () => {
-            drawing = false;
-            saveNotesOnBoard();
-        });
-
-        // Draw previously saved drawing on load
-        drawing.forEach(point => {
-            ctx.lineTo(point.x, point.y);
-            ctx.stroke();
-        });
-
-        // Add image if exists
-        if (imageSrc) {
-            const img = document.createElement('img');
-            img.src = imageSrc;
-            note.appendChild(img);
-        }
-
-        // Clear button to remove the note
-        const clearButton = document.createElement('button');
-        clearButton.classList.add('clear-button');
-        clearButton.textContent = 'Clear Note';
-        clearButton.onclick = () => {
-            note.remove();
-            saveNotesOnBoard();
-        };
-        note.appendChild(clearButton);
-
-        whiteboard.appendChild(note);
-
-        // Save notes after adding the note
-        saveNotesOnBoard();
-    }
-
-    // Save all notes on the whiteboard
-    function saveNotesOnBoard() {
-        const notes = [];
-        const allNotes = document.querySelectorAll('.note');
-        allNotes.forEach(noteElement => {
-            const textarea = noteElement.querySelector('textarea');
-            const image = noteElement.querySelector('img');
-            const drawingCanvas = noteElement.querySelector('.drawing-canvas');
-            const drawing = [];
-            const ctx = drawingCanvas.getContext('2d');
-            
-            // Get drawing path data
-            const imageSrc = image ? image.src : '';
-            notes.push({
-                text: textarea.value,
-                imageSrc: imageSrc,
-                drawing: drawing
-            });
-        });
-        saveStickyNotes(notes);
-    }
-
-    // Add a new note when the "+" button is clicked
+    // Show Modal
     addNoteButton.addEventListener('click', () => {
-        createNote();
+        modal.style.display = 'flex';
     });
 
-    // Load sticky notes when the page is loaded
-    window.onload = loadStickyNotes;
+    // Close Modal
+    closeModal.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
 
+    // Set Drawing Color
+    colorPalette.addEventListener('click', (e) => {
+        if (e.target && e.target.style.backgroundColor) {
+            currentColor = e.target.style.backgroundColor;
+        }
+    });
+
+    // Handle Font Change
+    fontSelect.addEventListener('change', (e) => {
+        currentFont = e.target.value;
+        noteText.style.fontFamily = currentFont;
+    });
+
+    // Drawing Area
+    const ctx = drawingArea.getContext('2d');
+    drawingArea.addEventListener('mousedown', (e) => {
+        const startX = e.offsetX;
+        const startY = e.offsetY;
+
+        const draw = (e) => {
+            if (e.buttons !== 1) return;
+            ctx.lineTo(e.offsetX, e.offsetY);
+            ctx.strokeStyle = currentColor;
+            ctx.lineWidth = 3;
+            ctx.stroke();
+        };
+
+        drawingArea.addEventListener('mousemove', draw);
+        drawingArea.addEventListener('mouseup', () => {
+            drawingArea.removeEventListener('mousemove', draw);
+        });
+    });
+
+    // Save Note
+    saveNoteButton.addEventListener('click', () => {
+        const note = document.createElement('div');
+        note.classList.add('note');
+        note.style.fontFamily = currentFont;
+        note.style.left = '50px';
+        note.style.top = '50px';
+        
+        const textArea = document.createElement('textarea');
+        textArea.value = noteText.value;
+        textArea.style.fontFamily = currentFont;
+        note.appendChild(textArea);
+
+        whiteboard.appendChild(note);
+        modal.style.display = 'none';  // Close modal after saving note
+        noteText.value = ''; // Clear text
+    });
+
+    // Handle Image Upload
+    imageUpload.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                const img = document.createElement('img');
+                img.src = event.target.result;
+                img.style.maxWidth = '100px';
+                whiteboard.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        }
+    });
 </script>
 
 </body>
