@@ -3,182 +3,236 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StickyNote</title>
+    <title>Whiteboard StickyNotes</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #f0f0f0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            color: #333;
+            flex-direction: column;
+            overflow: hidden;
         }
-        .sticky-note {
-            width: 300px;
-            height: 300px;
-            background-color: #ffeb3b;
-            padding: 20px;
-            border-radius: 10px;
+        .whiteboard {
+            width: 80%;
+            height: 80%;
+            background-color: white;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+            border-radius: 10px;
         }
-        .header {
-            font-weight: bold;
-            font-size: 16px;
-            margin-bottom: 10px;
+        .note {
+            width: 250px;
+            height: 200px;
+            background-color: #ffeb3b;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
-        .content {
-            height: calc(100% - 40px);
-            overflow: auto;
+        .note textarea {
+            width: 100%;
+            height: 80%;
+            border: none;
+            background: transparent;
+            resize: none;
             font-size: 14px;
         }
-        .warning {
-            font-size: 12px;
-            color: #d32f2f;
-            margin-top: 10px;
+        .note img {
+            max-width: 100%;
+            max-height: 100px;
+        }
+        .drawing-canvas {
+            width: 100%;
+            height: 100px;
+            border: 1px solid #333;
+            cursor: crosshair;
+        }
+        .add-note-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #2196f3;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .add-note-button:hover {
+            background-color: #1976d2;
         }
         .footer {
+            font-size: 12px;
+            color: #888;
+            margin-top: 10px;
+        }
+        .warning {
+            font-size: 14px;
+            color: #d32f2f;
             position: absolute;
             bottom: 10px;
             left: 20px;
+        }
+        .clear-button {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
             font-size: 12px;
-            color: #888;
-        }
-        .drawing-canvas {
-            border: 1px solid #333;
-            width: 100%;
-            height: 100px;
-            cursor: crosshair;
-        }
-        .add-picture {
-            margin-top: 10px;
-        }
-        input[type="file"] {
-            display: none;
-        }
-        .file-label {
-            background-color: #2196f3;
-            color: white;
+            color: #333;
+            background-color: #fff;
+            border: 1px solid #ddd;
             padding: 5px 10px;
             cursor: pointer;
             border-radius: 5px;
-            font-size: 12px;
         }
     </style>
 </head>
 <body>
 
-<div class="sticky-note">
-    <div class="header">StickyNote - Temporary Save</div>
-    <div class="content" id="stickyContent">
-        <textarea id="noteText" placeholder="Write something..." style="width: 100%; height: 100%;"></textarea>
-    </div>
-    <canvas id="drawingCanvas" class="drawing-canvas"></canvas>
-    <div class="add-picture">
-        <label for="imageUpload" class="file-label">Add Image</label>
-        <input type="file" id="imageUpload" accept="image/*">
-    </div>
-    <div class="warning" id="warningMessage"></div>
-    <div class="footer">
-        <button onclick="clearStickyNote()">Clear Note</button>
-    </div>
+<div class="whiteboard" id="whiteboard">
+    <!-- Sticky Notes will be added here -->
+    <div class="warning" id="warningMessage">Your notes are temporary and will disappear in 24 hours.</div>
 </div>
 
+<button class="add-note-button" id="addNoteButton">+ Add a Note</button>
+
 <script>
-    const noteText = document.getElementById('noteText');
-    const stickyContent = document.getElementById('stickyContent');
-    const drawingCanvas = document.getElementById('drawingCanvas');
+    const whiteboard = document.getElementById('whiteboard');
+    const addNoteButton = document.getElementById('addNoteButton');
     const warningMessage = document.getElementById('warningMessage');
-    const imageUpload = document.getElementById('imageUpload');
-    const storedNoteKey = 'stickyNote';
-    const storedTimeKey = 'stickyNoteTimestamp';
-    
-    // Load sticky note if available
-    function loadStickyNote() {
-        const savedNote = localStorage.getItem(storedNoteKey);
+    const storedNotesKey = 'stickyNotes';
+    const storedTimeKey = 'stickyNotesTimestamp';
+
+    // Load sticky notes if available
+    function loadStickyNotes() {
+        const savedNotes = JSON.parse(localStorage.getItem(storedNotesKey));
         const savedTimestamp = localStorage.getItem(storedTimeKey);
 
-        if (savedNote && savedTimestamp) {
+        if (savedNotes && savedTimestamp) {
             const timeElapsed = Date.now() - parseInt(savedTimestamp);
             if (timeElapsed < 86400000) { // 24 hours = 86400000ms
-                noteText.value = savedNote;
-                warningMessage.innerHTML = `This note will disappear in ${Math.ceil((86400000 - timeElapsed) / 1000)} seconds.`;
+                savedNotes.forEach(note => {
+                    createNote(note.text, note.imageSrc, note.drawing);
+                });
+                warningMessage.innerHTML = `This board will clear in ${Math.ceil((86400000 - timeElapsed) / 1000)} seconds.`;
             } else {
-                localStorage.removeItem(storedNoteKey);
+                localStorage.removeItem(storedNotesKey);
                 localStorage.removeItem(storedTimeKey);
-                warningMessage.innerHTML = "This note has expired.";
+                warningMessage.innerHTML = "All notes have expired.";
             }
-        } else {
-            warningMessage.innerHTML = "Your note is temporary and will disappear after 24 hours.";
         }
     }
 
-    // Save the note to localStorage
-    function saveStickyNote() {
-        const content = noteText.value;
+    // Save sticky notes to localStorage
+    function saveStickyNotes(notes) {
         const timestamp = Date.now();
-        localStorage.setItem(storedNoteKey, content);
+        localStorage.setItem(storedNotesKey, JSON.stringify(notes));
         localStorage.setItem(storedTimeKey, timestamp.toString());
-        loadStickyNote();
     }
 
-    // Clear the sticky note content
-    function clearStickyNote() {
-        noteText.value = '';
-        localStorage.removeItem(storedNoteKey);
-        localStorage.removeItem(storedTimeKey);
-        warningMessage.innerHTML = "Your note is cleared!";
-    }
+    // Create a new sticky note
+    function createNote(text = '', imageSrc = '', drawing = []) {
+        const note = document.createElement('div');
+        note.classList.add('note');
 
-    // Handle image upload
-    imageUpload.addEventListener('change', (event) => {
-        const file = event.target.files[0];
-        if (file && file.type.startsWith('image/')) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const img = new Image();
-                img.src = e.target.result;
-                img.onload = function() {
-                    const imgElement = document.createElement('img');
-                    imgElement.src = img.src;
-                    imgElement.style.maxWidth = '100%';
-                    stickyContent.appendChild(imgElement);
-                    saveStickyNote();
-                };
-            };
-            reader.readAsDataURL(file);
-        }
-    });
+        // Text area
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.placeholder = "Write something...";
+        note.appendChild(textarea);
 
-    // Drawing functionality
-    let drawing = false;
-    const ctx = drawingCanvas.getContext('2d');
+        // Drawing Canvas
+        const drawingCanvas = document.createElement('canvas');
+        drawingCanvas.classList.add('drawing-canvas');
+        const ctx = drawingCanvas.getContext('2d');
+        note.appendChild(drawingCanvas);
 
-    drawingCanvas.addEventListener('mousedown', (e) => {
-        drawing = true;
-        ctx.moveTo(e.offsetX, e.offsetY);
-    });
+        let drawing = false;
+        drawingCanvas.addEventListener('mousedown', (e) => {
+            drawing = true;
+            ctx.moveTo(e.offsetX, e.offsetY);
+        });
 
-    drawingCanvas.addEventListener('mousemove', (e) => {
-        if (drawing) {
-            ctx.lineTo(e.offsetX, e.offsetY);
+        drawingCanvas.addEventListener('mousemove', (e) => {
+            if (drawing) {
+                ctx.lineTo(e.offsetX, e.offsetY);
+                ctx.stroke();
+            }
+        });
+
+        drawingCanvas.addEventListener('mouseup', () => {
+            drawing = false;
+            saveNotesOnBoard();
+        });
+
+        // Draw previously saved drawing on load
+        drawing.forEach(point => {
+            ctx.lineTo(point.x, point.y);
             ctx.stroke();
+        });
+
+        // Add image if exists
+        if (imageSrc) {
+            const img = document.createElement('img');
+            img.src = imageSrc;
+            note.appendChild(img);
         }
+
+        // Clear button to remove the note
+        const clearButton = document.createElement('button');
+        clearButton.classList.add('clear-button');
+        clearButton.textContent = 'Clear Note';
+        clearButton.onclick = () => {
+            note.remove();
+            saveNotesOnBoard();
+        };
+        note.appendChild(clearButton);
+
+        whiteboard.appendChild(note);
+
+        // Save notes after adding the note
+        saveNotesOnBoard();
+    }
+
+    // Save all notes on the whiteboard
+    function saveNotesOnBoard() {
+        const notes = [];
+        const allNotes = document.querySelectorAll('.note');
+        allNotes.forEach(noteElement => {
+            const textarea = noteElement.querySelector('textarea');
+            const image = noteElement.querySelector('img');
+            const drawingCanvas = noteElement.querySelector('.drawing-canvas');
+            const drawing = [];
+            const ctx = drawingCanvas.getContext('2d');
+            
+            // Get drawing path data
+            const imageSrc = image ? image.src : '';
+            notes.push({
+                text: textarea.value,
+                imageSrc: imageSrc,
+                drawing: drawing
+            });
+        });
+        saveStickyNotes(notes);
+    }
+
+    // Add a new note when the "+" button is clicked
+    addNoteButton.addEventListener('click', () => {
+        createNote();
     });
 
-    drawingCanvas.addEventListener('mouseup', () => {
-        drawing = false;
-        saveStickyNote();
-    });
+    // Load sticky notes when the page is loaded
+    window.onload = loadStickyNotes;
 
-    // Save note every 5 seconds
-    setInterval(saveStickyNote, 5000);
-
-    // Load sticky note on page load
-    window.onload = loadStickyNote;
 </script>
 
 </body>
