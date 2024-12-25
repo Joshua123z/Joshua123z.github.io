@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Who Asked? - Enhanced Edition</title>
+    <style>
+        body { margin: 0; overflow: hidden; }
+        canvas { display: block; }
+        #ui {
+            position: fixed;
+            padding: 20px;
+            font-family: 'Arial', sans-serif;
+            color: white;
+            text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+        }
+        #controls {
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            position: fixed;
+            background: rgba(0,0,0,0.7);
+            padding: 15px 30px;
+            border-radius: 10px;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .key {
+            background: rgba(255,255,255,0.9);
+            color: black;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin: 0 3px;
+            font-weight: bold;
+        }
+        #coordinates {
+            top: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.7);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        /* Popup Styles */
+        #licensePopup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+            text-align: center;
+            z-index: 1000;
+        }
+        #licensePopup button {
+            background: #ff0000;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #licenseButton {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 15px;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="coordinates">Position: <span id="pos">0, 0, 0</span></div>
+    <div id="controls">
+        <span class="key">WASD</span> Move (Inverted) | 
+        <span class="key">SPACE</span> Jump | 
+        <span class="key">F</span> Switch View | 
+        <span class="key">SHIFT</span> Sprint |
+        <span class="key">ESC</span> Mouse Control
+    </div>
+
+    <!-- License Popup -->
+    <div id="licensePopup">
+        <h3>This project uses Three.js, which is licensed under the MIT License.</h3>
+        <p>For more information, visit: <a href="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" target="_blank" style="color: #00f;">https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js</a></p>
+        <button onclick="closePopup()">Close</button>
+    </div>
+
+    <!-- License Button -->
+    <div id="licenseButton" onclick="showPopup()">Three.js License</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        const scene = new THREE.Scene();
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.shadowMap.enabled = true;
+        document.body.appendChild(renderer.domElement);
+
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+        // Improved lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        scene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        directionalLight.position.set(100, 100, 50);
+        directionalLight.castShadow = true;
+        scene.add(directionalLight);
+
+        // Create gradient sky
+        const verticalGradient = new THREE.Mesh(
+            new THREE.SphereGeometry(500, 32, 32),
+            new THREE.ShaderMaterial({
+                side: THREE.BackSide,
+                uniforms: {
+                    topColor: { value: new THREE.Color(0x0077ff) },
+                    bottomColor: { value: new THREE.Color(0xffffff) }
+                },
+                vertexShader: `
+                    varying vec3 vWorldPosition;
+                    void main() {
+                        vec4 worldPosition = modelMatrix * vec4(position, 1.0);
+                        vWorldPosition = worldPosition.xyz;
+                        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                    }
+                `,
+                fragmentShader: `
+                    uniform vec3 topColor;
+                    uniform vec3 bottomColor;
+                    varying vec3 vWorldPosition;
+                    void main() {
+                        float h = normalize(vWorldPosition).y;
+                        gl_FragColor = vec4(mix(bottomColor, topColor, max(h, 0.0)), 1.0);
+                    }
+                `
+            })
+        );
+        scene.add(verticalGradient);
+
+        // Ground plane with better texture (no grid)
+        const groundGeometry = new THREE.PlaneGeometry(1000, 1000);
+        const groundMaterial = new THREE.MeshStandardMaterial({
+            color: 0x90EE90,
+            roughness: 0.8,
+            metalness: 0.2
+        });
+        const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+        ground.rotation.x = -Math.PI / 2;
+        ground.receiveShadow = true;
+        scene.add(ground);
+
+        // Add landmarks
+        function createLandmark(x, z) {
+            const height = 20 + Math.random() * 30;
+            const geometry = new THREE.CylinderGeometry(2, 4, height, 6);
+            const material = new THREE.MeshStandardMaterial({
+                color: 0x808080,
+                roughness: 0.7,
+                metalness: 0.3
+            });
+            const landmark = new THREE.Mesh(geometry, material);
+            landmark.position.set(x, height/2, z);
+            landmark.castShadow = true;
+            landmark.receiveShadow = true;
+            scene.add(landmark);
+        }
+
+        // Add several landmarks in different positions
+        for (let i = 0; i < 20; i++) {
+            const angle = (i / 20) * Math.PI * 2;
+            const radius = 100 + Math.random() * 200;
+            createLandmark(
+                Math.cos(angle) * radius,
+                Math.sin(angle) * radius
+            );
+        }
+
+        // Enhanced player character
+        const player = new THREE.Group();
+        
+        // Body
+        const bodyMaterial = new THREE.MeshStandardMaterial({
+            color: 0x2244ff,
+            roughness: 0.5,
+            metalness: 0.3
+        });
+        const body = new THREE.Mesh(
+            new THREE.BoxGeometry(1, 1.5, 0.5),
+            bodyMaterial
+        );
+        player.add(body);
+
+        // Head
+        const headMaterial = new THREE.MeshStandardMaterial({
+            color: 0xffe0bd,
+            roughness: 0.3,
+            metalness: 0.1
+        });
+        const head = new THREE.Mesh(
+            new THREE.BoxGeometry(0.5, 0.5, 0.5),
+            headMaterial
+        );
+        head.position.y = 1;
+        player.add(head);
+
+        // Limbs
+        const limbMaterial = bodyMaterial.clone();
+        const createLimb = (x, y) => {
+            const limb = new THREE.Mesh(
+                new THREE.BoxGeometry(0.25, 1, 0.25),
+                limbMaterial
+            );
+            limb.position.set(x, y, 0);
+            return limb;
+        };
+
+        const [leftArm, rightArm] = [-0.625, 0.625].map(x => createLimb(x, 0));
+        const [leftLeg, rightLeg] = [-0.25, 0.25].map(x => createLimb(x, -1.25));
+        player.add(leftArm, rightArm, leftLeg, rightLeg);
+
+        scene.add(player);
+        player.position.y = 0.75;
+
+        // Movement and controls (inverted)
+        let moveForward = false;
+        let moveBackward = false;
+        let moveLeft = false;
+        let moveRight = false;
+        let isSprinting = false;
+        let canJump = true;
+        let velocity = new THREE.Vector3();
+        let rotation = 0;
+        let isFirstPerson = true;
+
+        // Inverted controls
+        document.addEventListener('keydown', (event) => {
+            switch(event.code) {
+                case 'KeyW': moveBackward = true; break;  // Inverted
+                case 'KeyS': moveForward = true; break;   // Inverted
+                case 'KeyA': moveRight = true; break;     // Inverted
+                case 'KeyD': moveLeft = true; break;      // Inverted
+                case 'Space':
+                    if (canJump) {
+                        velocity.y += 10;
+                        canJump = false;
+                    }
+                    break;
+                case 'KeyF':
+                    isFirstPerson = !isFirstPerson;
+                    break;
+                case 'ShiftLeft':
+                    isSprinting = true;
+                    break;
+            }
+        });
+
+        document.addEventListener('keyup', (event) => {
+            switch(event.code) {
+                case 'KeyW': moveBackward = false; break; // Inverted
+                case 'KeyS': moveForward = false; break;  // Inverted
+                case 'KeyA': moveRight = false; break;    // Inverted
+                case 'KeyD': moveLeft = false; break;     // Inverted
+                case 'ShiftLeft': isSprinting = false; break;
+            }
+        });
+
+        // Mouse controls
+        let isMouseLocked = false;
+        renderer.domElement.addEventListener('click', () => {
+            if (!isMouseLocked) {
+                renderer.domElement.requestPointerLock();
+                isMouseLocked = true;
+            }
+        });
+
+        document.addEventListener('pointerlockchange', () => {
+            isMouseLocked = document.pointerLockElement === renderer.domElement;
+        });
+
+        document.addEventListener('mousemove', (event) => {
+            if (isMouseLocked) {
+                rotation -= event.movementX * 0.002;
+                player.rotation.y = rotation;
+            }
+        });
+
+        const posElement = document.getElementById('pos');
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            const baseSpeed = 0.15;
+            const moveSpeed = isSprinting ? baseSpeed * 2 : baseSpeed;
+
+            // Movement
+            const direction = new THREE.Vector3(
+                Number(moveRight) - Number(moveLeft),
+                0,
+                Number(moveForward) - Number(moveBackward)
+            ).normalize();
+
+            if (moveForward || moveBackward) {
+                player.position.x += direction.z * Math.sin(rotation) * moveSpeed;
+                player.position.z += direction.z * Math.cos(rotation) * moveSpeed;
+            }
+            if (moveLeft || moveRight) {
+                player.position.x += direction.x * Math.cos(rotation) * moveSpeed;
+                player.position.z -= direction.x * Math.sin(rotation) * moveSpeed;
+            }
+
+            // Jumping and gravity
+            velocity.y -= 0.3;
+            player.position.y += velocity.y * 0.01;
+
+            if (player.position.y < 0.75) {
+                velocity.y = 0;
+                player.position.y = 0.75;
+                canJump = true;
+            }
+
+            // Camera positioning
+            if (isFirstPerson) {
+                camera.position.copy(player.position);
+                camera.position.y += 1.5;
+                camera.rotation.y = rotation;
+            } else {
+                camera.position.copy(player.position);
+                camera.position.y += 5;
+                camera.position.z += 8;
+                camera.lookAt(player.position);
+            }
+
+            // Limb animation
+            if (moveForward || moveBackward || moveLeft || moveRight) {
+                const time = Date.now() * (isSprinting ? 0.01 : 0.005);
+                const amplitude = isSprinting ? 0.8 : 0.5;
+                [leftLeg, rightLeg, leftArm, rightArm].forEach((limb, i) => {
+                    limb.rotation.x = Math.sin(time + (i % 2) * Math.PI) * amplitude;
+                });
+            }
+
+            posElement.textContent = `${player.position.x.toFixed(1)}, ${player.position.y.toFixed(1)}, ${player.position.z.toFixed(1)}`;
+
+            renderer.render(scene, camera);
+        }
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        animate();
+
+        // Popup functions
+        function showPopup() {
+            document.getElementById('licensePopup').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('licensePopup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
