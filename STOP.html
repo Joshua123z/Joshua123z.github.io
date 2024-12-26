@@ -25,6 +25,7 @@
             text-align: center;
             animation: flash 1s infinite;
             color: #ff0000;
+            position: relative;
         }
 
         @keyframes flash {
@@ -57,21 +58,23 @@
             }
         }
 
-        /* Simulating Blood Drips */
-        .blood-drip {
+        /* Blood Drips Effect */
+        .blood-drop {
             position: absolute;
             top: 0;
             left: 50%;
-            width: 10px;
-            height: 100px;
-            background-color: #8b0000;
-            animation: drip 1s linear infinite;
+            width: 30px;
+            height: 30px;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/3/3d/Red_droplet.svg');
+            background-size: cover;
+            animation: bloodDrip 1s linear infinite;
+            opacity: 0;
             z-index: 2;
         }
 
-        @keyframes drip {
+        @keyframes bloodDrip {
             0% {
-                top: -100px;
+                top: -50px;
                 opacity: 1;
             }
             100% {
@@ -80,14 +83,14 @@
             }
         }
 
-        .blood-drip:nth-child(odd) {
+        .blood-drop:nth-child(odd) {
+            left: 20%;
             animation-duration: 1.5s;
-            left: 30%;
         }
 
-        .blood-drip:nth-child(even) {
-            animation-duration: 2s;
+        .blood-drop:nth-child(even) {
             left: 70%;
+            animation-duration: 2s;
         }
 
         #content {
@@ -128,10 +131,10 @@
     <div id="slogan">Vending Exposed</div>
 
     <!-- Simulated Blood Drips -->
-    <div class="blood-drip"></div>
-    <div class="blood-drip"></div>
-    <div class="blood-drip"></div>
-    <div class="blood-drip"></div>
+    <div class="blood-drop"></div>
+    <div class="blood-drop"></div>
+    <div class="blood-drop"></div>
+    <div class="blood-drop"></div>
 
     <!-- Main Content -->
     <div id="content">
