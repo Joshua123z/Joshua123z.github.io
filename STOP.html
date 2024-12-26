@@ -60,7 +60,16 @@
 
         /* Blood Drips Effect */
         .blood-drop {
-        background-image: url('https://www.clker.com/cliparts/E/9/x/5/N/k/blood-drop-md.png');
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 30px;
+            height: 30px;
+            background-image: url('https://www.pngitem.com/pimgs/m/41-416512_red-blood-drop-png-image-free-download-searchpng-hd.png');
+            background-size: cover;
+            animation: bloodDrip 1s linear infinite;
+            opacity: 0;
+            z-index: 2;
         }
 
         @keyframes bloodDrip {
