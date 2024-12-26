@@ -15,6 +15,7 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            position: relative;
         }
 
         /* Flashing Font Animation */
@@ -23,10 +24,11 @@
             font-weight: bold;
             text-align: center;
             animation: flash 1s infinite;
+            color: #ff0000;
         }
 
         @keyframes flash {
-            0% {
+            0%, 100% {
                 font-family: 'Arial', sans-serif;
             }
             12.5% {
@@ -53,6 +55,39 @@
             100% {
                 font-family: 'Arial', sans-serif;
             }
+        }
+
+        /* Simulating Blood Drips */
+        .blood-drip {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 10px;
+            height: 100px;
+            background-color: #8b0000;
+            animation: drip 1s linear infinite;
+            z-index: 2;
+        }
+
+        @keyframes drip {
+            0% {
+                top: -100px;
+                opacity: 1;
+            }
+            100% {
+                top: 100%;
+                opacity: 0;
+            }
+        }
+
+        .blood-drip:nth-child(odd) {
+            animation-duration: 1.5s;
+            left: 30%;
+        }
+
+        .blood-drip:nth-child(even) {
+            animation-duration: 2s;
+            left: 70%;
         }
 
         #content {
@@ -92,6 +127,12 @@
     <!-- Flashing Slogan -->
     <div id="slogan">Vending Exposed</div>
 
+    <!-- Simulated Blood Drips -->
+    <div class="blood-drip"></div>
+    <div class="blood-drip"></div>
+    <div class="blood-drip"></div>
+    <div class="blood-drip"></div>
+
     <!-- Main Content -->
     <div id="content">
         <h1>Vending Exposed</h1>
@@ -106,7 +147,7 @@
     </div>
 
     <script>
-        // Hide flashing slogan after 1 second and show the content
+        // Hide flashing slogan and show the content after 1 second
         setTimeout(() => {
             document.getElementById("slogan").style.display = "none";
             document.getElementById("content").style.display = "block";
