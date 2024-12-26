@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Greed Exposed</title>
+    <title>Vending Exposed</title>
     <style>
         body {
             background-color: #141414;
@@ -17,19 +17,27 @@
             overflow: hidden;
         }
 
-        /* Flashing Animation */
+        /* Flashing Font Animation */
         #slogan {
             font-size: 4em;
-            color: #ff3333;
             font-weight: bold;
             text-align: center;
-            animation: flash 0.5s linear infinite;
+            animation: flash 2s infinite;
         }
 
         @keyframes flash {
-            0% { opacity: 1; }
-            50% { opacity: 0; }
-            100% { opacity: 1; }
+            0%, 100% {
+                font-family: 'Arial', sans-serif;
+            }
+            25% {
+                font-family: 'Courier New', Courier, monospace;
+            }
+            50% {
+                font-family: 'Impact', sans-serif;
+            }
+            75% {
+                font-family: 'Times New Roman', Times, serif;
+            }
         }
 
         #content {
@@ -67,11 +75,11 @@
 </head>
 <body>
     <!-- Flashing Slogan -->
-    <div id="slogan">Greed</div>
+    <div id="slogan">Vending Exposed</div>
 
     <!-- Main Content -->
     <div id="content">
-        <h1>Greed Exposed</h1>
+        <h1>Vending Exposed</h1>
         <p>
             Vending machines in our school are profiting off students by charging inflated prices for snacks and drinks. 
             Where is all that money going? It's time to demand transparency and ensure that these profits are being used to benefit the students and improve our school environment.
