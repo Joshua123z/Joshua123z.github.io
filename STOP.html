@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#STOPvending</title>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #stop-vending {
+            font-size: 5em;
+            font-weight: bold;
+            color: red;
+            text-align: center;
+        }
+        #content {
+            display: none;
+            padding: 20px;
+        }
+        header {
+            background: #a30000;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-transform: uppercase;
+        }
+        section {
+            padding: 20px;
+        }
+        h2 {
+            color: #ff4444;
+        }
+        button {
+            background: #ff4444;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <div id="stop-vending">#STOP VENDING</div>
+    <div id="content">
+        <header>
+            <h1>#STOPvending</h1>
+        </header>
+        <section>
+            <h2>The Truth Behind the Profits</h2>
+            <p>Vending machines at PJMS are making <strong>massive profits</strong>, but at what cost? Students deserve better than to be exploited for overpriced snacks and drinks. </p>
+            <button onclick="alert('Demand Transparency!')">Learn More</button>
+        </section>
+    </div>
+    <script>
+        const stopVending = document.getElementById("stop-vending");
+        const content = document.getElementById("content");
+        const fonts = [
+            "Arial", "Verdana", "Tahoma", "Georgia", 
+            "Courier New", "Times New Roman", "Impact", 
+            "Comic Sans MS", "Helvetica", "Lucida Console"
+        ];
+
+        // Change the font every millisecond
+        let fontIndex = 0;
+        const fontChange = setInterval(() => {
+            stopVending.style.fontFamily = fonts[fontIndex];
+            fontIndex = (fontIndex + 1) % fonts.length;
+        }, 1);
+
+        // Stop the animation after 5 seconds and show the main content
+        setTimeout(() => {
+            clearInterval(fontChange);
+            stopVending.style.display = "none"; // Hide the animation
+            content.style.display = "block"; // Show the main content
+            document.body.style.overflow = "auto"; // Allow scrolling again
+        }, 5000);
+    </script>
+</body>
+</html>
