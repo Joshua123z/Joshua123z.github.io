@@ -3,97 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>#STOPvending</title>
+    <title>Greed Exposed</title>
     <style>
         body {
-            background-color: #1a1a1a;
+            background-color: #141414;
             color: #fff;
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
             height: 100vh;
-            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
         }
-        #stop-vending {
-            font-size: 5em;
+
+        /* Flashing Animation */
+        #slogan {
+            font-size: 4em;
+            color: #ff3333;
             font-weight: bold;
-            color: red;
             text-align: center;
+            animation: flash 0.5s linear infinite;
         }
+
+        @keyframes flash {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
         #content {
             display: none;
-            padding: 20px;
-        }
-        header {
-            background: #a30000;
-            color: #fff;
-            padding: 10px 0;
             text-align: center;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 2.5em;
-            text-transform: uppercase;
-        }
-        section {
             padding: 20px;
+            width: 90%;
         }
-        h2 {
-            color: #ff4444;
+
+        h1 {
+            color: #ff3333;
         }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
         button {
-            background: #ff4444;
+            background: #ff5555;
             color: #fff;
             border: none;
-            padding: 10px 15px;
-            font-size: 1em;
+            padding: 10px 20px;
+            font-size: 1.2em;
             cursor: pointer;
             border-radius: 5px;
-            margin-top: 10px;
+            margin-top: 15px;
+            transition: background 0.3s ease;
         }
+
         button:hover {
             background: #cc0000;
         }
     </style>
 </head>
 <body>
-    <div id="stop-vending">#STOP VENDING</div>
+    <!-- Flashing Slogan -->
+    <div id="slogan">Greed</div>
+
+    <!-- Main Content -->
     <div id="content">
-        <header>
-            <h1>#STOPvending</h1>
-        </header>
-        <section>
-            <h2>The Truth Behind the Profits</h2>
-            <p>Vending machines at PJMS are making <strong>massive profits</strong>, but at what cost? Students deserve better than to be exploited for overpriced snacks and drinks. </p>
-            <button onclick="alert('Demand Transparency!')">Learn More</button>
-        </section>
+        <h1>Greed Exposed</h1>
+        <p>
+            Vending machines in our school are profiting off students by charging inflated prices for snacks and drinks. 
+            Where is all that money going? It's time to demand transparency and ensure that these profits are being used to benefit the students and improve our school environment.
+        </p>
+        <p>
+            We deserve a voice in how our money is spent, and we must hold the school accountable for its decisions.
+        </p>
+        <button onclick="alert('Join the Movement')">Join the Movement</button>
     </div>
+
     <script>
-        const stopVending = document.getElementById("stop-vending");
-        const content = document.getElementById("content");
-        const fonts = [
-            "Arial", "Verdana", "Tahoma", "Georgia", 
-            "Courier New", "Times New Roman", "Impact", 
-            "Comic Sans MS", "Helvetica", "Lucida Console"
-        ];
-
-        // Change the font every millisecond
-        let fontIndex = 0;
-        const fontChange = setInterval(() => {
-            stopVending.style.fontFamily = fonts[fontIndex];
-            fontIndex = (fontIndex + 1) % fonts.length;
-        }, 1);
-
-        // Stop the animation after 5 seconds and show the main content
+        // Hide flashing slogan after 2 seconds and show the content
         setTimeout(() => {
-            clearInterval(fontChange);
-            stopVending.style.display = "none"; // Hide the animation
-            content.style.display = "block"; // Show the main content
-            document.body.style.overflow = "auto"; // Allow scrolling again
-        }, 5000);
+            document.getElementById("slogan").style.display = "none";
+            document.getElementById("content").style.display = "block";
+        }, 2000);
     </script>
 </body>
 </html>
