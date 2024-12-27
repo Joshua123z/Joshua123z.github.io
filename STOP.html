@@ -2,150 +2,134 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vending Exposed</title>
+    <title>Vending Machines: Students Sacrificed for Profit</title>
     <style>
         body {
-            background-color: #141414;
-            color: #fff;
             font-family: Arial, sans-serif;
+            line-height: 1.6;
             margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        
+        #intro-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-            position: relative;
-        }
-
-        /* Flashing Font Animation */
-        #slogan {
-            font-size: 4em;
+            background-color: black;
+            z-index: 1000;
+            color: white;
+            font-size: 3rem;
             font-weight: bold;
+        }
+
+        @keyframes fontChange {
+            0% { font-family: 'Times New Roman', serif; }
+            16.6% { font-family: 'Arial Black', sans-serif; }
+            33.2% { font-family: 'Courier New', monospace; }
+            49.8% { font-family: 'Georgia', serif; }
+            66.4% { font-family: 'Impact', sans-serif; }
+            83% { font-family: 'Verdana', sans-serif; }
+            100% { font-family: 'Times New Roman', serif; }
+        }
+
+        .animated-text {
+            animation: fontChange 0.3s infinite;
+        }
+        
+        header {
+            background-color: #800000;
+            color: white;
             text-align: center;
-            animation: flash 1s infinite;
-            color: #ff0000;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .highlight {
+            background-color: #800000;
+            color: white;
+            padding: 1rem;
+            border-left: 4px solid #ff4444;
+            margin: 1rem 0;
+        }
+        
+        .hashtag {
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        section {
+            margin: 2rem 0;
+        }
+        
+        h2 {
+            font-weight: bold; /* Make headings bold */
         }
 
-        @keyframes flash {
-            0%, 100% {
-                font-family: 'Arial', sans-serif;
-            }
-            12.5% {
-                font-family: 'Courier New', Courier, monospace;
-            }
-            25% {
-                font-family: 'Impact', sans-serif;
-            }
-            37.5% {
-                font-family: 'Times New Roman', Times, serif;
-            }
-            50% {
-                font-family: 'Georgia', serif;
-            }
-            62.5% {
-                font-family: 'Verdana', sans-serif;
-            }
-            75% {
-                font-family: 'Trebuchet MS', sans-serif;
-            }
-            87.5% {
-                font-family: 'Lucida Console', Monaco, monospace;
-            }
-            100% {
-                font-family: 'Arial', sans-serif;
-            }
-        }
-
-        #content {
-            display: none;
-            text-align: center;
-            padding: 20px;
-            width: 90%;
-        }
-
-        h1 {
-            color: #ff3333;
-        }
-
-        p {
-            font-size: 1.2em;
-            line-height: 1.6;
-            text-align: justify;
-        }
-
-        p strong {
-            color: #ff5555;
-        }
-
-        button {
-            background: #ff5555;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1.2em;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-top: 15px;
-            transition: background 0.3s ease;
-        }
-
-        button:hover {
-            background: #cc0000;
-        }
-
-        /* Hashtag Styling */
-        #hashtag {
-            font-size: 1.5em;
-            margin-top: 20px;
-            color: #ff3333;
+        /* Styling for bolded key words */
+        .bold-text {
             font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <!-- Flashing Slogan -->
-    <div id="slogan">Vending Exposed</div>
+    <div id="intro-animation">
+        <span class="animated-text">#ProfitsOverStudents</span>
+    </div>
 
-    <!-- Main Content -->
-    <div id="content">
-        <h1>Vending Exposed</h1>
-        <p>
-            The vending machines in our school are unreliable at best and a complete waste of resources at worst. 
-            These machines break down constantly, leaving students frustrated when they try to grab a snack or drink between classes. 
-            <strong>Why should students pay for something that barely works half the time?</strong>
-        </p>
-        <p>
-            Recently, the school made the baffling decision to install card readers on these vending machines. 
-            This was an unnecessary and expensive upgrade that prioritizes profit over student needs. Instead of using those funds to improve vital school services like better lunch options, extracurricular activities, or classroom supplies, 
-            the administration poured money into machines that already overcharge us for low-quality snacks.
-        </p>
-        <p>
-            <strong>The worst part?</strong> The vending machines are making obscene profits, and none of it seems to be going back to improve our school. 
-            The gross profit from these machines is truly <strong>gross.</strong>
-        </p>
-        <p>
-            - Drinks and snacks are marked up 200-300%, turning every purchase into pure profit. <br>
-            - The money earned doesn't directly benefit the students. <br>
-            - The machines break down so often that they spend more time "Out of Order" than helping anyone.
-        </p>
-        <p>
-            <strong>We Deserve Better.</strong> These vending machines are a perfect example of misplaced priorities. 
-            Instead of focusing on what the students actually need, the school is using these machines as a cash grab. 
-            It's time to <strong>stop the madness</strong> and demand transparency. Where is the money going? Why are our funds being wasted on pointless upgrades when our classrooms still lack the basics?
-        </p>
-        <button onclick="alert('Join the Movement')">Join the Movement</button>
+    <header>
+        <h1>Greed in Our Schools: Vending Machines Over Student Success</h1>
+    </header>
+    
+    <div class="container">
+        <section>
+            <h2>The <span class="bold-text">Shameful</span> Truth About School Vending Machines</h2>
+            <p>In a <span class="bold-text">disgusting</span> display of <span class="bold-text">greed</span>, our schools are being invaded by vending machines while our students suffer. Instead of investing in their futures, administrators are stuffing hallways with these metal monsters that serve nothing but empty calories and empty promises.</p>
+        </section>
 
-        <!-- Hashtag Display -->
-        <div id="hashtag">#ProfitsOverStudents</div>
+        <section>
+            <h2>What We're Sacrificing for Pocket Change</h2>
+            <p>While these machines steal our space and resources, here's what our students are missing out on:</p>
+            <ul>
+                <li><span class="bold-text">Desperately needed new textbooks</span> - some are falling apart in students' hands!</li>
+                <li>Basic classroom supplies teachers are forced to buy themselves</li>
+                <li>Vital educational programs getting <span class="bold-text">cut</span> while vending profits soar</li>
+                <li>Critical student support services abandoned for quick profits</li>
+            </ul>
+        </section>
+
+        <div class="highlight">
+            <p>Shocking but true: Schools are literally selling out their students' futures for loose change from sugary drinks and junk food. Is this what education has become?</p>
+            <p class="hashtag">#ProfitsOverStudents</p>
+        </div>
+
+        <section>
+            <h2>The <span class="bold-text">Horrifying</span> Reality</h2>
+            <p>Every dollar that goes into these machines is a dollar stolen from our students' education. While kids struggle with outdated materials and overcrowded classrooms, administrators count coins from their precious vending machines. This isn't just wrong - it's <span class="bold-text">revolting</span>.</p>
+        </section>
     </div>
 
     <script>
-        // Hide flashing slogan and show the content after 1 second
-        setTimeout(() => {
-            document.getElementById("slogan").style.display = "none";
-            document.getElementById("content").style.display = "block";
-        }, 1000);
+        // Hide animation ONLY when scrolling
+        window.addEventListener('scroll', function() {
+            const introAnimation = document.getElementById('intro-animation');
+            if (window.scrollY > 10) {
+                introAnimation.style.display = 'none';
+            }
+        });
     </script>
 </body>
 </html>
