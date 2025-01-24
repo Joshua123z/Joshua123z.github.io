@@ -3,30 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tab Duplicator</title>
+  <title>Bouncing Popups</title>
 </head>
 <body>
-  <h1>Tab Duplicator</h1>
-  <p>Click the button to start duplicating tabs. Press the letter <strong>I</strong> to close all tabs.</p>
-  <button id="start-duplication">Start Duplicating Tabs</button>
-  <button id="stop-duplication">Stop Duplicating Tabs</button>
+  <h1>Bouncing Popups</h1>
+  <p>Click the button to start bouncing popups. Press the letter <strong>I</strong> to close all popups.</p>
+  <button id="start-bouncing">Start Bouncing Popups</button>
+  <button id="stop-bouncing">Stop Bouncing Popups</button>
 
   <script>
-    let interval = null; // To hold the interval ID
-    const popups = []; // Array to store references to the open popups
+    const popups = []; // Array to store popup references
+    const speeds = []; // Array to store speed and direction for each popup
+    const intervalHandles = []; // Array to store intervals for each popup
+    const popupSize = { width: 300, height: 200 }; // Popup dimensions
 
-    // Function to open a new popup and add it to the array
-    function openPopup() {
+    // Function to create a new popup
+    function createBouncingPopup() {
       const screenWidth = window.screen.availWidth;
       const screenHeight = window.screen.availHeight;
 
-      const randomX = Math.floor(Math.random() * (screenWidth - 300)); // Adjust width of popup
-      const randomY = Math.floor(Math.random() * (screenHeight - 200)); // Adjust height of popup
+      // Initial random position
+      let posX = Math.random() * (screenWidth - popupSize.width);
+      let posY = Math.random() * (screenHeight - popupSize.height);
+
+      // Random speeds (both x and y direction)
+      const speedX = Math.random() * 5 + 2; // Random speed between 2 and 7
+      const speedY = Math.random() * 5 + 2;
 
       const newPopup = window.open(
         "",
         `_blank`,
-        `width=300,height=200,top=${randomY},left=${randomX}`
+        `width=${popupSize.width},height=${popupSize.height},top=${posY},left=${posX}`
       );
 
       if (newPopup) {
@@ -45,7 +52,7 @@
                 align-items: center;
                 height: 100vh;
                 font-family: Arial, sans-serif;
-                background-color: #add8e6;
+                background-color: #ffcccb;
               }
               h1 {
                 color: #007BFF;
@@ -54,50 +61,71 @@
             </style>
           </head>
           <body>
-            <h1>I am a moving popup!</h1>
+            <h1>Bouncing Popup!</h1>
           </body>
           </html>
         `);
+
         popups.push(newPopup); // Store the popup reference
+        speeds.push({ x: speedX, y: speedY }); // Store its speed
+
+        // Start moving the popup
+        const interval = setInterval(() => {
+          if (newPopup.closed) {
+            clearInterval(interval);
+            return;
+          }
+
+          // Update position
+          posX += speeds[speeds.length - 1].x;
+          posY += speeds[speeds.length - 1].y;
+
+          // Bounce off the edges
+          if (posX <= 0 || posX + popupSize.width >= screenWidth) {
+            speeds[speeds.length - 1].x *= -1; // Reverse X direction
+          }
+          if (posY <= 0 || posY + popupSize.height >= screenHeight) {
+            speeds[speeds.length - 1].y *= -1; // Reverse Y direction
+          }
+
+          // Move the popup
+          newPopup.moveTo(posX, posY);
+        }, 20); // Update position every 20ms
+
+        intervalHandles.push(interval); // Store the interval handle
       } else {
         alert("Popup blocked! Please allow popups for this site.");
-        stopDuplication();
-      }
-    }
-
-    // Function to stop the duplication process
-    function stopDuplication() {
-      if (interval) {
-        clearInterval(interval);
-        interval = null;
       }
     }
 
     // Function to close all popups
     function closeAllPopups() {
-      popups.forEach((popup) => {
+      popups.forEach((popup, index) => {
         if (popup && !popup.closed) {
           popup.close();
         }
+        clearInterval(intervalHandles[index]); // Stop the movement
       });
-      popups.length = 0; // Clear the array
+      popups.length = 0;
+      speeds.length = 0;
+      intervalHandles.length = 0;
     }
 
-    // Start duplicating tabs
-    document.getElementById("start-duplication").addEventListener("click", () => {
-      if (!interval) {
-        interval = setInterval(openPopup, 1000); // Open a new popup every second
-      }
+    // Event listeners for buttons
+    document.getElementById("start-bouncing").addEventListener("click", () => {
+      // Create a new bouncing popup every second
+      const bouncingInterval = setInterval(createBouncingPopup, 1000);
+
+      // Store this interval so you can stop it later
+      intervalHandles.push(bouncingInterval);
     });
 
-    // Stop duplicating tabs
-    document.getElementById("stop-duplication").addEventListener("click", stopDuplication);
+    document.getElementById("stop-bouncing").addEventListener("click", closeAllPopups);
 
     // Close all popups when the "I" key is pressed
     document.addEventListener("keydown", (event) => {
       if (event.key.toLowerCase() === "i") {
         closeAllPopups();
-        stopDuplication();
       }
     });
   </script>
