@@ -88,26 +88,28 @@
   </div>
 
   <script>
-    let popups = []; // To keep track of all popups
-    const popupSize = { width: 300, height: 200 }; // Size of the popups
+    // Array to keep track of all popups
+    let popups = [];
 
     // Function to create a new popup
     function createPopup() {
       const screenWidth = window.screen.availWidth;
       const screenHeight = window.screen.availHeight;
 
-      // Random initial position
-      const posX = Math.random() * (screenWidth - popupSize.width);
-      const posY = Math.random() * (screenHeight - popupSize.height);
+      // Random initial position for popups
+      const posX = Math.random() * (screenWidth - 300);
+      const posY = Math.random() * (screenHeight - 200);
 
+      // Create a new popup window
       const newPopup = window.open(
         "",
         `_blank`,
-        `width=${popupSize.width},height=${popupSize.height},top=${posY},left=${posX}`
+        `width=300,height=200,top=${posY},left=${posX}`
       );
 
+      // Check if the popup was successfully created
       if (newPopup) {
-        // Write proper HTML content into the popup
+        // Write HTML content into the popup
         newPopup.document.write(`
           <!DOCTYPE html>
           <html lang="en">
@@ -143,21 +145,21 @@
             <button id="close-popup">Close Popup</button>
             <script>
               // Close the popup when the button is clicked
-              document.getElementById('close-popup').addEventListener('click', () => {
+              document.getElementById('close-popup').addEventListener('click', function() {
                 window.close();
               });
 
-              // If the popup is closed via the browser's close button
+              // When the popup is closed (via the browser's close button), create two new popups
               window.onbeforeunload = function() {
-                opener.createPopup(); // Create two new popups
-                opener.createPopup();
+                window.opener.createPopup(); // Create two new popups when one is closed
+                window.opener.createPopup();
               };
             </script>
           </body>
           </html>
         `);
 
-        // Add the popup to the list
+        // Add the newly created popup to the popups list
         popups.push(newPopup);
       } else {
         alert("Popup blocked! Please allow popups for this site.");
@@ -166,17 +168,18 @@
 
     // Function to stop all popups
     function stopAllPopups() {
-      popups.forEach((popup) => {
+      popups.forEach(function(popup) {
         if (popup && !popup.closed) {
           popup.close();
         }
       });
-      popups = []; // Clear the popup list
+      popups = []; // Clear the popups array
     }
 
-    // Event listeners for starting and stopping popups
+    // Event listeners for the buttons
     document.getElementById("start-popup").addEventListener("click", createPopup);
     document.getElementById("stop-popup").addEventListener("click", stopAllPopups);
   </script>
+
 </body>
 </html>
