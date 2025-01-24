@@ -66,13 +66,14 @@
           <body>
             <button id="close-popup">Close Popup</button>
             <script>
+              // Close the popup when the button is clicked
               document.getElementById('close-popup').addEventListener('click', () => {
-                window.close(); // Close the popup when the button is clicked
+                window.close();
               });
 
               // Prevent closing the popup manually
               window.onbeforeunload = function() {
-                opener.createPopup(); // Create two new popups
+                opener.createPopup(); // Create two new popups in the parent window
                 opener.createPopup();
               };
             </script>
@@ -80,7 +81,7 @@
           </html>
         `);
 
-        // Add the popup to the list
+       
         popups.push(newPopup);
       } else {
         alert("Popup blocked! Please allow popups for this site.");
