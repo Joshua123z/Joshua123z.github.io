@@ -3,51 +3,101 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Main Page</title>
+  <title>Tab Duplicator</title>
 </head>
 <body>
-  <h1>Main Page</h1>
-  <button id="open-popup">Open Always-On-Top Window</button>
+  <h1>Tab Duplicator</h1>
+  <p>Click the button to start duplicating tabs. Press the letter <strong>I</strong> to close all tabs.</p>
+  <button id="start-duplication">Start Duplicating Tabs</button>
+  <button id="stop-duplication">Stop Duplicating Tabs</button>
 
   <script>
-    document.getElementById("open-popup").addEventListener("click", () => {
-      const popup = window.open(
+    let interval = null; // To hold the interval ID
+    const popups = []; // Array to store references to the open popups
+
+    // Function to open a new popup and add it to the array
+    function openPopup() {
+      const screenWidth = window.screen.availWidth;
+      const screenHeight = window.screen.availHeight;
+
+      const randomX = Math.floor(Math.random() * (screenWidth - 300)); // Adjust width of popup
+      const randomY = Math.floor(Math.random() * (screenHeight - 200)); // Adjust height of popup
+
+      const newPopup = window.open(
         "",
-        "AlwaysOnTop",
-        "width=300,height=200,top=100,left=100"
+        `_blank`,
+        `width=300,height=200,top=${randomY},left=${randomX}`
       );
 
-      // Add content to the popup
-      if (popup) {
-        popup.document.write(`
+      if (newPopup) {
+        newPopup.document.write(`
           <!DOCTYPE html>
           <html lang="en">
           <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Always On Top</title>
+            <title>Popup</title>
             <style>
               body {
                 margin: 0;
-                font-family: Arial, sans-serif;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 height: 100vh;
-                background-color: #f0f0f0;
+                font-family: Arial, sans-serif;
+                background-color: #add8e6;
               }
               h1 {
                 color: #007BFF;
+                text-align: center;
               }
             </style>
           </head>
           <body>
-            <h1>I Stay on Top!</h1>
+            <h1>I am a moving popup!</h1>
           </body>
           </html>
         `);
+        popups.push(newPopup); // Store the popup reference
       } else {
         alert("Popup blocked! Please allow popups for this site.");
+        stopDuplication();
+      }
+    }
+
+    // Function to stop the duplication process
+    function stopDuplication() {
+      if (interval) {
+        clearInterval(interval);
+        interval = null;
+      }
+    }
+
+    // Function to close all popups
+    function closeAllPopups() {
+      popups.forEach((popup) => {
+        if (popup && !popup.closed) {
+          popup.close();
+        }
+      });
+      popups.length = 0; // Clear the array
+    }
+
+    // Start duplicating tabs
+    document.getElementById("start-duplication").addEventListener("click", () => {
+      if (!interval) {
+        interval = setInterval(openPopup, 1000); // Open a new popup every second
+      }
+    });
+
+    // Stop duplicating tabs
+    document.getElementById("stop-duplication").addEventListener("click", stopDuplication);
+
+    // Close all popups when the "I" key is pressed
+    document.addEventListener("keydown", (event) => {
+      if (event.key.toLowerCase() === "i") {
+        closeAllPopups();
+        stopDuplication();
       }
     });
   </script>
