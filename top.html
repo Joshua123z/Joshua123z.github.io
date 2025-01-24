@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Always on Top</title>
+    <style>
+        body {
+            background-color: black;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // Create a new window and open it with "about:blank"
+        const newWindow = window.open("about:blank", "_blank", "width=800,height=600,top=100,left=100");
+
+        // Script to keep it on top
+        if (newWindow) {
+            newWindow.document.body.innerHTML = "<h1>This is an always on top window!</h1>";
+            newWindow.document.body.style.backgroundColor = "black";
+            newWindow.document.body.style.color = "white";
+
+            setInterval(() => {
+                newWindow.focus(); // Try to keep the window in focus
+            }, 100); // Re-focus every 100ms
+
+            // This won't necessarily prevent the window from being minimized or behind other windows
+            // but keeps refocusing it to simulate 'always on top'.
+        }
+    </script>
+</body>
+</html>
